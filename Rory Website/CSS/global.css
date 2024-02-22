@@ -1,0 +1,20 @@
+/* * * START CSS TIPS * * *
+  * Great places to learn about CSS
+  * * https://css-tricks.com
+  * * https://www.w3schools.com/
+  * * https://www.google.com/
+  * List of available CSS properties: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference
+  * List of shorthand properties: https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties
+  * Directory paths: https://css-tricks.com/quick-reminder-about-file-paths/
+  * To know which browsers support what property: https://caniuse.com/
+  * Alphabetizing your CSS properties makes for easier reading
+  * Indenting by 2 spaces helps for readability
+  * When developing with CSS use classes as much as possible leave id(s) for Javascript
+  * Give everything a meaningful name
+  * By default all elements are set to position:static: Default value. Elements render in order, as they appear in the document flow
+  * Single property items can be on the same line as enclosing bracket { } saves on whitespace while developing
+  * Whitespace is ignored, will not render in HTML file
+  * Every property should end with a semi colon
+  * Remember to compress your imagery: https://enviragallery.com/9-best-free-image-optimization-tools-for-image-compression/ no one want to wait and download a 1 MB image on a mobile device
+  * Fonts - web safe fonts will give you the most speed when someone is trying to view your site at an airport, museum, in a canyon - somewhere there is a slow connection, not everyone travels at the same speed
+ * * * END CSS TIPS * * */
