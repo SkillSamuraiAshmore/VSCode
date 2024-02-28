@@ -18,3 +18,15 @@
   * Remember to compress your imagery: https://enviragallery.com/9-best-free-image-optimization-tools-for-image-compression/ no one want to wait and download a 1 MB image on a mobile device
   * Fonts - web safe fonts will give you the most speed when someone is trying to view your site at an airport, museum, in a canyon - somewhere there is a slow connection, not everyone travels at the same speed
  * * * END CSS TIPS * * */
+
+ * {
+  color:blue;
+ }
+
+ p {
+  color:red;
+ }
+
+ p a {
+  color:green; 
+ }
