@@ -30,3 +30,24 @@
  p a {
   color:green; 
  }
+
+ img {
+  width: 30%;
+  height: auto
+ }
+
+header {
+height: 70%;
+background-color: red;
+}
+
+footer {
+height: 10%;
+background-color: blue;
+}
+
+div {
+  width: 70%;
+  height: auto;
+  background-color: gray;
+}
