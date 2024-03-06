@@ -92,3 +92,12 @@ min-height: 800px;
 padding-top: 50px
 
 }
+
+.content {
+  background-color: rgba(232, 233, 235, 0.6);
+
+  margin: 0 auto;
+  min-height: 700px;
+  padding: 50px;
+  width: 80%;
+}
