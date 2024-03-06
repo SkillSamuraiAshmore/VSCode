@@ -19,17 +19,24 @@
   * Fonts - web safe fonts will give you the most speed when someone is trying to view your site at an airport, museum, in a canyon - somewhere there is a slow connection, not everyone travels at the same speed
  * * * END CSS TIPS * * */
 
- * {
-  color:blue;
+ *{
+  box-sizing: border-box;
  }
 
- p {
-  color:red;
- }
+html,body {
+  height: 100%;
+  margin: 0;
+}
 
- p a {
-  color:green; 
- }
+.container {
+padding: 0;
+min-height: 0;
+
+margin-top: 0px;
+margin-bottom: -70px;
+margin-right: auto;
+margin-left: auto;
+}
 
  img {
   width: 30%;
@@ -37,17 +44,40 @@
  }
 
 header {
-height: 70%;
 background-color: red;
 }
 
-footer {
-height: 10%;
-background-color: blue;
+header div {
+  width: 80%;
+
+  padding-top: 30px;
+  padding-right: 0;
+  padding-bottom: 30px;
+  padding-left: 0;
+
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: auto;
+  margin-left: auto;
 }
 
-div {
-  width: 70%;
-  height: auto;
-  background-color: gray;
+.main-logo {
+color: lightblue;
+background-color: black;
+
+font-family: 'arial black', Arial, Helvetica, sans-serif;
+
+font-size: 6vh;
+
+margin-left: 5%;
+text-decoration: none;
+position: relative; 
+}
+
+.page-title {
+font-family: 'cambria', times, serif;
+font-size: 5vh;
+padding-left: 1%;
+position: relative;
+
 }
