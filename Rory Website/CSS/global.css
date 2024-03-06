@@ -81,3 +81,14 @@ padding-left: 1%;
 position: relative;
 
 }
+
+section {
+background-image: url("C:\\Users\\Skill Samurai\\Desktop\\VSCode\\Rory Website\\Images\\images.jpg");
+
+background-position: center center;
+background-size: 100% 100%;
+background-repeat: no-repeat;
+min-height: 800px;
+padding-top: 50px
+
+}
