@@ -101,3 +101,29 @@ padding-top: 50px
   padding: 50px;
   width: 80%;
 }
+
+footer {
+  position: relative;
+  margin: 0 auto;
+  width: 80%;
+  height: 70px;
+}
+
+footer div {
+  position: absolute;
+  right: 0;
+  width: 112px;
+  z-index: 1;
+}
+
+.skillsamurai-icon {
+  background-image: url("C:\repo\VSCode\RoryK\Rory Website\Images\Skillsamurai.jpg");
+}
+
+.youtube-icon {
+  background-image: url("C:\repo\VSCode\RoryK\Rory Website\Images\youtube-logo.jpg");
+}
+
+.facebook-icon {
+  background-image: url("C:\repo\VSCode\RoryK\Rory Website\Images\facebook.jpg");
+}
