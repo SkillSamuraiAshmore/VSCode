@@ -117,13 +117,22 @@ footer div {
 }
 
 .skillsamurai-icon {
-  background-image: url("C:\repo\VSCode\RoryK\Rory Website\Images\Skillsamurai.jpg");
+  background-image: url("../Images/Skillsamurai.jpg");
 }
 
 .youtube-icon {
-  background-image: url("C:\repo\VSCode\RoryK\Rory Website\Images\youtube-logo.jpg");
+  background-image: url("../Images/youtube-logo.jpg");
 }
 
 .facebook-icon {
-  background-image: url("C:\repo\VSCode\RoryK\Rory Website\Images\facebook.jpg");
+  background-image: url("../Images/facebook.jpg");
+}
+
+footer div a {
+  background-size: 100% 100%;
+  display: inline-block;
+  height: 25px;
+  overflow: hidden;
+  text-indent: 101%;
+  width: 25px;
 }
