@@ -17,4 +17,49 @@ def spin():
     circle(10)
 
 def print_text():
-    write("Hit", align= "center", font=("Arial", 15))
+    write("Hit", align= "center", font=("Arial", 15, "normal"))
+
+def dig():
+    dot(50)
+    
+def near_mole(x_coord, y_coord):
+    leeway = 20 
+    return (y_coord - leeway <= xcor() <= x_coord + leeway) and \
+           (y_coord - leeway <= ycor() <= y_coord + leeway)
+
+def move_mole():
+    global clicked, whacked
+    new_x, new_y = randint(-max_x, max_x), randint(-max_y, max_y)
+    goto(new_x, new_y)
+
+    spin_count = 0
+    while not clicked and spin_count < num_spins:
+        spin()
+        spin_count += 1
+    
+    if whacked:
+        print_text()
+    else:
+        dig()
+    clicked = False
+    whacked = False
+
+def whack(x_coord, y_coord):
+    global clicked, whacked
+    click = True
+    whacked = near_mole(x_coord, y_coord) 
+
+
+
+setup(max_screen_x * 2, max_screen_y * 2)
+title("Whack-A-Mole")
+bgcolor("forestgreen")
+
+
+speed('fast')
+register_shape('MadelineP\wack-a-mole\mole2.gif') # It first had to be a static image
+shape('MadelineP\wack-a-mole\mole2.gif') # Then you need to call relative directory path for it
+penup()
+onscreenclick(whack)
+for hole in range(num_holes):
+    move_mole()
