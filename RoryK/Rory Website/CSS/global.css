@@ -93,6 +93,32 @@ padding-top: 50px
 
 }
 
+nav {
+  left: 25px;
+  position: relative;
+  top: 10px;
+  margin: 0 auto;
+  width: 80%;
+}
+
+nav a {
+  color: white;
+  font-family: 'arial black', arial, sans-serif;
+  padding: 0.5vh;
+  text-decoration: none;
+
+}
+
+.nav-home {background-color: #a00101;}
+
+.nav-about-me {background-color: #12b35d;}
+
+.nav-my-thoughts {background-color: #a00101;}
+
+.nav-games {background-color: #12b35d;}
+
+.nav-misc {background-color: #a00101;}
+
 .content {
   background-color: rgba(232, 233, 235, 0.85);
 
