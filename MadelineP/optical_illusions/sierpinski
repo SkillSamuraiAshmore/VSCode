@@ -1,0 +1,10 @@
+import turtle
+from illusionHelper import drawTriangle
+
+turtle.speed(0)
+
+def seirpinski(x, y, size, degree):
+    drawTriangle(turtle, x, y, size, fill=False)
+    drawTriangle(turtle, x, y, size/2, fill=False)
+
+seirpinski(-350, -350, 700, 1)
