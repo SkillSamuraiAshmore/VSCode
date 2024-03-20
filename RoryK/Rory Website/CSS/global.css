@@ -119,6 +119,18 @@ nav a {
 
 .nav-misc {background-color: #a00101;}
 
+.nav-home:hover {background-color: black; color: #a00101;}
+.nav-about-me:hover {background-color: black; color: #12b35d;}
+.nav-my-thoughts:hover {background-color: black; color: #a00101;}
+.nav-games:hover {background-color: black; color: #12b35d; }
+.nav-misc:hover {background-color: black; color: #a00101;}
+
+
+nav a {
+  transition: background-color 1s ease;
+}
+
+
 .content {
   background-color: rgba(232, 233, 235, 0.85);
 
