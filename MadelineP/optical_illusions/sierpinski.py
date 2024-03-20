@@ -6,9 +6,9 @@ turtle.speed(0)
 # turtle.Screen().tracer(0,0)
 
 def sierpinski(x, y, size, degree):
-    # colours = ['blue','red','green','white','yellow',]
+    colours = ['blue','red','green','white','yellow','violet','orange']
     
-    drawTriangle(turtle, x, y, size, fill=False)
+    drawTriangle(turtle, x, y, size, colours[degree])
     
     if degree > 0:
         sierpinski(x, y, size/2, degree-1)
