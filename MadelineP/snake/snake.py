@@ -38,13 +38,14 @@ snakeFood.goto(0,100)
 
 def move():
     position = snakeHead.position()
+
     if snakeHead.direction == "up":
         snakeHead.sety(snakeHead.ycor() + 20)
-    if snakeHead.direction == "down":
+    elif snakeHead.direction == "down":
         snakeHead.sety(snakeHead.ycor() - 20)
-    if snakeHead.direction == "right":
+    elif snakeHead.direction == "right":
         snakeHead.setx(snakeHead.xcor() + 20)
-    if snakeHead.direction == "left":
+    elif snakeHead.direction == "left":
         snakeHead.setx(snakeHead.xcor() - 20)
 
     for segment in segments:
