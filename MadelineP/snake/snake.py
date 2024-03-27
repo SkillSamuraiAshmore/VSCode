@@ -36,8 +36,10 @@ snakeFood.speed(0)
 snakeFood.penup()
 snakeFood.goto(0,100)
 
+
 def move():
     position = snakeHead.position()
+    
 
     if snakeHead.direction == "up":
         snakeHead.sety(snakeHead.ycor() + 20)
