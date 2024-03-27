@@ -1,4 +1,4 @@
-# name = "flynn"
+name = "flynn"
 # print("hello my name is " + name)
 # age = str(11)
 # print("my age is " + age + " years old")
@@ -43,33 +43,3 @@
 # amount = 10
 # price = 2.99
 # good = True
-
-#light = input("what it the traffic light? ")
-
-#if light == "red":
- #   print("stop")
-#elif light == "green":
-  #  print("go")
-#else:
-   # print("uh oh!")
-
-#name = input("what is your name? ")
-
-#if name == "flynn":
-#    print("hi " + name)
-#elif name == "josh":
- #   print("hi " + name)
-#elif name == "mum":
- #   print("hi " + name)
-#elif name == "dad":
- #   print("hi " + name)
-#else:
- #   print("this is not a good name!")
-
-money = 0
-if money >= 10:
-    print("lunch")
-elif money >= 5:
-    print("snack")
-else:
-    print("to bad")
