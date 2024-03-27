@@ -108,7 +108,7 @@ while True:
         y = random.randint(-270, 270)
         snakeFood.goto(x, y)
         snakeSegment = snakeHead.clone()
-        snakeSegment.color("grey")
+        snakeSegment.color("black")
         segments.append(snakeSegment)
         score = score + 10
         update_score()
