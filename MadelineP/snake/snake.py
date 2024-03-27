@@ -52,6 +52,14 @@ def move():
         segment.goto(position)
         position = newPosition
 
+    if snakeHead.xcor() >= 290 or snakeHead.xcor() <= -290 or snakeHead.ycor() >= 290 or snakeHead.ycor() <= -290:
+        kill_snake()
+    for segment in segments:
+        if segment.distance(snakeHead) < 10:
+            kill_snake()
+
+
+
 def move_up():
     if snakeHead.direction != "down":
         snakeHead.direction = "up"
@@ -64,6 +72,24 @@ def move_left():
 def move_right():
     if snakeHead.direction != "left":
         snakeHead.direction = "right"
+
+def kill_snake():
+    global segments, delay, score
+    for segment in segments:
+        segment.color("red")
+        time.sleep(delay)
+        snakeScreen.update()
+    time.sleep(1)
+    for segment in reversed(segments):
+        segment.hideturtle()
+        time.sleep(delay)
+        snakeScreen.update()
+    segments = []
+    snakeHead.goto(0,0)
+    snakeHead.direction = "stop"
+    delay = 0.1
+    score = 0
+    update_score()
     
 
 
@@ -86,3 +112,4 @@ while True:
         segments.append(snakeSegment)
         score = score + 10
         update_score()
+
