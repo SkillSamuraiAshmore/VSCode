@@ -3,6 +3,20 @@ import random
 
 turtle.bgcolor("black")
 
+invaderList = []
+number_of_invaders = 5
+invaderspeed = 5
+
+for i in range(number_of_invaders):
+    invader = turtle.Turtle()
+    invader.color("blue")
+    #TODO: change player to invader
+    # player.shape("arrow")
+    # player.speed(0)
+    # player.penup()
+    # player.setheading(90)
+    # player.setposition(0, -250)
+
 player = turtle.Turtle()
 player.color("blue")
 player.shape("arrow")
@@ -50,4 +64,16 @@ turtle.onkey(move_left, "Left")
 turtle.onkey(move_right, "Right")
 turtle.onkey(fire_bullet, "space")
 
+while True:
+    if bullet_state == "fire":
+        y, bullet.ycor()
+        y = y + bullet_speed
+        bullet.sety(y)
+
+    if bullet.ycor() > 275:
+        bullet.hideturtle()
+        bullet_state = "ready"
+
+    
+    
 turtle.done()
