@@ -29,7 +29,7 @@ def cavern():
     decision = input()
 
     if decision == "break":
-        typewriter("You hit the door and are i nturn hit by a falling rock")
+        typewriter("You hit the door and are in turn hit by a falling rock")
         # TODO: add damage
 
 def way():
