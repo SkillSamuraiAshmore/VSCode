@@ -22,5 +22,9 @@ shopping_list = fruit_list + snack_list
 print(shopping_list)
 shopping_list.remove("bannana")
 print(shopping_list)
-range(10000000000000,200000000000000000000)
-list(range(200000000000000000000))
+
+
+print("bite")
+for i in range(10):
+    print("chew" + str(i))
+print("swallow")
