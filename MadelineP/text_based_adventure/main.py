@@ -16,10 +16,6 @@ def end_game(z):
     if (z == 7):
         sys.exit()
     
-
-
-
-
 hp = random.randint(6, 12)
 
 def game_over(hp):
@@ -51,9 +47,6 @@ def fight_dragon():
         error_handler()
         fight_dragon()
 
-  
-
-
 def cavern():
     global hp 
     typewriter("Will you try to break the door down, or will you risk climbing the spring for the key? [break or climb]: ")
@@ -82,7 +75,6 @@ def way():
         typewriter("The key must lead to the small rotted door to the right of the spring.")
         cavern()
 
-
     elif decision == "right":
         typewriter("You walk down the right path, but run into some spikes.")
         damage(random.randint(1, 3), hp)
@@ -103,9 +95,6 @@ def start_game():
     else:
         typewriter("Bye!")
         sys.exit()
-
-
-
 
 typewriter("Greetings and salutations, adventurer!")
 start_game()
