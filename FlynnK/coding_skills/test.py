@@ -66,10 +66,40 @@
 #else:
  #   print("this is not a good name!")
 
-money = 0
-if money >= 10:
-    print("lunch")
-elif money >= 5:
-    print("snack")
-else:
-    print("to bad")
+#money = 0
+#if money >= 10:
+ #   print("lunch")
+#elif money >= 5:
+    #print("snack")
+#else:
+ #   print("to bad")
+
+#hi = {"o", "b"}
+#print(hi)
+
+#for i in range
+
+import random 
+
+score = {"leaderboard"}
+
+def game():
+    print('')
+    difficulty = (input("please choose a difficulty 1,2 or 3"))
+
+    if difficulty == '1':
+      maxnumber = 10
+    elif difficulty == '2':
+      maxnumber = 20
+    elif difficulty == '3':
+      maxnumber = 30
+
+number = random.randint(1, maxnumber)
+lives = 10
+
+myname = input("what is your name? ")
+print("well, " + myname + , i am thinking of a number between 1 and " + str(maxnumber))
+      
+
+game()
+    
