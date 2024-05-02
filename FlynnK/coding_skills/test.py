@@ -149,7 +149,7 @@ elif guess == number:
   score.append(myname + "(lVL " + str(difficulty) + ") - " + str(guessTaken+1) +grammar)
   final = "\n".join(score)
   print(final)
-  game_over()
+  game_over(1)
 
 
 
