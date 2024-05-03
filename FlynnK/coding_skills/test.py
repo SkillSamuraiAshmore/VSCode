@@ -66,10 +66,93 @@
 #else:
  #   print("this is not a good name!")
 
-money = 0
-if money >= 10:
-    print("lunch")
-elif money >= 5:
-    print("snack")
-else:
-    print("to bad")
+#money = 0
+#if money >= 10:
+ #   print("lunch")
+#elif money >= 5:
+    #print("snack")
+#else:
+ #   print("to bad")
+
+#hi = {"o", "b"}
+#print(hi)
+
+#for i in range
+
+import random 
+
+score = ["leaderboard"]
+maxnumber = 88
+difficulty = 0 
+
+
+def game():
+    global maxnumber
+    print('')
+    difficulty = (input("please choose a difficulty 1,2 or 3 "))
+
+    if difficulty == '1':
+      maxnumber = 10
+    elif difficulty == '2':
+      maxnumber = 20
+    elif difficulty == '3':
+      maxnumber = 30
+
+def game_over():
+  replay = input("Do you want to play again? y'n ")
+  if replay == "y" or replay == "Y":
+    game()
+  elif replay == "n" or replay == "N":
+      print("thank you for playing")
+      final = "\n".join(score)
+      print(final)
+  else:
+    print("invalid input")
+    game_over
+
+
+lives = 10
+
+game()
+number = random.randint(1, maxnumber)
+myname = input("what is your name? ")
+print("well, " + myname + " , i am thinking of a number between 1 and " + str(maxnumber))
+
+for guessTaken in range(lives):
+  print("you have " + str(lives - guessTaken) + " guesses left")
+  guess = input("take a guess: ")
+  guess = int(guess)
+
+  if guess == number:
+    print("good job you won!")
+    break
+  elif guess < number:
+    print("your guess is to low")
+  elif guess > number:
+    print("your guess is to high")
+
+  elif guess > maxnumber:
+    print("your guess is out of range")
+
+if guess != number:
+  number = str(number)
+  print("Nope. that number is not what i was thinking of. i was thinking of: " + number)
+  game_over()
+elif guess == number:
+  if guessTaken+1 == 1:
+    grammar = "guess"
+  else:
+    grammar = "guesses"
+  
+  print("that is correct i was thinking of " + str(number) + " you took " + str(guessTaken+1) + grammar)
+
+  score.append(myname + "(lVL " + str(difficulty) + ") - " + str(guessTaken+1) +grammar)
+  final = "\n".join(score)
+  print(final)
+  game_over(1)
+
+
+
+
+      
+    
