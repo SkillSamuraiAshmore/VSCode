@@ -15,4 +15,10 @@ def game():
     elif difficulty == '3':
         maxNumber = 30
 
+    number = random.randint(1, maxNumber)
+    lives = 6
+
+    my_name = input("what is your name? ")
+    print("Well, " + my_name + " , I am thinking of a number between 1 and " + str(maxNumber))
+
 game()
