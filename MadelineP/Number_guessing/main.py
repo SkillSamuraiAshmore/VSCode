@@ -14,3 +14,5 @@ def game():
     
     elif difficulty == '3':
         maxNumber = 30
+
+game()
