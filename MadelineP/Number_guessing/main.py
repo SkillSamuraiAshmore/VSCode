@@ -22,7 +22,7 @@ def game():
     print("Well, " + my_name + " , I am thinking of a number between 1 and " + str(maxNumber))
 
     for guesstaken in range(lives):
-        print("You have " + str(lives - guesstaken) + "guesses left")
+        print("You have " + str(lives - guesstaken) + " guesses left")
         guess = input('Take a guess: ')
         guess = int(guess)
 
