@@ -28,6 +28,7 @@ def game():
 
         if guess == number:
             print("good job! You won!")
+            break
         
         elif guess < number:
             print("Your guess is too low")
@@ -38,6 +39,33 @@ def game():
         elif guess > maxNumber:
             print("Your guess is out of range")
 
+    if guess != number:
+        number = str(number)
+        print("Nope. That number is not what i was thinking of. i was thinking of: " + number)
+        game_over()
+    elif guess == number:
+        if guesstaken + 1 == 1:
+            grammar = " guess"
+        else:
+            grammar = " guesses"
         
+        print("That is correct. I was thinking of " + str(number) + " you took " + str(guesstaken+1) + grammar)
+        
+        score.append(my_name + "(Lvl " + str(difficulty) +") - " + str(guesstaken+1) + grammar)
+        final = "\n".join(score)
+        print(final)
+        game_over()
+
+def game_over():
+    replay = input("Do you want to play again? y/n")
+    if replay == "y" or replay == "Y":
+        game()
+    elif replay == "n" or replay == "N":
+        print("Thank you for playing")
+        final = "\n".join(score)
+        print(final)
+    else:
+        print("Invalid input")
+        game_over  
 
 game()
