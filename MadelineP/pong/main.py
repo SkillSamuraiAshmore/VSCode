@@ -64,3 +64,7 @@ while True:
     window.update()
     ball.setx(ball.xcor() + ball. dx)
     ball.sety(ball.ycor() + ball. dy)
+
+    if ball.ycor() > 290:
+        ball.sety(290)
+        ball.dy *= -1
