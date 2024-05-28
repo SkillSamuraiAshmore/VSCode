@@ -6,13 +6,14 @@ maxNumber = 1
 difficulty = ""
 
 def game():
-    print()
-    difficulty = (input("please choose a difficulty 1,2 or 3"))
-    if difficulty == '1':
+    global maxNumber
+    difficulty = input("please choose a difficulty 1,2 or 3 ")
+    difficulty = int(difficulty)
+    if difficulty == 1:
         maxNumber = 10        
-    elif difficulty == '2':
-       maxNumber = 20
-    elif difficulty == '3':
+    elif difficulty == 2:
+        maxNumber = 20
+    elif difficulty == 3:
         maxNumber = 30
 
 def game_over():
@@ -30,10 +31,12 @@ def game_over():
 lives = 6
 
 myName = input("what is your name")
-print("hi" + myName + " I am thinking of a number between 1 and" + str(maxNumber))
-
+print(maxNumber)
 game()
 number = random.randint(1, maxNumber)
+
+
+print("hi" + myName + " I am thinking of a number between 1 and " + str(maxNumber))
 for guesstaken in range (lives):
     print("you have" + str (lives - guesstaken) +" guesses left")
     guess = input ("take a guess:")
@@ -55,7 +58,7 @@ for guesstaken in range (lives):
         print ("your guess is out of range")
     if guess != number:
         number = str(number)
-        print("this is not the number i was thinking of.i was thinking of" + number )
+        print("this is not the number i was thinking of.i was thinking of " + number )
         game_over()
     elif guess == number:
         if guesstaken+1 == 1:\
