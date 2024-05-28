@@ -1,7 +1,5 @@
-light = input("what is the traffic light? ")
+fruit_list = ["apple", "banna", "cherry"]
+print(fruit_list)
 
-if light  == "red":
-    print("stop")
 
-if light == "green":
-    print("go")
+
