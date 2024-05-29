@@ -19,7 +19,7 @@ class Wordle():
             character = word[i]
             letter = LetterState(character)
             letter.is_in_word = character in self.secret
-            letter.is_in_position = character == slef.secret[i]
+            letter.is_in_position = character == self.secret[i]
             result.append(letter)
 
         return []
