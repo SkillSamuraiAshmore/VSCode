@@ -1,5 +1,6 @@
-fruit_list = ["apple", "banna", "cherry"]
-print(fruit_list)
+snack_list = ["white cheese", "chips", "cookies"]
 
+for snack in snack_list:
+    print("time to eat " + snack)
 
 
