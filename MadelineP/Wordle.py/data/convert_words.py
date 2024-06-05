@@ -1,8 +1,8 @@
 def main():
     # input_file_path = "word_source.txt"
     # output_file_path = "wordle_words.txt"
-    f = open("MadelineP\Wordle.py\data\word_source.txt", "r")
-    w = open("MadelineP\Wordle.py\data\wordle_words.txt", "w")
+    f = open("word_source.txt", "r")
+    w = open("wordle_words.txt", "w")
     
     five_letter_words = []
 
