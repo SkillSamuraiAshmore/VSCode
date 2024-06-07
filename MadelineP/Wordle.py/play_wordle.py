@@ -2,11 +2,12 @@ from wordle import Wordle
 from colorama import Fore
 from Letter_state import LetterState
 from typing import List 
-
+import random
 
 def main():
-    print("hello world!")
-    wordle = Wordle("APPLE")
+    word_set = load_word_set("data\wordle_words.txt")
+    secret = random.choice(list (word_set))
+    wordle = Wordle(secret)
 
     while wordle.can_attempt:
         x = input("\nType your guess: ")
@@ -14,6 +15,12 @@ def main():
         if len(x) != wordle.WORD_LENGTH:
             print(Fore.RED + f"Word must be {wordle.WORD_LENGTH} characters long!" + Fore.RESET)
             continue 
+        
+        if not x in word_set:
+            print(Fore.RED + f"{x} is not a valid word!" + Fore.RESET)
+            continue 
+            
+        
 
         wordle.attempt(x)
         display_results(wordle)
@@ -23,6 +30,7 @@ def main():
 
     else:
         print("You have failed to solve the puzzle!")
+        print(f"The secret word was: {wordle.secret}")
 
 
 def display_results(wordle: Wordle):
@@ -39,7 +47,14 @@ def display_results(wordle: Wordle):
 
     draw_border_around(lines)
     
-
+def load_word_set(path: str):
+    word_set = set()
+    with open(path, "r") as f:
+        for line in f.readlines():
+            word = line.strip().upper()
+            word_set.add(word)
+    return word_set
+    pass
 def convert_result_to_color(result: List[LetterState]): 
     result_with_color = []
     for letter in result:
