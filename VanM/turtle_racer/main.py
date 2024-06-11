@@ -69,10 +69,12 @@ t4.color("red")
 t4.shape("turtle")
 t4.penup()
 t4.goto(-250, -50)
-
-
-
-
+time.sleep(2)
+for i in range(140):
+    t1.forward(randint(1,6))
+    t2.forward(randint(1,6))
+    t3.forward(randint(1,6))
+    t4.forward(randint(1,6))
 turtle.done()
 
 
