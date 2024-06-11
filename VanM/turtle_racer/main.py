@@ -49,7 +49,26 @@ t1.shape("turtle")
 t1.penup()
 t1.goto(-250, 100)
 
+t2 = Turtle()
+t2.speed(0)
+t2.color("blue") 
+t2.shape("turtle")
+t2.penup()
+t2.goto(-250, 50)
 
+t3 = Turtle()
+t3.speed(0)
+t3.color("yellow") 
+t3.shape("turtle")
+t3.penup()
+t3.goto(-250, 0)
+
+t4 = Turtle()
+t4.speed(0)
+t4.color("red") 
+t4.shape("turtle")
+t4.penup()
+t4.goto(-250, -50)
 
 
 
