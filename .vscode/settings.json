@@ -1,3 +1,7 @@
 {
-    "python.REPL.enableREPLSmartSend": false
+    "python.REPL.enableREPLSmartSend": false,
+
+    "workbench.colorCustomizations": {
+        "tree.indentGuidesStroke": "#35e20a"
+    },
 }
