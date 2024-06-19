@@ -7,6 +7,8 @@ invaderList = []
 number_of_invaders = 5
 invaderspeed = 5
 
+score = 0 
+
 
 for i in range(number_of_invaders):
     invader = turtle.Turtle()
@@ -99,6 +101,13 @@ while True:
             x = random.randint(-200, 200)
             y = random.randint(100, 200)
             invader.setposition(x, y)
+
+            score += 10
+        
+        if invader.distance(player) < 15:
+            player.hideturtle()
+            invader.hideturtle()
+            print("your score was: ", score)
 
 
 turtle.done()
