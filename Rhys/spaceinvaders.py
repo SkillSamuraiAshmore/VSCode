@@ -7,6 +7,8 @@ invaderList = []
 number_of_invaders = 5
 invaderspeed = 5
 
+score = 0
+
 for i in range(number_of_invaders):
     invader = turtle.Turtle()
     invader.color("red")
@@ -39,6 +41,17 @@ bullet.hideturtle()
 
 bulletspeed = 25
 bulletstate = "ready"
+
+scoreLabel = turtle.Turtle()
+scoreLabel.penup()
+scoreLabel.hideturtle()
+scoreLabel.goto(-30, 300)
+scoreLabel.color("red")
+scoreLabel.write("Score: " + str(score), font = ("Arial", 24, "normal"))
+def update_score():
+    global score
+    scoreLabel.clear()
+    scoreLabel.write("Score: " + str(score), font = ("Arial", 24, "normal"))
 
 def move_left():
     x = player.xcor()
@@ -82,3 +95,30 @@ while True:
         x = invader.xcor()
         x = x + invaderspeed
         invader.setx(x)
+
+        if invader.xcor() > 280 or invader.xcor() < -280:
+            invaderspeed = invaderspeed * -1
+
+            for invader in invaderList:
+                y = invader.ycor()
+                y = y - 25
+                invader.sety(y)
+
+        if invader.distance(bullet) < 15:
+            bullet.hideturtle()
+            bulletstate = "ready"
+            bullet.setposition(0, -400)
+
+            x = random.randint(-200, 200)
+            y = random.randint(100, 200)
+            invader.setposition(x, y)
+
+
+            score += 10
+            update_score()
+
+        if invader.distance(player) < 15:
+            player.hideturtle()
+            invader.hideturtle()
+            print("Your score was: ", score)
+            update_score()
