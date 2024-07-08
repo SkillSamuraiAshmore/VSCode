@@ -10,9 +10,16 @@ def game_over(hp):
         time.sleep(3)
         sys.exit
     else:
-        typewriter("you have " +str(hp)+"left")
+        typewriter("you have " +str(hp)+" hp left")
         
-        
+def start_game():
+    typewriter("do you want to play [yes or no]:")
+    play = input()
+    if play == "yes":
+        game_over(hp)
+        typewriter("it is time to begin because for some reason you want to play this game")
+    way()
+                
 
 def typewriter(message):
     for l in message:
@@ -27,6 +34,17 @@ def damage(damage, hp):
 
 typewriter("hi this is a text based adventure :)")
 
+def cavern():
+    global hp
+    typewriter("will you bash the door and let out yor rage of being stuck to open it,you could risk it  and cimb the spring for the key you need if you are not mad [climb or hit]")
+    decision = input()
+    if decision == "hit":
+        typewriter("you have hit the door but rocks are falling and you are hurt")
+        damage(random.randint(2, 4),hp)
+    elif decision == "climb":
+        typewriter("you had a lot of experience climbing because you used playgrounds the way they were not built for because you new that it whould happen when you where young. now you sucsesfuly got the key and unlocked the door ")
+
+
 def way():
     global hp
     
@@ -34,16 +52,11 @@ def way():
     decision = input()
     
     if decision == "left":
-        typewriter("for some reason you chose left the path leads to a small cavern with a spring or somthing inthe center and a key on that spring thing.")
+        typewriter("for some reason you chose left the path leads to a small cavern with a spring or somthing in the center and a key on that spring thing.")
         typewriter("It must lead to the tiny door to the right of the spring")
+        cavern()
     elif    decision == "right":
-        typewriter("you walk down the right path until you run into painful spike spikes why did you chose right ")
+        typewriter("you walk down the right path until you run into painful spikes  why did you chose right ")
         damage(random.randint(1,2),hp)
         
-def start_game():
-    typewriter("do you want to play [yes or no]:")
-    play = input()
-    if play == "yes":
-        typewriter("it is time to begin because for some reason you want to play this game")
-        
-        start_game()
+start_game()
