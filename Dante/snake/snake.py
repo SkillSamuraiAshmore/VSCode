@@ -2,6 +2,7 @@ import turtle
 import random
 import time
 
+
 snakeScreen = turtle.Screen()
 snakeScreen.title("Snake")
 snakeScreen.setup(width = 600, height = 600)
@@ -9,23 +10,24 @@ snakeScreen.tracer(0)
 
 snakeHead = turtle.Turtle()
 snakeHead.shape("square")
-snakeHead.penup()
+#snakeHead.penup()
 snakeHead.speed(0)
+snakeHead.color(random.randint(1,10)*0.1,random.randint(1,10)*0.1,random.randint(1,10)*0.1)
 snakeHead.direction = "stop"
 
 delay = 0.2
 segments = []
 score = 0
 
-scoreLable = turtle.Turtle()
-scoreLable.penup()
-scoreLable.hideturtle()
-scoreLable.goto(-280, 260)
-scoreLable.write("Score: " + str(score), font = ("Arial", 24, "normal"))
+scoreLabel = turtle.Turtle()
+scoreLabel.penup()
+scoreLabel.hideturtle()
+scoreLabel.goto(-280, 260)
+scoreLabel.write("Score: " + str(score), font = ("", 24, "normal"))
 
 def update_score():
-    scoreLable.clear()
-    scoreLable.write("Score: " + str(score), font = ("Arial", 24, "normal"))
+    scoreLabel.clear()
+    scoreLabel.write("Score: " + str(score), font = ("", 24, "normal"))
 
 
 snakeFood = turtle.Turtle()
@@ -36,48 +38,44 @@ snakeFood.speed(0)
 snakeFood.penup()
 snakeFood.goto(0,100)
 
-
 def move():
     position = snakeHead.position()
-    
-
     if snakeHead.direction == "up":
         snakeHead.sety(snakeHead.ycor() + 20)
-    elif snakeHead.direction == "down":
+    if snakeHead.direction == "down":
         snakeHead.sety(snakeHead.ycor() - 20)
-    elif snakeHead.direction == "right":
+    if snakeHead.direction == "right":
         snakeHead.setx(snakeHead.xcor() + 20)
-    elif snakeHead.direction == "left":
+    if snakeHead.direction == "left":
         snakeHead.setx(snakeHead.xcor() - 20)
 
     for segment in segments:
         newPosition = segment.position()
         segment.goto(position)
         position = newPosition
-
+"""
     if snakeHead.xcor() >= 290 or snakeHead.xcor() <= -290 or snakeHead.ycor() >= 290 or snakeHead.ycor() <= -290:
         kill_snake()
     for segment in segments:
         if segment.distance(snakeHead) < 10:
             kill_snake()
-
-
+"""
 
 def move_up():
-    if snakeHead.direction != "down":
+    #if snakeHead.direction != "down":
         snakeHead.direction = "up"
 def move_down():
-    if snakeHead.direction != "up":
+    #if snakeHead.direction != "up":
         snakeHead.direction = "down"
 def move_left():
-    if snakeHead.direction != "right":
+    #if snakeHead.direction != "right":
         snakeHead.direction = "left"
 def move_right():
-    if snakeHead.direction != "left":
-        snakeHead.direction = "right"
+    #if snakeHead.direction != "left":
+    snakeHead.direction = "right"
 
 def kill_snake():
-    global segments, delay, score
+    global segments, delay, score 
     for segment in segments:
         segment.color("red")
         time.sleep(delay)
@@ -93,13 +91,12 @@ def kill_snake():
     delay = 0.1
     score = 0
     update_score()
-    
 
 
-snakeScreen.onkeypress(move_up, 'w')
-snakeScreen.onkeypress(move_down, 's')
-snakeScreen.onkeypress(move_left, 'a')
-snakeScreen.onkeypress(move_right, 'd')
+snakeScreen.onkeypress(move_up , 'w')
+snakeScreen.onkeypress(move_down , 's')
+snakeScreen.onkeypress(move_left , 'a')
+snakeScreen.onkeypress(move_right , 'd')
 snakeScreen.listen()
 
 while True:
@@ -111,8 +108,10 @@ while True:
         y = random.randint(-270, 270)
         snakeFood.goto(x, y)
         snakeSegment = snakeHead.clone()
-        snakeSegment.color("black")
+        snakeSegment.color(random.randint(1,10)*0.1,random.randint(1,10)*0.1,random.randint(1,10)*0.1)
         segments.append(snakeSegment)
-        score = score + 10
+        score = score + 1
         update_score()
+    
 
+#input("Hit enter.")

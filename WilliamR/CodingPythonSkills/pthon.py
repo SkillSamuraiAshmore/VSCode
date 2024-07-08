@@ -10,8 +10,12 @@ print(age + 10000)
 print(age / 2)
 print(100 - 100)
 print(7 * 7)
-name = input("what is your name")
 fruit = "apple"
 Amount = 10
 price = 500.22
-delicious = true
+delicious = True
+int("10") + 10
+print("10 + 10")
+light = "red"
+score = 10
+score  > 10000000
