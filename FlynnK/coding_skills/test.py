@@ -30,4 +30,3 @@
 #yay = 299
 #print(yay - 1)
 
-input()
