@@ -1,27 +1,23 @@
 from turtle import *
 from random import randint
 from time import sleep
-import os
 
-clicked = False 
+clicked = False
 whacked = False
 
 max_screen_x, max_screen_y = 400, 300
 border = 50
-max_x, max_y, = max_screen_x - border, max_screen_y - border
+max_x, max_y = max_screen_x - border, max_screen_y - border
 
-num_holes = 20
+num_holes = 10
 num_spins = 3
 
 def spin():
     sleep(0.25)
     circle(10)
-    
+
 def print_text():
-    write("Bonk!", align ="center", font =("Arial", 15, "normal"))
-    sleep(1)
-    
-    
+    write("Hit", align = "center", font=("Arial", 15, "bold"))
     
 def dig():
     dot(50)
@@ -36,36 +32,35 @@ def move_mole():
     new_x, new_y = randint(-max_x, max_x), randint(-max_y, max_y)
     goto(new_x, new_y)
     
-    spin_count  = 0
-    while not clicked and spin_count < num_spins:
+    spin_count = 0
+    while not clicked and spin_count <num_spins:
         spin()
-        spin_count+= 1 
-
-    if whacked == True:
+        spin_count += 1
+        
+    if whacked:
         print_text()
     else:
         dig()
-
-    clicked = False
-    whacked = False
-
+        
+        clicked = False
+        whacked = False
+        
 def whack(x_coord, y_coord):
     global clicked, whacked
     clicked = True
-    whacked = near_mole (x_coord, y_coord)
-    
-setup(max_screen_x * 2, max_screen_y *2)
+    whacked = near_mole(x_coord, y_coord)
+
+setup(max_screen_x * 2, max_screen_y * 2)
 title("Whack-A-Mole")
 bgcolor("forestgreen")
-
-
-speed('fast')
-
+speed("fast")
+register_shape("CianK\Whack-The-Mole\mole.gif")
+shape("CianK\Whack-The-Mole\mole.gif")
 penup()
-
 onscreenclick(whack)
-
 for hole in range(num_holes):
-    move_mole()
-
-done()
+    move_mole()   
+    
+temp = input("")
+    
+               
