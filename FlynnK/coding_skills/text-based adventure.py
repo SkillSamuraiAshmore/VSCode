@@ -31,7 +31,7 @@ def fight_robot():
 
 if decision == "fight":
     typewriter("the robot fires its rockets at you, ending you joueny instily,")
-    damage(999999999999999, hp)
+    damage(999, hp)
 elif decision == "run":
     typewriter("you'ur not a fool! you drop everything and flee")
 
