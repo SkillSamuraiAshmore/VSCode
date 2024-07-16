@@ -1,4 +1,4 @@
-yesimport sys
+import sys
 import random
 import time
 
