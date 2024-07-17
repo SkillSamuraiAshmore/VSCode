@@ -30,7 +30,7 @@ player.setposition(0, -250)
 
 playerspeed = 15
 
-bullet = turtle.Turtle()
+bullet = turtle.Turtle() 
 bullet.color("yellow")
 bullet.shape("triangle")
 bullet.speed(0)
