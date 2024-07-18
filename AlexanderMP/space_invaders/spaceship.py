@@ -46,6 +46,8 @@ bullet.hideturtle()
 
 bulletspeed = 25
 bulletstate = "ready"
+
+# added movement functions
 def move_left():
     x = player.xcor()
     x = max(x - playerspeed, -280)
