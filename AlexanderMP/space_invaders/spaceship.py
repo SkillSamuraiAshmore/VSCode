@@ -5,6 +5,7 @@ turtle.bgcolor("black")
 invaderList = []
 number_of_invader = 5
 invaderspeed = 5
+#for loop
 for i in range (number_of_invader):
     invader = turtle.Turtle()
     invader.color("red")
