@@ -21,13 +21,13 @@ def start_game():
         way()
        
     else:
-        typewriter("bye you are stupid you can play later when you follow instructions")
+        typewriter("bye")
         sys.exit()
 def typewriter(message):
     for l in message:
         sys.stdout.write(l)
         sys.stdout.flush()
-        time.sleep(0.04)
+        time.sleep(0.03)
     sys.stdout.write('\n')
 
 def damage(damage, hp):
