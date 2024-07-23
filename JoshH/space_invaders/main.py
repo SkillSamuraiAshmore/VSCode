@@ -2,6 +2,23 @@ import turtle
 import random
 
 turtle.bgcolor("black")
+
+invaderList = []
+number_of_invaders = 5
+invaderspeed = 5
+score = 0
+
+for i in range (number_of_invaders):
+    invader = turtle.Turtle()
+    invader.color("red")
+    invader.shape("square")
+    invader.speed(0)
+    invader.penup()
+    x = random.randint(-200, 200)
+    y = random.randint(100, 200)
+    invader.setposition(x, y)
+    invaderList.append(invader)
+    
     
 player = turtle.Turtle()
 player.color("blue")
@@ -13,7 +30,7 @@ player.setposition(0, -250)
 
 playerspeed = 15
 
-bullet = turtle.Turtle()
+bullet = turtle.Turtle() 
 bullet.color("yellow")
 bullet.shape("triangle")
 bullet.speed(0)
@@ -53,14 +70,44 @@ turtle.onkey(fire_bullet, "space")
 
 while True:
     if bulletstate == "fire":
-        y = bullet.ycor
+        y = bullet.ycor()
         y = y + bulletspeed
         bullet.sety(y)
         
     if bullet.ycor() > 275:
         bullet.hideturtle()
         bulletstate = "ready"
-
+        
+    for invader in invaderList:
+        x = invader.xcor()
+        x = x + invaderspeed
+        invader.setx(x)
+            
+        if invader.xcor() > 280 or invader.xcor() < -280:
+            invaderspeed = invaderspeed * -1
+                
+            for invader in invaderList:
+                y = invader.ycor()
+                y = y - 25
+                invader.sety(y)
+        if invader.distance(bullet) < 15:
+            bullet.hideturtle()
+            bulletstate = "ready"
+            bullet.setposition(0, -400)
+            
+            x = random.randint(-200, 200)
+            y = random.randint(100, 200)
+            invader.setposition(x, y)
+            
+            score += 10
+            
+        if invader.distance(player) < 15:
+            player.hideturtle()
+            invader.hideturtle()
+            print("game over you suck" ) 
+            print("Your score was: ", score)
+            
+            
     
     
-turtle.done()
+#turtle.done()
