@@ -71,7 +71,7 @@ turtle.onkey(fire_bullet, "space")
 while True:
     if bulletstate == "fire":
         # bullet has been fired
-        y = bullet.ycor
+        y = bullet.ycor()
         y = y + bulletspeed
         bullet.sety(y)
         
