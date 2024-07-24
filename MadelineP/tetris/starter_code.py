@@ -315,7 +315,6 @@ def main(win):
         
         grid = create_grid(locked_position)
         fall_time += clock.get_rawtime()
-        clock.tick()
         level_time += clock.get_rawtime()
         clock.tick()
         
@@ -374,11 +373,7 @@ def main(win):
             score += clear_rows(grid, locked_position) * 10
             
             
-            
-                
-                
-                
-                     
+        
         draw_window(win, grid, score)
         draw_next_shape(next_piece, win) 
         pygame.display.update()
