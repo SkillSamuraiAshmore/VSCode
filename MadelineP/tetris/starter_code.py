@@ -279,19 +279,23 @@ def draw_next_shape(shape, surface):
     surface.blit(label, (sx + 10, sy- 30))
 
 def update_score(nscore):
+    score = max_score()
+        
+    with open('scores.txt', 'w') as f:
+        if int(score) > nscore:
+            f.write(str(score))
+        else:
+            f.write(str(nscore))    
+            
+def max_score():
     with open('scores.txt', 'r') as f:
         lines = f.readlines()
         score = lines[0].strip()
         
-    with open('scores.txt', 'w') as f:
-        if score > nscore:
-            f.write(str(score))
-        else:
-            f.write(str(nscore))    
-    
-    
-
-def draw_window(surface, grid, score=0):
+    return score
+  
+  
+def draw_window(surface, grid, score=0, last_score = 0):
     surface.fill((0,0,0))
     pygame.font.init()
     font = pygame.font.SysFont('comicsans', 60)
@@ -300,7 +304,7 @@ def draw_window(surface, grid, score=0):
     surface.blit(label, (top_left_x + play_width/2 - (label.get_width()/2), 30))
     
     
-    
+    #current score
     font = pygame.font.SysFont('comicsans', 30)
     label = font.render('Score:' + str(score), 1, (255,255,255))
 
@@ -308,6 +312,16 @@ def draw_window(surface, grid, score=0):
     sy = top_left_y + play_height/2 - 100
     
     surface.blit(label, (sx + 20, sy + 160))
+    
+    
+    #last score
+    label = font.render('High Score:' + last_score, 1, (255,255,255))
+
+    sx = top_left_x - 250
+    sy = top_left_y + 200
+    
+    surface.blit(label, (sx + 20, sy + 160))
+    
     
     for i in range(len(grid)):
         for j in range(len(grid[i])):
@@ -319,6 +333,7 @@ def draw_window(surface, grid, score=0):
     pygame.display.update()
 
 def main(win):
+    last_score = max_score()
     locked_position = {}
     grid = create_grid(locked_position)
     
@@ -398,7 +413,7 @@ def main(win):
             
             
         
-        draw_window(win, grid, score)
+        draw_window(win, grid, score, last_score)
         draw_next_shape(next_piece, win) 
         pygame.display.update()
         
@@ -407,6 +422,8 @@ def main(win):
             pygame.display.update()
             pygame.time.delay(1500)
             run = False
+            update_score(score)
+            
     
 def main_menu(win):
     run = True
