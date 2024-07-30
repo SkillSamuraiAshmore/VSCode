@@ -5,7 +5,9 @@ turtle.bgcolor("black")
 
 invaderList = []
 number_of_invaders = 5
-invaderspeed = 5
+invaderspeed = 10
+
+score = 0
 
 for i in range(number_of_invaders):
     invader = turtle.Turtle()
@@ -32,7 +34,7 @@ playerspeed = 15
 bullet = turtle.Turtle()
 bullet.color("yellow")
 bullet.shape("arrow")
-bullet.speed(0)
+bullet.speed(5)
 bullet.penup()
 bullet.setheading(90)
 bullet.shapesize(0.5, 0.5)
@@ -79,6 +81,42 @@ while True:
         bullet.hideturtle() 
         bulletstate = "ready"
         
+        
+        
+    for invader in invaderList:
+        x = invader.xcor()
+        x = x + invaderspeed
+        invader.setx(x)
+        
+        if invader.xcor() > 280 or invader.xcor() < -280:
+            invaderspeed = invaderspeed * -1
+            
+            for invader in invaderList:
+                y = invader.ycor()
+                y = y - 5
+                invader.sety(y)
+            
+        if invader.distance(bullet) < 15:
+            #collsion
+            #reset bullet
+            bullet.hideturtle
+            bulletstate = "ready"
+            bullet.setposition(0, 400)
+
+            #reset the invader
+            x = random.randint(-200, 200)
+            y = random.randint(100, 200)
+            invader.setposition(x, y)
+            
+            score += 10
+
+        if invader.distance(player) < 15:
+            #colision with player
+            #GAMEROVER
+            player.hideturtle()
+            invader.hideturtle
+            print ("your score was: ", score)
+            turtle.bye()           
 
 
 
@@ -89,25 +127,3 @@ while True:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-turtle.done()
