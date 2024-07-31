@@ -46,7 +46,7 @@ def move_mole():
     clicked = False
     whacked = False
     
-def whack(x_coord, y_coord)
+def whack(x_coord, y_coord):
      global clicked, whacked
      clicked = True
      whacked = near_mole(x_coord, y_coord)
