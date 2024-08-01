@@ -13,6 +13,8 @@ max_y = max_screen_y-border
 num_holes = 10
 num_spins = 3
 
+mole_pic = "JoshuaH\wackamole\images\mole.gif"
+
 def spin():
     sleep(0.25)
     circle(10)
@@ -51,4 +53,17 @@ def whack(x_coord, y_coord):
      clicked = True
      whacked = near_mole(x_coord, y_coord)
      
-     
+setup(max_screen_x * 2, max_screen_y * 2)
+title("whack-a-mole")
+bgcolor("forestgreen")
+
+speed('fast')
+register_shape(mole_pic)
+shape(mole_pic)
+penup()
+
+onscreenclick(whack)
+for hole in range(num_holes):
+    move_mole()
+    
+done()
