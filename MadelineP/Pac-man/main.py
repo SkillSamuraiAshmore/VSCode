@@ -215,7 +215,6 @@ def check_position(centerx, centery):
 #     return turns
 
 def move_player(play_x, play_y):
-    print("test")
     if direction == 0 and turns_allowed[0]:
         play_x += player_speed
     elif direction == 1 and turns_allowed[1]:
