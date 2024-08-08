@@ -17,7 +17,8 @@ def spin():
     circle(10)
 
 def print_text():
-    write("bonk!", align="ceneter", font=("arial", 15, "normal"))
+    write("bonk!", align="center", font=("Arial", 15, "normal"))()
+    
 def dig():
     dot(50)
 
@@ -28,4 +29,37 @@ def near_mole(x_coord, y_coord):
  
 def move_mole():
     global clicked, whacked
-    new_x, new_y = randint(- max_x, max_y)   
+    new_x, new_y = randint(- max_x, max_y), randint(-max_y, max_y)
+    goto(new_x, new_y)
+    
+    spin_count = 0
+    while not clicked and spin_count < num_spins:
+        spin()
+        spin_count += 1
+        
+    if whacked:
+        print_text()
+    else:
+        dig()
+        
+    clicked = False
+    whacked = False 
+
+def whack (x_coord, y_coord):
+    global clicked, whacked
+    clicked = True
+    whacked = near_mole(x_coord, y_coord)
+    
+    
+setup(max_screen_x * 2, max_screen_y * 2)
+title("Whack-a-mole💀")
+bgcolor("forestgreen")
+
+speed('fast')
+register_shape("VanM\wack_a_mole\images\mole.gif")
+shape("VanM\wack_a_mole\images\mole.gif")
+penup()
+
+onscreenclick(whack)
+for hole in range(num_holes):
+    move_mole()
