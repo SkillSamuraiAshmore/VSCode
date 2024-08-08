@@ -6,7 +6,7 @@ hp = random.randint(6, 12)
 
 def game_over(hp):
     if hp >= 0:
-        typewriter("game over")
+        typewriter("you died💀💀💀")
 def typewriter(message):
     for l in message:
         sys.stdout.write(l)
