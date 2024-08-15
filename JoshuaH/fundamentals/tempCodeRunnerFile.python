@@ -1,0 +1,9 @@
+light = input("What is the traffic light?")
+
+if light == "red":
+    print("stop")
+else:
+    print("uh oh!")
+
+if light == "green":
+    print("go")
