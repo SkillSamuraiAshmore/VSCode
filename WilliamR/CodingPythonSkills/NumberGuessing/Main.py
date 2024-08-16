@@ -18,6 +18,7 @@ def game():
 
 def game_over():
     replay = input("Do you want to play again? y/n")
+    # same thing 
     if replay == "y" or replay == "y":
         game()
     elif replay == "n" or replay =="N":
@@ -67,10 +68,11 @@ for guesstaken in range (lives):
             grammar = "guessses"
 
     print("this is corect i was thinking of" + str(number) + "you took" + str(guesstaken+1) + grammar)
-    score.append (myName + "(LVL" + str(difficulty)+")  -"+ str(guesstaken+1) + grammar)
+    score.append (myName + "(LVL" + str(difficulty)+")  - " + str(guesstaken+1) + grammar)
     final = "/n".join(score)
     print(final)
     game_over()
+    
 
 
 game()
