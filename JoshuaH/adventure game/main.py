@@ -33,7 +33,11 @@ def start_game():
     if play =="yes":
         typewriter("Lets begin!")
         
+    
+        
 def way():
+    global hp
+    
     typewriter("you are in a cave. there are two ways you can go, left or right. which way? [left or right]:")
     decision = input()
     
