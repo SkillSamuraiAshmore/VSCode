@@ -148,32 +148,32 @@ class Ghost:
                 or (level[(self.center_y - num3) //num1][self.center_x //num2] == 9 and (self.in_box or self.dead)):
                     self.turns[2] = True
                     
-            if self.direction == 2 or self.direction == 3:
+            if self.direct == 2 or self.direct == 3:
                 if 12 <= self.center_x % num2 <= 18:
-                    if level[(center_y + num3)// num1][self.center_x//num2] < 3 \
-                        or (level[(center_y + num3)// num1][self.center_x//num2]  == 9 and (self.in_box or self.dead)):
+                    if level[(self.center_y + num3)// num1][self.center_x//num2] < 3 \
+                        or (level[(self.center_y + num3)// num1][self.center_x//num2]  == 9 and (self.in_box or self.dead)):
                             self.turns[3] = True
                     
-                    if level[(center_y - num3)// num1][self.center_x//num2] < 3 \
-                        or (level[(center_y - num3)// num1][self.center_x//num2]  == 9 and (self.in_box or self.dead)):
+                    if level[(self.center_y - num3)// num1][self.center_x//num2] < 3 \
+                        or (level[(self.center_y - num3)// num1][self.center_x//num2]  == 9 and (self.in_box or self.dead)):
                             self.turns[2] = True
                 
                 if 12 <= self.center_y % num1 <= 18:
-                    if level[center_y // num1][(self.center_x - num2)//num2] < 3 \
-                        or (level[center_y // num1][(self.center_x - num2)//num2]  == 9 and (self.in_box or self.dead)):
+                    if level[self.center_y // num1][(self.center_x - num2)//num2] < 3 \
+                        or (level[self.center_y // num1][(self.center_x - num2)//num2]  == 9 and (self.in_box or self.dead)):
                             self.turns[1] = True
                     
-                    if level[center_y // num1][(self.center_x + num2)//num2] < 3 \
-                        or (level[center_y // num1][(self.center_x + num2)//num2]  == 9 and (self.in_box or self.dead)):
+                    if level[self.center_y // num1][(self.center_x + num2)//num2] < 3 \
+                        or (level[self.center_y // num1][(self.center_x + num2)//num2]  == 9 and (self.in_box or self.dead)):
                             self.turns[0] = True
                 
-            if self.direction == 0 or self.direction == 1:
+            if self.direct == 0 or self.direct == 1:
                 if 12 <= self.center_x % num2 <= 18:
-                    if level[(center_y + num3)// num1][self.center_x//num2] < 3 \
-                        or (level[(center_y + num3)// num1][self.center_x//num2]  == 9 and (self.in_box or self.dead)):
+                    if level[(self.center_y + num3)// num1][self.center_x//num2] < 3 \
+                        or (level[(self.center_y + num3)// num1][self.center_x//num2]  == 9 and (self.in_box or self.dead)):
                             self.turns[3] = True
                     
-                    if level[(center_y - num3)// num1][self.center_x//num2] < 3 \
+                    if level[(self.center_y - num3)// num1][self.center_x//num2] < 3 \
                         or (level[(center_y - num3)// num1][self.center_x//num2]  == 9 and (self.in_box or self.dead)):
                             self.turns[2] = True
                 
@@ -188,7 +188,7 @@ class Ghost:
         else:
             self.turns[0] = True
             self.turns[1] = True
-        if 350 < self.x_pos < 550 and 370 < self.y_pos < 490:
+        if 350 < self.x_pos < 550 and 370 < self.ypos < 490:
             self.in_box = True
         else:
             self.in_box = False
