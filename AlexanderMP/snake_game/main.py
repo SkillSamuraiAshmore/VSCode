@@ -13,7 +13,23 @@ snakeHead.penup()
 snakeHead.speed(0)
 snakeHead.direction = "stop"
 
+delay = 0.2 
+
+segments = []
+
+snakeFood = turtle.Turtle()
+snakeFood.color("red")
+snakeFood.shape("square")
+snakeFood.shapesize(0.5, 0.5)
+snakeFood.speed(0)
+snakeFood.penup()
+snakeFood.goto(0,100)
+
 def move():
+    position = snakeHead.position()
+    
+    
+
     if snakeHead.direction == "up":
         snakeHead.sety(snakeHead.ycor()+ 20)
     if snakeHead.direction == "down":
@@ -76,8 +92,14 @@ snakeScreen.listen()
 while True:
     snakeScreen.update()
     move()
-
-
+    time.sleep(delay) 
+    if snakeHead.distance(snakeFood) < 15:
+        y = random.randint(- 270, 270)
+        x = random.randint(- 270, 270)
+        snakeFood.goto(x, y)
+        snakeSegments = snakeHead.clone()
+        snakeSegments.color("grey")
+        segments.append(snakeSegments)
 
 
 
