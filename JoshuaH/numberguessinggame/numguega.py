@@ -24,6 +24,7 @@ def game():
         
         if guess == number:
             print("Good job you won! ")
+            break
             
         elif guess < number:
             print("Your guess is too low")
@@ -34,7 +35,8 @@ def game():
             print("Your guess is out of range")
     if guess != number:
         number = str(number)
-        print("Nope. That number is not what im thinking of. I was thinking of: " + number)
+        # print("Nope. That number is not what im thinking of. I was thinking of: " + number)
+        print(f"Nope. That number is not what im thinking of. I was thinking of: {number}")
         game_over()
     elif guess ==number:
         if guessesTaken+1 == 1:
@@ -42,5 +44,21 @@ def game():
         else:
             grammar = "guesses"
         
-        print("That is correst I was thinking of " + number + "you took" + str (guessesTaken+1))
+        print("That is correst I was thinking of " + str(number) + "you took" + str (guessesTaken+1) + grammar)
+        
+        score.append(myName + "(Lvl " +str(difficulty) +") - " + str(guessesTaken+1) +grammar)
+        final  = "\n".join(score)
+        print(final)
+        
+def game_over():
+    replay = input ("do you want to play again? y/n")
+    if replay == "y" or replay == "Y":
+        game()
+    elif replay == "n" or replay == "N":
+        print("Otay thanks for playing and you better come back tomorrow or a spider infestation will invade your house")
+        final = "\n".join(score)
+    else:
+        print("invalid input")
+        game_over()
+        
 game()

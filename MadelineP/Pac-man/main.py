@@ -130,8 +130,176 @@ class Ghost:
         num1 = ((HEIGHT-50)//32)
         num2 = (WIDTH//30)
         num3 = 15
-        
+        self.turns = [False, False, False, False]
+        if self.center_x // 30 < 29:
+            if level[self.center_y//num1][(self.center_x - num3)//num2] < 3 \
+                or (level[self.center_y//num1][(self.center_x - num3)//num2] == 9 and (self.in_box or self.dead)):
+                self.turns[1] = True
+                    
+            if level[self.center_y//num1][(self.center_x + num3)//num2] < 3 \
+                or (level[self.center_y//num1][(self.center_x + num3)//num2] == 9 and (self.in_box or self.dead)):
+                    self.turns[0] = True
+                    
+            if level[(self.center_y + num3) // num1][self.center_x // num2] < 3 \
+                or (level[(self.center_y + num3) //num1][self.center_x //num2] == 9 and (self.in_box or self.dead)):
+                    self.turns[3] = True
+                    
+            if level[(self.center_y - num3) // num1][self.center_x // num2] < 3 \
+                or (level[(self.center_y - num3) //num1][self.center_x //num2] == 9 and (self.in_box or self.dead)):
+                    self.turns[2] = True
+                    
+            if self.direct == 2 or self.direct == 3:
+                if 12 <= self.center_x % num2 <= 18:
+                    if level[(self.center_y + num3)// num1][self.center_x//num2] < 3 \
+                        or (level[(self.center_y + num3)// num1][self.center_x//num2]  == 9 and (self.in_box or self.dead)):
+                            self.turns[3] = True
+                    
+                    if level[(self.center_y - num3)// num1][self.center_x//num2] < 3 \
+                        or (level[(self.center_y - num3)// num1][self.center_x//num2]  == 9 and (self.in_box or self.dead)):
+                            self.turns[2] = True
+                
+                if 12 <= self.center_y % num1 <= 18:
+                    if level[self.center_y // num1][(self.center_x - num2)//num2] < 3 \
+                        or (level[self.center_y // num1][(self.center_x - num2)//num2]  == 9 and (self.in_box or self.dead)):
+                            self.turns[1] = True
+                    
+                    if level[self.center_y // num1][(self.center_x + num2)//num2] < 3 \
+                        or (level[self.center_y // num1][(self.center_x + num2)//num2]  == 9 and (self.in_box or self.dead)):
+                            self.turns[0] = True
+                
+            if self.direct == 0 or self.direct == 1:
+                if 12 <= self.center_x % num2 <= 18:
+                    if level[(self.center_y + num3)// num1][self.center_x//num2] < 3 \
+                        or (level[(self.center_y + num3)// num1][self.center_x//num2]  == 9 and (self.in_box or self.dead)):
+                            self.turns[3] = True
+                    
+                    if level[(self.center_y - num3)// num1][self.center_x//num2] < 3 \
+                        or (level[(center_y - num3)// num1][self.center_x//num2]  == 9 and (self.in_box or self.dead)):
+                            self.turns[2] = True
+                
+                if 12 <= self.center_y % num1 <= 18:
+                    if level[center_y // num1][(self.center_x - num3)//num2] < 3 \
+                        or (level[center_y // num1][(self.center_x - num3)//num2]  == 9 and (self.in_box or self.dead)):
+                            self.turns[1] = True
+                    
+                    if level[center_y // num1][(self.center_x + num3)//num2] < 3 \
+                        or (level[center_y // num1][(self.center_x + num3)//num2]  == 9 and (self.in_box or self.dead)):
+                            self.turns[0] = True
+        else:
+            self.turns[0] = True
+            self.turns[1] = True
+        if 350 < self.x_pos < 550 and 370 < self.ypos < 490:
+            self.in_box = True
+        else:
+            self.in_box = False
+            
         return self.turns, self.in_box
+
+    def move_clyde(self):
+        if self.direct == 0:
+            if self.target[0] > self.x_pos and self.turns[0]:
+                self.x_pos += self.speed
+            elif not self.turns[0]:
+                if self.target[1] > self.ypos and self.turns[3]:
+                    self.direct = 3
+                    self.ypos += self.speed
+                elif self.target[1] < self.ypos and self.turns[2]:
+                    self.direct = 2
+                    self.x_pos -= self.speed
+                elif self.target[0] < self.x_pos and self.turns[1]:
+                    self.direct = 1
+                    self.x_pos -= self.speed
+                elif self.turns[3]:
+                    self.direct = 3
+                    self.ypos += self.speed
+                elif self.turns[2]:
+                    self.direct = 2
+                    self.ypos -= self.speed
+                elif self.turns[1]:
+                    self.direct = 1
+                    self.x_pos -= self.speed
+            elif self.turns[0]:
+                if self.target[1] > self.ypos and self.turns[3]:
+                    self.direct = 3
+                    self.ypos += self.speed
+                if self.target[1] < self.ypos and self.turns[2]:
+                    self.direct = 2
+                    self.ypos -= self.speed
+                else:
+                    self.x_pos += self.speed
+                    
+        elif self.direct == 1:
+            if self.target[1] > self.ypos and self.turns[3]:
+                self.direct = 3 
+            elif self.target[0] < self.x_pos and self.turns[1]:
+                self.x_pos -= self.speed
+            elif not self.turns[1]:
+                if self.target[1] > self.ypos and self.turns[3]:
+                    self.direct = 3
+                    self.ypos += self.speed
+                elif self.target[1] < self.ypos and self.turns[2]:
+                    self.direct = 2
+                    self.x_pos -= self.speed
+                elif self.target[0] > self.x_pos and self.turns[0]:
+                    self.direct = 0
+                    self.x_pos += self.speed
+                elif self.turns[3]:
+                    self.direct = 3
+                    self.ypos += self.speed
+                elif self.turns[2]:
+                    self.direct = 2
+                    self.ypos -= self.speed
+                elif self.turns[0]:
+                    self.direct = 0
+                    self.x_pos += self.speed
+            elif self.turns[1]:
+                if self.target[1] > self.ypos and self.turns[3]:
+                    self.direct = 3
+                    self.ypos += self.speed
+                if self.target[1] < self.ypos and self.turns[2]:
+                    self.direct = 2
+                    self.ypos -= self.speed
+                else:
+                    self.x_pos -= self.speed
+        
+        elif self.direct == 2:
+            if self.target[0] < self.x_pos and self.turns[0]:
+                self.direct = 0
+                self.x_pos -= self.speed
+            elif self.target[1] < self.ypos and self.turns[2]:
+                self.ypos -= self.speed
+            elif not self.turns[2]:
+                if self.target[0] > self.x_pos and self.turns[0]:
+                    self.direct = 0
+                    self.x_pos += self.speed
+                elif self.target[0] < self.x_pos and self.turns[1]:
+                    self.direct = 1
+                    self.x_pos -= self.speed
+                elif self.target[1] > self.ypos and self.turns[3]:
+                    self.direct = 3
+                    self.ypos += self.speed
+                elif self.turns[3]:
+                    self.direct = 3
+                    self.ypos += self.speed
+                elif self.turns[1]:
+                    self.direct = 1
+                    self.x_pos -= self.speed
+                elif self.turns[0]:
+                    self.direct = 0
+                    self.x_pos += self.speed
+            elif self.turns[2]:
+                if self.target[1] > self.ypos and self.turns[3]:
+                    self.direct = 3
+                    self.x_pos += self.speed
+                if self.target[1] < self.ypos and self.turns[2]:
+                    self.direct = 2
+                    self.x_pos -= self.speed
+                else:
+                    self.ypos -= self.speed
+                    
+                    
+                
+        
 
 def draw_misc():
     score_text = font.render(f'Score: {score}', True, 'white')
