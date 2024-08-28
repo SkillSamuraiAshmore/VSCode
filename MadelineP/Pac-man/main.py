@@ -483,6 +483,39 @@ def move_player(play_x, play_y):
         play_y += player_speed
     return play_x, play_y
 
+def get_targets():
+    if player_x < 450:
+        runaway_x = 900
+    else:
+        runaway_x = 0
+
+    if player_y < 450:
+        runaway_y = 900
+    else:
+        runaway_y = 0
+    return_target = (380, 400)
+    if powerup:
+        if not blinky_dead:
+            blink_target = (runaway_x, runaway_y)
+        else:
+            blink_target = return_target
+            
+        if not inky_dead:
+            ink_target = (runaway_x, runaway_y)
+        else:
+            ink_target = return_target
+        
+        if not pinky_dead:
+            pink_target = (runaway_x, runaway_y)
+        else:
+            pink_target = return_target
+        
+        if not clyde_dead:
+            clyde_target = (runaway_x, runaway_y)
+        else:
+            clyde_target = return_target
+        
+
 run = True
 while run:
     timer.tick(fps)
@@ -515,6 +548,7 @@ while run:
     pinky = Ghost(pinky_x, pinky_y, targets[2], ghost_speed, pinky_img, pinky_direction, pinky_dead, pinky_box, 2)
     clyde = Ghost(clyde_x, clyde_y, targets[3], ghost_speed, clyde_img, clyde_direction, clyde_dead, clyde_box, 3)
     draw_misc()
+    targets = get_targets(blinky_x, blinky_y, inky_x, inky_y, pinky_x, pinky_y, clyde_x, clyde_y)
     center_x = player_x + 23
     center_y = player_y + 24
     turns_allowed = check_position(center_x, center_y)
