@@ -1,1 +1,1 @@
-self.
+direct
