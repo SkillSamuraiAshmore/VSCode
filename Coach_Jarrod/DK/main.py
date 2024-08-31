@@ -6,6 +6,7 @@
 # (x, y, x + offset, y + offset)
 
 import pygame
+import Mario_handler
 
 pygame.init()
 WIDTH = 900
@@ -63,6 +64,8 @@ while run:
     # screen.blit(frame_2, (150, 0))
     # screen.blit(frame_3, (250, 0))
     surface.blit(scale_images("cinema",0,50,230,260), (-20, 0))
+    Mario = Mario_handler.Mario_handler(65,10,10)
+    Mario.walk(15,20)
     surface.blit(scale_images("sprite",65,10,15,20), (surface.get_width()*0.5, surface.get_height()*0.5))
     
 	#event handler
