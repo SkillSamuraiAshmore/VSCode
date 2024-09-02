@@ -39,7 +39,7 @@ food.goto(0,100)
 
 def move():
     
-    position = snakeHead.position()
+    position = snakeHead.position()   
     
     if snakeHead.direction == "up":
         snakeHead.sety(snakeHead.ycor() + 20)
@@ -52,12 +52,8 @@ def move():
         
         
     for segment in snakeSegments:
-        newPosition = segment.position()
-        segment.goto(position)
-        position = newPosition
-        
-    if snakeHead.xcor() >= 290 or snakeHead.xcor() <= -290 or snakeHead.ycor() >= 290 or snakeHead.ycor() <= -290:
-        operation_Kill_snake()
+        if snakeHead.xcor() >= 290 or snakeHead.xcor() <= -290 or snakeHead.ycor() >= 290 or snakeHead.ycor() <= -290:
+            operation_Kill_snake()
     for segment in snakeSegments:
         if segment.distance(snakeHead) < 10:
             operation_Kill_snake()
@@ -65,7 +61,7 @@ def move():
             
             
                           
-def move_up():
+def move_up():   
     if snakeHead.direction != "down":
         snakeHead.direction = "up"
 def move_down():
@@ -80,27 +76,23 @@ def move_right():
         
         
 def operation_Kill_snake():
-            global segments, delay, score
-            for segment in segments:
-                segment.color("yellow")
-                time.sleep(delay)
-                snakeScreen.update()
-            time.sleep(1)
-            for segment in reversed(segments):
-                segment.hideturtle
-                time.sleep(delay)
-                snakeScreen.update()
+    global snakeSegments, delay, score
+    for segment in snakeSegments:
+        segment.color("yellow")
+        time.sleep(delay)
+        snakeScreen.update()
+    time.sleep(1)
+    for segment in reversed(snakeSegments):
+        segment.hideturtle
+        time.sleep(delay)
+        snakeScreen.update()
                 
-            segments = []
-            snakeHead.goto(0,0)
-            snakeHead.direction
-            delay = 0.1
-            score = 0 
-            update_score()
-                
-        
-        
-        
+    snakeSegments = []
+    snakeHead.goto(0,0)
+    snakeHead.direction
+    delay = 0.1
+    score = 0 
+    update_score()      
                
 snakeScreen.onkeypress(move_up , 'w')
 snakeScreen.onkeypress(move_down , 's')
