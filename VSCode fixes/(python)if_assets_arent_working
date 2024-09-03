@@ -1,0 +1,5 @@
+import os
+from os.path import abspath, dirname
+os.chdir(dirname(abspath(__file__)))
+
+# if the videos are using relative pathing, the above code should convert it to an absolute path
