@@ -3,7 +3,7 @@ import random
 import time
 
     
-def typewriter(messsage):
+def typewriter(message):
     for L in message:
         sys.stdout.write(L)
         sys.stdout.flush()
@@ -18,23 +18,37 @@ def game_over (hp):
             time.sleep(3)
             sys.exit
     else:
-        typewriter("you have " +str(hp) + "left!")
+        typewriter("you have " +str(hp) + "HP left!")
         
 def damage(damage, hp):
     hp -=damage
     game_over(hp)
     
-typewriter ("Greeting and salutatoius, adventurer!")
-
-def start_game():
-    typewriter("Begin the game? [yes or no]")
-    play = input
-
-    if play =="yes":
-        typewriter("Lets begin!")
-        
+def fight_mighty_fox():
+    global hp 
     
-        
+    typewriter("this is a srong feasome mighty jacked and sigma opponent thqat has infinite aura! w8ill you fight or run [fight or run]: ")
+    decision = input()
+    
+    if decision =="fight":
+        typewriter("the fox draws it sords slashes you and kung fu fights you into the next generation.")
+        damage(999, hp)
+    # TODO: finish if statement 
+    # elif decision ==
+
+def cavern():
+    global hp
+    
+    typewriter("will you hit the door or will yoiu climb the spring fpor the key? [hit or climb]:")
+    decision = input()
+    
+    if decision == "hit":
+        typewriter ("you hit the door and are in turn hit by a falling rock")
+        damage (random.randint(2,4), hp)
+        cavern()
+    elif decision =="climb":
+        typewriter("you arte a very good climber, you climb the spring, get the key and unlock ythe doore in no time.")
+        typewriter("you open the door and step through and come face to face with a ... fighting fox with triplke katana's and knos kung fu")
 def way():
     global hp
     
@@ -44,6 +58,22 @@ def way():
     if decision == "left":
         typewriter ("the left path leads you to a small cavern with a spring ijn the center and a key on top of the spring")
         typewriter ("the spring must lead to the small rotted door to the right of the springl.")
+        cavern()
     elif decision == "right":
         typewriter("you walk right down the path, but run into somr spikes.")
         damage(random.randint(1,3), hp) 
+        
+def start_game():
+    global hp
+    
+    typewriter("Begin the game? [yes or no]")
+    play = input()
+
+    if play =="yes":
+        typewriter("Lets begin!")
+        game_over(hp)
+        way()
+        
+typewriter ("Greeting and salutatoius, adventurer!")
+
+start_game()    
