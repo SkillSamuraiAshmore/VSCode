@@ -16,6 +16,17 @@ snakeHead.direction = "stop"
 delay = 0.2 
 
 segments = []
+score = 0 
+
+scoreLabel = turtle.Turtle()
+scoreLabel.penup()
+scoreLabel.hideturtle()
+scoreLabel.goto(-280, 260)
+scoreLabel.write("Score:" + str(score), font= ("Arial", 24, "normal"))
+
+def update_score():
+    scoreLabel.clear()
+    scoreLabel.write("Score: " + str(score), font = ("Arial", 24, "normal"))
 
 snakeFood = turtle.Turtle()
 snakeFood.color("red")
@@ -74,6 +85,8 @@ while True:
         snakeSegments = snakeHead.clone()
         snakeSegments.color("grey")
         segments.append(snakeSegments)
+        score = score + 10
+        update_score()
 
 
 
