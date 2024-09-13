@@ -9,6 +9,9 @@ def typewriter(message):
         sys.stdout.flush()
         time.sleep(0.05)
     sys.stdout.write('\n')
+    
+def error_handler(): 
+    typewriter("please try enetring that again")
         
 hp = random.randint(6, 12)
 
@@ -27,14 +30,18 @@ def damage(damage, hp):
 def fight_mighty_fox():
     global hp 
     
-    typewriter("this is a srong feasome mighty jacked and sigma opponent thqat has infinite aura! w8ill you fight or run [fight or run]: ")
+    typewriter("this is a strong fearsome mighty jacked and sigma opponent that has infinite aura! will you fight or run [fight or run]: ")
     decision = input()
     
     if decision =="fight":
         typewriter("the fox draws it sords slashes you and kung fu fights you into the next generation.")
         damage(999, hp)
-    # TODO: finish if statement 
-    # elif decision ==
+    elif decision == "run":
+        typewriter("you are not a fool! you drop everything and call for Alex")
+    else:
+        error_handler()
+        fight_mighty_fox()
+        
 
 def cavern():
     global hp
@@ -44,11 +51,15 @@ def cavern():
     
     if decision == "hit":
         typewriter ("you hit the door and are in turn hit by a falling rock")
-        damage (random.randint(2,4), hp)
+        damage(random.randint(2,4), hp)
         cavern()
     elif decision =="climb":
         typewriter("you arte a very good climber, you climb the spring, get the key and unlock ythe doore in no time.")
         typewriter("you open the door and step through and come face to face with a ... fighting fox with triplke katana's and knos kung fu")
+    else:
+        error_handler()
+        cavern()
+        
 def way():
     global hp
     
@@ -62,7 +73,11 @@ def way():
     elif decision == "right":
         typewriter("you walk right down the path, but run into somr spikes.")
         damage(random.randint(1,3), hp) 
-        
+        way()
+    else: 
+        error_handler()
+        way()
+    
 def start_game():
     global hp
     
@@ -73,7 +88,15 @@ def start_game():
         typewriter("Lets begin!")
         game_over(hp)
         way()
+    elif play == "no":
+        sys.exit()
+    else:
+        error_handler()
+        start_game()
+
         
 typewriter ("Greeting and salutatoius, adventurer!")
 
 start_game()    
+
+typewriter("you have finished the game. thanks for playing")
