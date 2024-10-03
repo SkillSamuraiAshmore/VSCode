@@ -111,6 +111,7 @@ while True:
         snakeSegments = snakeHead.clone()
         snakeSegments.color("grey")
         segments.append(snakeSegments)
+        print(segments)
         score = score + 10
         update_score()
 
