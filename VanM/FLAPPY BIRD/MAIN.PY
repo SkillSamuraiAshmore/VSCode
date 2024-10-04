@@ -2,7 +2,7 @@ import pygame
 from sys import exit
 import random
 
-from pygame.sprite import _Group, Group
+#from pygame.sprite import Group, Group
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -26,6 +26,8 @@ start_image = pygame.image.load("assets/start.png")
 #game
 scroll_speed = 1
 bird__start_position = (100, 250)
+score = 0
+font = pygame.font.SysFont('Segoe', 26)
 
 
     
@@ -41,12 +43,14 @@ class Bird(pygame.sprite.Sprite):
         self.image_index = 0
         self.vel = 0
         self.flap = False
+        self.alive = True
         
         
         
     def update(self, user_input): 
         #animate bird
-        self.image_index += 1
+        if self.alive:
+            self.image_index += 1
         if self.image_index >= 30:
             self.image_index = 0
         self.image = bird_images[self.image_index // 10]
@@ -70,43 +74,38 @@ class Bird(pygame.sprite.Sprite):
                 
                 
         # user input
-        if user_input[pygame.K_SPACE] and not self.flap and self.rect.y > 0:
-            print("space_pressed")
+        if user_input[pygame.K_SPACE] and not self.flap and self.rect.y > 0 and self.alive:
             self.flap = True
             self.vel = -7
 
 class Pipe(pygame.sprite.Sprite):
-    def __init__(self, x,y, image):
+    def __init__(self, x,y, image, pipe_type):
         pygame.sprite.Sprite.__init__(self)
         self.image = image
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y, = x,y
+        self.enter, self.exit, self.passed = False, False, False
+        self.pipe_type = pipe_type
         
     def update(self):
         # move pipe
         self.rect.x -= scroll_speed
         if self.rect.x <= -win_widith:
-            self.kill()
+           self.kill()
             
-            
-        
-        
-        
     
-
-
-
-        
-        
-        
-    
-
+        #score
+        global score
+        if self.pipe_type == 'bottom':
+            if bird__start_position[0] > self.rect.topleft[0] and not self.passed:
+               self.enter = True
+            if bird__start_position[0] > self.rect.topright[0] and not self.passed:
+                self.exit = True
+            if self.enter and self.exit and not self.passed:
+                self.passed = True
+                score +=1
+                
             
-        
-        
-        
-        
-        
         
 
 class Ground(pygame.sprite.Sprite):
@@ -131,6 +130,8 @@ def quit_game():
             
 # game main method
 def main():
+    global score    
+    
     # instaiene bird
     bird = pygame.sprite.GroupSingle()
     bird.add(Bird())
@@ -165,19 +166,52 @@ def main():
         pipes.draw(window)
         ground.draw(window)
         bird.draw(window)
+        
+        #SHOW SCORE
+        score_text = font.render('Score: ' + str(score), True, pygame.Color(255, 255, 255))
+        window.blit(score_text, (20, 20))
+        
+        
+        
+        
+        
+        
         #update
-        pipes.update()
-        ground.update()
+        if bird.sprite.alive:
+            pipes.update()
+            ground.update()
         bird.update(user_input)
         
+        #Collison Detection
+        collision_pipes = pygame.sprite.spritecollide(bird.sprites()[0], pipes, False)
+        collision_ground = pygame.sprite.spritecollide(bird.sprites()[0], ground, False)
+        if collision_pipes or collision_ground:
+            bird.sprite.alive = False
+            if collision_ground:
+                window.blit(game_over_image ,win_widith  th // 2 - game_over_image.get_widith() // 2,
+                            win_widith // 2 - game_over_image.get_height() // 2)
+                if user_input[pygame.K_r]:
+                    score = 0
+                    main()
+                    break
+                    
+            
+            
+        
+        
+        
+        
+        
+        
         #spawn pipes
-        if pipe_timer <= 0:
+        if pipe_timer <= 0 and bird.sprite.alive:
             x_top, x_bottom = 550, 550
             y_top = random.randint(-600, -480)
             y_bottom = y_top + random.randint(90, 130) + bottom_pipe_image.get_height()
-            pipes.add(Pipe(x_top, y_top, top_pipe_image))
-            #TODO: finish this
-            pipes.add(Pipe(x_bottom, y_bottom, bottom_pipe_image))
+            pipes.add(Pipe(x_top, y_top, top_pipe_image, 'top'))
+            pipes.add(Pipe(x_bottom, y_bottom, bottom_pipe_image, 'bottom'))
+            pipe_timer = random.randint(180, 250)
+        pipe_timer -=1
             
             
             
