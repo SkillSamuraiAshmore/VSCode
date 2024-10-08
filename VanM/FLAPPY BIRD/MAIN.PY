@@ -28,11 +28,7 @@ scroll_speed = 1
 bird__start_position = (100, 250)
 score = 0
 font = pygame.font.SysFont('Segoe', 26)
-
-
-    
-
-    
+game_stopped = True
     
 class Bird(pygame.sprite.Sprite):
     def __init__(self):
@@ -171,11 +167,6 @@ def main():
         score_text = font.render('Score: ' + str(score), True, pygame.Color(255, 255, 255))
         window.blit(score_text, (20, 20))
         
-        
-        
-        
-        
-        
         #update
         if bird.sprite.alive:
             pipes.update()
@@ -188,21 +179,13 @@ def main():
         if collision_pipes or collision_ground:
             bird.sprite.alive = False
             if collision_ground:
-                window.blit(game_over_image ,win_widith  th // 2 - game_over_image.get_widith() // 2,
-                            win_widith // 2 - game_over_image.get_height() // 2)
+                #TODO: fix
+                window.blit(game_over_image , (win_widith // 2 - game_over_image.get_width() // 2
+                            , win_widith // 2 - game_over_image.get_height() // 2))
                 if user_input[pygame.K_r]:
                     score = 0
-                    main()
                     break
                     
-            
-            
-        
-        
-        
-        
-        
-        
         #spawn pipes
         if pipe_timer <= 0 and bird.sprite.alive:
             x_top, x_bottom = 550, 550
@@ -213,12 +196,30 @@ def main():
             pipe_timer = random.randint(180, 250)
         pipe_timer -=1
             
-            
-            
-        
-        
         clock.tick(60)
         pygame.display.update()
-
-main()
         
+#menu
+def menu():
+    global game_stopped
+    
+    while game_stopped:
+        quit_game()
+        
+        #draw menu
+        window.fill((0, 0, 0))
+        window.blit(skyline_image, (0, 0))
+        window.blit(ground_image, Ground(0, 520))
+        window.blit(bird_images[0], (100, 250))
+        window.blit(start_image, (win_widith // 2 - start_image.get_width() // 2
+                            , win_widith // 2 - start_image.get_height() // 2))
+        
+        
+        #user input
+        user_input = pygame.key.get_pressed()
+        if user_input[pygame.K_SPACE]:
+            main()
+            
+        pygame.display.update()
+        
+menu()   
