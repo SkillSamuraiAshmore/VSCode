@@ -40,9 +40,7 @@ class Bird(pygame.sprite.Sprite):
         self.vel = 0
         self.flap = False
         self.alive = True
-        
-        
-        
+
     def update(self, user_input): 
         #animate bird
         if self.alive:
@@ -60,15 +58,9 @@ class Bird(pygame.sprite.Sprite):
         if self.vel == 0:
             self.flap = False
             
-            
-            
         # rotate bird
         self.image = pygame.transform.rotate(self.image, self.vel * -7)
-        
-        
-                
-                
-                
+         
         # user input
         if user_input[pygame.K_SPACE] and not self.flap and self.rect.y > 0 and self.alive:
             self.flap = True
@@ -128,8 +120,9 @@ def quit_game():
 def main():
     global score    
     
-    # instaiene bird
+    # instantiate bird
     bird = pygame.sprite.GroupSingle()
+    #INSTANTIATION
     bird.add(Bird())
     
     # set up pipes
