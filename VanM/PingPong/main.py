@@ -92,7 +92,7 @@ while True:
         ball.dx *= 1
         
     # paddle and ball collisons
-    # TODO: fix why it kicks me out when i touch the paddle
+    # TODO: fix why it kicks me out when i touch the paddle at 29:52
     if ball.xcor() > 340 and ball.xcor() < 350 (ball.ycor() < paddle_b.ycor() + 50 and ball.ycor() > paddle_b.ycor() - 50):
         ball.setx(340)
         ball.dx *= -1 
