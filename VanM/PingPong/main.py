@@ -92,6 +92,11 @@ while True:
         ball.dx *= 1
         
     # paddle and ball collisons
-    if ball.xcor() > 340 and (ball.ycor() < paddle_b.ycor() + 50 and ball.ycor() > paddle_b.ycor() - 50):
+    # TODO: fix why it kicks me out when i touch the paddle
+    if ball.xcor() > 340 and ball.xcor() < 350 (ball.ycor() < paddle_b.ycor() + 50 and ball.ycor() > paddle_b.ycor() - 50):
+        ball.setx(340)
         ball.dx *= -1 
-    if ball.xcor() > 340 and (ball.ycor() < paddle_b.ycor() + 50 and ball.ycor() > paddle_b.ycor() - 50):
+        
+    if ball.xcor() < -340 and ball.xcor() > -350 (ball.xcor() > paddle_a.xcor() - 50 and ball.xcor() < paddle_a.xcor() + 50):
+        ball.dx *= -1
+        ball.setx(-340)
