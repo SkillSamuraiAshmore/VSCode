@@ -33,6 +33,9 @@ ball.shape("circle")
 ball.color("white")
 ball.penup()
 ball.goto(0, 0)
+ball.dx = 0.1
+ball.dy = 0.1
+
 
 # Function
 def paddle_a_up():
@@ -66,4 +69,20 @@ win.onkeypress(paddle_b_down, "Down")
 #Main_Game_Loop
 while True:
     win.update()
+    
+# move ball
+    ball.setx(ball.xcor() + ball.dx)
+    ball.sety(ball.ycor() + ball.dy)
+    
+    # border checking
+    if ball.ycor() > 290:
+        ball.sety(290)
+        ball.dy *= -1
+        
+    if ball.ycor() > -290:
+        ball.sety(290)
+        ball.dy *= -1
+        
+        
+
     
