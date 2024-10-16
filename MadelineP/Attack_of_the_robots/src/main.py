@@ -1,5 +1,6 @@
 import pygame
 from pathlib import Path
+from os.path import abspath
 # Start the game
 pygame.init()
 game_width = 1000
@@ -8,9 +9,9 @@ screen = pygame.display.set_mode((game_width, game_height))
 clock = pygame.time.Clock()
 running = True
 
-# background_image = pygame.image.load(abspath("../assets/BG_Grass.png"))
-filename = Path('C:\\repos\VSCode\MadelineP\Attack_of_the_robots\\assets\BG_Grass.png').resolve()
-background_image = pygame.image.load(filename)
+# KEVIN: this is better solution, remember to use the "\\"
+# you can r-click "copy relative path"
+background_image = pygame.image.load(abspath("MadelineP\Attack_of_the_robots\\assets\BG_Grass.png"))
 
 # ***************** Loop Land Below *****************
 # Everything under 'while running' will be repeated over and over again
