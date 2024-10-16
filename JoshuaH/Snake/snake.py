@@ -57,5 +57,6 @@ while True:
     move()
     time.sleep(delay)
     if snakeHead.distance(snakeFood) < 15:
+        pass
     
 turtle.done()
