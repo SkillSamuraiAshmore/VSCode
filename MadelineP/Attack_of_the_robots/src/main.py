@@ -11,7 +11,7 @@ running = True
 
 # KEVIN: this is better solution, remember to use the "\\"
 # you can r-click "copy relative path"
-background_image = pygame.image.load(abspath("MadelineP\Attack_of_the_robots\\assets\BG_Grass.png"))
+background_image = pygame.image.load(abspath("MadelineP\Attack_of_the_robots\\assets\BG_Urban.png"))
 
 main_player = Player(screen, game_width/2, game_height/2)
 
@@ -25,6 +25,9 @@ while running:
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             running = False
 
+    main_player.move()
+    
+    
     screen.blit(background_image, (0, 0))
     
     main_player.update()
