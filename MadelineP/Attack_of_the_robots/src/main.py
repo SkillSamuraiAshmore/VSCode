@@ -25,7 +25,11 @@ while running:
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             running = False
 
-    main_player.move()
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_d]:
+        main_player.move()
+        
+    
     
     
     screen.blit(background_image, (0, 0))
