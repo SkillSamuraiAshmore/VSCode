@@ -1,7 +1,7 @@
 import pygame
 from os.path import abspath
 
-class player():
+class Player():
     def __init__(self, screen, x, y):
         self.screen = screen
         self.x = x

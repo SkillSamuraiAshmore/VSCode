@@ -1,6 +1,6 @@
 import pygame
-from pathlib import Path
 from os.path import abspath
+from player import Player
 # Start the game
 pygame.init()
 game_width = 1000
@@ -13,6 +13,8 @@ running = True
 # you can r-click "copy relative path"
 background_image = pygame.image.load(abspath("MadelineP\Attack_of_the_robots\\assets\BG_Grass.png"))
 
+main_player = Player(screen, game_width/2, game_height/2)
+
 # ***************** Loop Land Below *****************
 # Everything under 'while running' will be repeated over and over again
 while running:
@@ -24,7 +26,8 @@ while running:
             running = False
 
     screen.blit(background_image, (0, 0))
-
+    
+    main_player.update()
 
     # Tell pygame to update the screen
     pygame.display.flip()
