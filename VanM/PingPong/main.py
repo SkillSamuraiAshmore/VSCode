@@ -41,35 +41,43 @@ ball.dx = 0.1
 ball.dy = -0.1
 
 # pen
-pen = turtle.Turtle
+pen = turtle.Turtle()
 pen.speed = (0) 
 pen.color("white")
 pen.penup
 pen.hideturtle
 pen.goto(0, 260)
-pen.write("Player A: 0 Player B: 0", align = "center", font = ("Courier", 24, "normal"))
+pen.write("Player A: 0 Player B: 0".format(score_a, score_b), align = "center", font = ("Courier", 24, "normal"))
 
 # Function
 def paddle_a_up():
     y = paddle_a.ycor()
     y += 20
     paddle_a.sety(y)
+    pen.clear
+    pen.write("Player A: {} Player B: {}".format(score_a, score_b), align = "center", font = ("Courier", 24, "normal"))
     
 def paddle_a_down():
     y = paddle_a.ycor()
     y -= 20
     paddle_a.sety(y)
+    pen.clear
+    pen.write("Player {}: 0 Player B: {}".format(score_a, score_b), align = "center", font = ("Courier", 24, "normal"))
     
     
 def paddle_b_up():
     y = paddle_b.ycor()
     y += 20
     paddle_b.sety(y)
+    pen.clear
+    pen.write("Player A: {} Player B: {}".format(score_a, score_b), align = "center", font = ("Courier", 24, "normal"))
     
 def paddle_b_down():
     y = paddle_b.ycor()
     y -= 20
     paddle_b.sety(y)
+    pen.clear
+    pen.write("Player A: {} Player B: {}".format(score_a, score_b), align = "center", font = ("Courier", 24, "normal"))
     
 # Keyboard binding
 win.listen()
