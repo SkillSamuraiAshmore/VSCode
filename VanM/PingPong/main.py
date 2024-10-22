@@ -91,6 +91,9 @@ while True:
         ball.sety(290)
         ball.dy *= -1
         score_b += 1
+        # TODO FIX WHY SOUND DOES NOT WORK???
+        os.system("af 02play bounce.wav")
+        
         
     if ball.ycor() < -290:
         ball.sety(-290)
