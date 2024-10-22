@@ -1,0 +1,5 @@
+import turtle
+from helperfile import drawSquare, drawDiamond
+
+# TODO: work on turtle
+turtle.speed()
