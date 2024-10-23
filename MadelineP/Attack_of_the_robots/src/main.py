@@ -11,7 +11,12 @@ running = True
 
 # KEVIN: this is better solution, remember to use the "\\"
 # you can r-click "copy relative path"
-background_image = pygame.image.load(abspath("MadelineP\Attack_of_the_robots\\assets\BG_Urban.png"))
+# background_image = pygame.image.load(abspath("MadelineP\Attack_of_the_robots\\assets\BG_Urban.png"))
+background_image = pygame.image.load("assets\BG_Urban.png")
+
+playerGroup = pygame.sprite.Group()
+
+Player.containers = playerGroup
 
 main_player = Player(screen, game_width/2, game_height/2)
 
@@ -27,7 +32,16 @@ while running:
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_d]:
-        main_player.move()
+        main_player.move(1, 0)
+    
+    if keys[pygame.K_a]:
+        main_player.move(-1, 0)
+        
+    if keys[pygame.K_w]:
+        main_player.move(0, -1)
+        
+    if keys[pygame.K_s]:
+        main_player.move(0, 1)
         
     
     
@@ -40,3 +54,5 @@ while running:
     pygame.display.flip()
     clock.tick(40)
     pygame.display.set_caption("ATTACK OF THE ROBOTS fps: " + str(clock.get_fps()))
+    
+    
