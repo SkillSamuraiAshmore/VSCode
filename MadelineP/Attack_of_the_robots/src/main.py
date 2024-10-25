@@ -1,6 +1,7 @@
 import pygame
 from os.path import abspath
 from player import Player
+from projectile import water_balloon
 # Start the game
 pygame.init()
 game_width = 1000
@@ -16,8 +17,10 @@ background_image = pygame.image.load("assets\BG_Urban.png")
 
 playerGroup = pygame.sprite.Group()
 
-Player.containers = playerGroup
+projectiles_group = pygame.sprite.Group()
 
+Player.containers = playerGroup
+water_balloon.containers = projectiles_group
 main_player = Player(screen, game_width/2, game_height/2)
 
 # ***************** Loop Land Below *****************
@@ -43,12 +46,15 @@ while running:
     if keys[pygame.K_s]:
         main_player.move(0, 1)
         
-    
-    
+    if pygame.mouse.get_pressed()[0]:
+        main_player.shoot()
+        
     
     screen.blit(background_image, (0, 0))
     
     main_player.update()
+    for projectile in projectiles_group:
+        projectile.update()
 
     # Tell pygame to update the screen
     pygame.display.flip()

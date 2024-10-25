@@ -1,5 +1,6 @@
 import pygame
 import toolbox
+import projectile
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, screen, x, y):
@@ -28,3 +29,8 @@ class Player(pygame.sprite.Sprite):
     def move(self, x_movement, y_movement):
         self.x += self.speed * x_movement
         self.y += self.speed * y_movement
+        
+    def shoot(self):
+        projectile.water_balloon(self.screen, self.x, self.y, self.angle)
+        
+        
