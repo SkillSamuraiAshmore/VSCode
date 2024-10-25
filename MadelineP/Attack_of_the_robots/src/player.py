@@ -11,13 +11,19 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
         self.speed = 8
+        self.angle = 0 
+        
     
     def update (self):
         self.rect.center = (self.x, self.y)
         
-        image_to_draw, image_rect = toolbox.getRotatedImage()
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+        self.angle = toolbox.angleBetweenPoints(self.x, self.y, mouse_x, mouse_y)
         
-        self.screen.blit(self.image, (self.rect))
+        image_to_draw, image_rect = toolbox.getRotatedImage(self.image, self.rect, self.angle)
+        
+        self.screen.blit(image_to_draw, image_rect)
+        
         
     def move(self, x_movement, y_movement):
         self.x += self.speed * x_movement
