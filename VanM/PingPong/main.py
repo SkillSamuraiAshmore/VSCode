@@ -1,6 +1,6 @@
 import turtle
 
-from  playsound import playsound
+from playsound import playsound
 
 
 win = turtle.Screen()
