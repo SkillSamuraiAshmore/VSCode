@@ -1,6 +1,7 @@
 import pygame
 from os.path import abspath
 from player import Player
+from projectile import water_balloon
 # Start the game
 pygame.init()
 game_width = 1000
@@ -11,8 +12,15 @@ running = True
 
 # KEVIN: this is better solution, remember to use the "\\"
 # you can r-click "copy relative path"
-background_image = pygame.image.load(abspath("MadelineP\Attack_of_the_robots\\assets\BG_Urban.png"))
+# background_image = pygame.image.load(abspath("MadelineP\Attack_of_the_robots\\assets\BG_Urban.png"))
+background_image = pygame.image.load("assets\BG_Urban.png")
 
+playerGroup = pygame.sprite.Group()
+
+projectiles_group = pygame.sprite.Group()
+
+Player.containers = playerGroup
+water_balloon.containers = projectiles_group
 main_player = Player(screen, game_width/2, game_height/2)
 
 # ***************** Loop Land Below *****************
@@ -27,16 +35,30 @@ while running:
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_d]:
-        main_player.move()
+        main_player.move(1, 0)
+    
+    if keys[pygame.K_a]:
+        main_player.move(-1, 0)
         
-    
-    
+    if keys[pygame.K_w]:
+        main_player.move(0, -1)
+        
+    if keys[pygame.K_s]:
+        main_player.move(0, 1)
+        
+    if pygame.mouse.get_pressed()[0]:
+        main_player.shoot()
+        
     
     screen.blit(background_image, (0, 0))
     
     main_player.update()
+    for projectile in projectiles_group:
+        projectile.update()
 
     # Tell pygame to update the screen
     pygame.display.flip()
     clock.tick(40)
     pygame.display.set_caption("ATTACK OF THE ROBOTS fps: " + str(clock.get_fps()))
+    
+    
