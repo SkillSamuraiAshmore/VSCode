@@ -1,6 +1,6 @@
 import turtle
 
-from playsound import playsound
+# from playsound import playsound
 
 
 win = turtle.Screen()
@@ -93,26 +93,26 @@ while True:
         ball.sety(290)
         ball.dy *= -1
         score_b += 1
-        playsound("bounce.wav")
+        # playsound("bounce.wav")
         
         
     if ball.ycor() < -290:
         ball.sety(-290)
         ball.dy *= -1
         score_b += 1
-        playsound("bounce.wav")
+        # playsound("bounce.wav")
         
     if ball.xcor() > 390:
         ball.goto(0, 0)
         ball.dx *= -1
         score_a += 1
-        playsound("bounce.wav")
+        # playsound("bounce.wav")
         
     if ball.xcor() < -390:
         ball.goto(0, 0)
         ball.dx *= 1
         score_a += 1
-        playsound("bounce.wav")
+        # playsound("bounce.wav")
         
   
     if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 50 and ball.ycor() > paddle_b.ycor() - 50):
