@@ -21,5 +21,20 @@ class water_balloon(pygame.sprite.Sprite):
         self.x += self.x_move
         self.y += self.y_move
         self.rect.center = (self.x, self.y)
+        
+        if self.x < - self.image.get_width():
+            self.kill()
+            
+        elif self.x > - self.image.get_width() + self.image.get_width():
+            self.kill()
+            
+        elif self.y < - self.image.get_height():
+            self.kill()
+            
+        elif self.y > - self.image.get_height() + self.image.get_height():
+            self.kill()
+            
+        
+        
         self.screen.blit(self.image, self.rect)
         
