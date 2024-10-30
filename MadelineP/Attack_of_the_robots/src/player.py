@@ -13,6 +13,8 @@ class Player(pygame.sprite.Sprite):
         self.rect.center = (self.x, self.y)
         self.speed = 8
         self.angle = 0 
+        self.shoot_cooldown = 0
+        self.shoot_cooldown_max = 10
         
     
     def update (self):
