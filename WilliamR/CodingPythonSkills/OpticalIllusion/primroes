@@ -2,4 +2,48 @@ import turtle
 from helperfile import drawSquare, drawDiamond
 
 # TODO: work on turtle 
-turtle.speed()
+turtle.speed(0)
+turtle.hideturtle
+turtle.tracer(0, 0)
+
+def drawprimrose(x, y, size, colour):
+    drawDiamond(turtle, x, y, size, colour, angle=0)
+    drawDiamond(turtle, x, y, size, colour, angle=90)
+    drawDiamond(turtle, x, y, size, colour, angle=180)
+    drawDiamond(turtle, x, y, size, colour, angle=270)
+
+gridsize = 45
+gridcolour1 = "#59b983"
+gridcolour2 = "#a4d443"
+
+#drawing background
+drawSquare(turtle, -7*gridsize, -7*gridsize, 15*gridsize, gridcolour1)
+
+for x in range(-7, 8, 2,):
+    for y in range (-7, 8, 2):
+        drawSquare(turtle, gridsize*x, gridsize*y, gridsize, gridcolour2)
+
+for x in range(-6, 8, 2,):
+    for y in range (-6, 8, 2):
+        drawSquare(turtle, gridsize*x, gridsize*y, gridsize, gridcolour2)
+#draw primroes
+primroesesize = 6
+primroescolour1 = "white"
+primroescolour2 = "#c81d97"
+pattern = [primroescolour1, primroescolour2, primroescolour2, primroescolour1,
+           primroescolour2, primroescolour1, primroescolour1, primroescolour2]
+
+for x in range(-6, 8, 1,):
+    for y in range (-6, 8, 1):
+       drawprimrose(gridsize*x, gridsize*y, primroesesize, 6, pattern[(x+y-1)%8])
+
+
+turtle.done()
+
+
+
+
+
+
+
+
