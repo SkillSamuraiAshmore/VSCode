@@ -1,10 +1,17 @@
 import turtle
 
+# from playsound import playsound
+
+
 win = turtle.Screen()
 win.title("Pong")
 win.bgcolor("black")
 win.setup(width = 800, height = 600)
 win.tracer(0)
+
+# Score
+score_a = 0
+score_b = 0
 
 
 
@@ -33,9 +40,17 @@ ball.shape("circle")
 ball.color("white")
 ball.penup()
 ball.goto(0, 0)
-ball.dx = 0.1
-ball.dy = -0.1
+ball.dx = 0.5
+ball.dy = 0.5
 
+# pen
+pen = turtle.Turtle()
+pen.speed = (0) 
+pen.color("white")
+pen.penup()
+pen.hideturtle()
+pen.goto(0, 260)
+pen.write("Player A: 0 Player B: 0", align = "center", font = ("Courier", 24, "normal"))
 
 # Function
 def paddle_a_up():
@@ -48,7 +63,6 @@ def paddle_a_down():
     y -= 20
     paddle_a.sety(y)
     
-    
 def paddle_b_up():
     y = paddle_b.ycor()
     y += 20
@@ -60,7 +74,7 @@ def paddle_b_down():
     paddle_b.sety(y)
     
 # Keyboard binding
-win.listen()
+win.listen() 
 win.onkeypress(paddle_a_up, "w")
 win.onkeypress(paddle_a_down, "s")
 win.onkeypress(paddle_b_up, "Up")
@@ -78,25 +92,38 @@ while True:
     if ball.ycor() > 290:
         ball.sety(290)
         ball.dy *= -1
+        score_b += 1
+        # playsound("bounce.wav")
+        
         
     if ball.ycor() < -290:
         ball.sety(-290)
         ball.dy *= -1
+        score_b += 1
+        # playsound("bounce.wav")
         
     if ball.xcor() > 390:
         ball.goto(0, 0)
         ball.dx *= -1
+        score_a += 1
+        # playsound("bounce.wav")
         
     if ball.xcor() < -390:
         ball.goto(0, 0)
         ball.dx *= 1
+        score_a += 1
+        # playsound("bounce.wav")
         
-    # paddle and ball collisons
-    # TODO: fix why it kicks me out when i touch the paddle at 29:52
-    if ball.xcor() > 340 and ball.xcor() < 350 (ball.ycor() < paddle_b.ycor() + 50 and ball.ycor() > paddle_b.ycor() - 50):
+  
+    if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 50 and ball.ycor() > paddle_b.ycor() - 50):
         ball.setx(340)
         ball.dx *= -1 
+        # os.system("afplay bounce.wav&")
         
-    if ball.xcor() < -340 and ball.xcor() > -350 (ball.xcor() > paddle_a.xcor() - 50 and ball.xcor() < paddle_a.xcor() + 50):
+    if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.xcor() > paddle_a.xcor() - 50 and ball.xcor() < paddle_a.xcor() + 50):
         ball.dx *= -1
         ball.setx(-340)
+        # os.system("afplay bounce.wav&")
+        
+    pen.clear()
+    pen.write("Player A: {} Player B: {}".format(score_a, score_b), align = "center", font = ("Courier", 24, "normal"))
