@@ -14,6 +14,18 @@ snakeHead.speed(0)
 snakeHead.direction = "stop"
 
 delay = 0.2
+segments = []
+score = 0
+
+scoreLabel = turtle.Turtle()
+scoreLabel.penup()
+scoreLabel.hideturtle()
+scoreLabel.goto(-280, 260)
+scoreLabel.write("Score: " +str(score), font = ("Arial", 24, "normal"))
+
+def update_score():
+    scoreLabel.clear()
+    scoreLabel.write("score: " + str(score), font = ("Arial", 24, "normal"))
 
 snakeFood = turtle.Turtle()
 snakeFood.color("green")
@@ -23,7 +35,10 @@ snakeFood.speed(0)
 snakeFood.penup()
 snakeFood.goto(0,100)
 
+
+
 def move():
+    position = snakeHead.position()
     if snakeHead.direction =="up":
         snakeHead.sety(snakeHead.ycor() + 20)
     if snakeHead.direction =="down":
@@ -32,6 +47,11 @@ def move():
         snakeHead.setx(snakeHead.xcor() + 20)
     if snakeHead.direction =="left":
         snakeHead.setx(snakeHead.xcor() - 20)
+    
+    for segment in segments:
+        newPosition = segment.position()
+        segment.goto(position)
+        position = newPosition 
         
 def move_up():
     if snakeHead.direction != "down":
@@ -57,6 +77,13 @@ while True:
     move()
     time.sleep(delay)
     if snakeHead.distance(snakeFood) < 15:
-        pass
+        x = random.randint(-270, 270)
+        y = random.randint(-270, 270)
+        snakeFood.goto(x,y)
+        snakeSegment = snakeHead.clone()
+        snakeSegment.color("red")
+        segments.append(snakeSegment)
+        score = score + 10
+        update_score()
     
 turtle.done()
