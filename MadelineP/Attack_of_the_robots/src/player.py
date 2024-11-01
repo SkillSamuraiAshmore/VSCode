@@ -20,6 +20,9 @@ class Player(pygame.sprite.Sprite):
     def update (self):
         self.rect.center = (self.x, self.y)
         
+        if self.shoot_cooldown > 0:
+            self.shoot_cooldown -= 1
+        
         mouse_x, mouse_y = pygame.mouse.get_pos()
         self.angle = toolbox.angleBetweenPoints(self.x, self.y, mouse_x, mouse_y)
         
@@ -33,6 +36,10 @@ class Player(pygame.sprite.Sprite):
         self.y += self.speed * y_movement
         
     def shoot(self):
-        projectile.water_balloon(self.screen, self.x, self.y, self.angle)
+        if self.shoot_cooldown <= 0:
+            self.shoot_cooldown = self.shoot_cooldown_max
+            projectile.water_balloon(self.screen, self.x, self.y, self.angle)
+        
+        
         
         
