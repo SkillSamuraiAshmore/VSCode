@@ -27,6 +27,9 @@ water_balloon.containers = projectiles_group
 Enemy.containers = enemyiesGroup
 main_player = Player(screen, game_width/2, game_height/2)
 
+Enemy(screen, 100, 100, main_player)
+Enemy(screen, 100, 500, main_player)
+
 # ***************** Loop Land Below *****************
 # Everything under 'while running' will be repeated over and over again
 while running:
@@ -58,8 +61,7 @@ while running:
     
     main_player.update()
     
-    Enemy(screen, 100, 100, main_player)
-    Enemy(screen, 100, 500, main_player)
+   
     
     for projectile in projectiles_group:
         projectile.update()
