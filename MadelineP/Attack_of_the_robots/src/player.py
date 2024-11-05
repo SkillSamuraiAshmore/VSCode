@@ -8,15 +8,20 @@ class Player(pygame.sprite.Sprite):
         self.screen = screen
         self.x = x
         self.y = y
-        self.image = pygame.image.load("assets\Player_04.png")
+        self.image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets\Player_04.png")
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
         self.speed = 8
         self.angle = 0 
+        self.shoot_cooldown = 0
+        self.shoot_cooldown_max = 10
         
     
     def update (self):
         self.rect.center = (self.x, self.y)
+        
+        if self.shoot_cooldown > 0:
+            self.shoot_cooldown -= 1
         
         mouse_x, mouse_y = pygame.mouse.get_pos()
         self.angle = toolbox.angleBetweenPoints(self.x, self.y, mouse_x, mouse_y)
@@ -31,6 +36,10 @@ class Player(pygame.sprite.Sprite):
         self.y += self.speed * y_movement
         
     def shoot(self):
-        projectile.water_balloon(self.screen, self.x, self.y, self.angle)
+        if self.shoot_cooldown <= 0:
+            self.shoot_cooldown = self.shoot_cooldown_max
+            projectile.water_balloon(self.screen, self.x, self.y, self.angle)
+        
+        
         
         
