@@ -22,10 +22,10 @@ class Enemy(pygame.sprite.Sprite):
         self.angle = toolbox.angleBetweenPoints(self.x, self.y, self.player.x, self.player.y)
         
         angle_rads = math.radians(self.angle)
-        x_move = math.cos(angle_rads) * self.speed
-        y_move = -math.sin(angle_rads) * self.speed
-        self.x += x_move
-        self.y += y_move
+        self.x_move = math.cos(angle_rads) * self.speed
+        self.y_move = -math.sin(angle_rads) * self.speed
+        self.x += self.x_move
+        self.y += self.y_move
         self.rect.center = (self.x, self.y)
         
         for projectile in projectiles:
@@ -39,6 +39,8 @@ class Enemy(pygame.sprite.Sprite):
         self.screen.blit(image_to_draw, image_rect)
         
     def getHit(self, damage):
+        self.x -= self.x_move * 7
+        self.y -= self.y_move * 7
         self.health -= damage
         if self.health <= 0 :
             self.health = 99999
