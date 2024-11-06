@@ -8,8 +8,8 @@ class water_balloon(pygame.sprite.Sprite):
         self.x= x
         self.y = y
         self.angle = angle
-        # self.image = pygame.image.load("assets\BalloonSmall.png")
-        self.image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets\BalloonSmall.png")
+        self.image = pygame.image.load("assets\BalloonSmall.png")
+        #self.image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets\BalloonSmall.png")
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
         self.image, self.rect = toolbox.getRotatedImage(self.image, self.rect, self.angle)
@@ -17,6 +17,8 @@ class water_balloon(pygame.sprite.Sprite):
         self.angle_rads = math.radians(self.angle)
         self.x_move = math.cos(self.angle_rads) * self.speed
         self.y_move = -math.sin(self.angle_rads) * self.speed
+        self.damage = 6
+        
         
     def update(self):
         self.x += self.x_move
@@ -38,4 +40,9 @@ class water_balloon(pygame.sprite.Sprite):
         
         
         self.screen.blit(self.image, self.rect)
+        
+    def expload(self):
+        self.kill()
+        
+        
         
