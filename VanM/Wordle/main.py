@@ -1,5 +1,5 @@
 from wordle import Wordle
-
+from colorama import Fore
 
 def main():
     print("Hello Wordle")
@@ -9,7 +9,15 @@ def main():
     
     while wordle.can_attempt:
         x = input("Type your guess: ")
+        if len(x) != wordle.WORD_LENGTH:
+            print(f"Word must be  {wordle.WORD_LENGTH} charcters long!")
+            continue
+        
         wordle.attempt(x)
+        result = wordle.guess(x)
+        print(*result, sep="/n")
+        
+        
         if x == wordle.secret:
             print("You have guessed the word!")
             break
