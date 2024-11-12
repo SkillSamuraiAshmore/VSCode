@@ -13,8 +13,8 @@ running = True
 
 # KEVIN: this is better solution, remember to use the "\\"
 # you can r-click "copy relative path"
-#background_image = pygame.image.load("MadelineP\Attack_of_the_robots\\assets\BG_Urban.png")
-background_image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets\BG_Urban.png")
+background_image = pygame.image.load("assets/BG_Urban.png")
+#background_image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets\BG_Urban.png")
 
 playerGroup = pygame.sprite.Group()
 
@@ -68,7 +68,7 @@ while running:
 
 
     for enemy in enemyiesGroup:
-        enemy.update()
+        enemy.update(projectiles_group)
     # Tell pygame to update the screen
     pygame.display.flip()
     clock.tick(40)

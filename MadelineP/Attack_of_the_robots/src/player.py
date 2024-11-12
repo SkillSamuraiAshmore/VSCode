@@ -8,7 +8,8 @@ class Player(pygame.sprite.Sprite):
         self.screen = screen
         self.x = x
         self.y = y
-        self.image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets\Player_04.png")
+        self.image = pygame.image.load("assets/Player_04.png")
+        # self.image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets\Player_04.png")
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
         self.speed = 8
