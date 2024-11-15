@@ -1,8 +1,10 @@
 import pygame
+import random
 from os.path import abspath
 from player import Player
 from projectile import water_balloon
 from enemy import Enemy
+
 # Start the game
 pygame.init()
 game_width = 1000
@@ -25,10 +27,13 @@ enemyiesGroup = pygame.sprite.Group()
 Player.containers = playerGroup
 water_balloon.containers = projectiles_group
 Enemy.containers = enemyiesGroup
+
+enemy_spawn_timer_max = 80
+enemy_spawn_timer = 0
+
 main_player = Player(screen, game_width/2, game_height/2)
 
-Enemy(screen, 100, 100, main_player)
-Enemy(screen, 100, 500, main_player)
+
 
 # ***************** Loop Land Below *****************
 # Everything under 'while running' will be repeated over and over again
@@ -56,7 +61,29 @@ while running:
     if pygame.mouse.get_pressed()[0]:
         main_player.shoot()
         
-    
+    enemy_spawn_timer -= 1
+    if enemy_spawn_timer <= 0:
+        new_enemy = Enemy(screen, 0, 0, main_player)
+        side_to_spawn = random.randint(0, 3)
+        if side_to_spawn == 0:
+            new_enemy.y = -new_enemy.image.get_height()
+            new_enemy.x = random.randint(0, game_width)
+            
+        elif side_to_spawn == 1:
+            new_enemy.y = game_height + new_enemy.image.get_height()
+            new_enemy.x = random.randint(0, game_width)
+            
+        elif side_to_spawn == 2:
+            new_enemy.y = random.randint(0, game_height)
+            new_enemy.x = -new_enemy.image.get_width()
+            
+        elif side_to_spawn == 3:
+            new_enemy.y = random.randint(0, game_height)
+            new_enemy.x = game_width + new_enemy.image.get_width()
+            
+        enemy_spawn_timer = enemy_spawn_timer_max
+        
+     
     screen.blit(background_image, (0, 0))
     
     main_player.update()
