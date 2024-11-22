@@ -16,10 +16,15 @@ class Player(pygame.sprite.Sprite):
         self.angle = 0 
         self.shoot_cooldown = 0
         self.shoot_cooldown_max = 10
-        
+        self.health = 30
+        self.alive = True
     
-    def update (self):
+    def update (self, enemies):
         self.rect.center = (self.x, self.y)
+        
+        for enemy in enemies:
+            if self.rect.colliderect(enemy.rect):
+                self.getHit(enemy.damage)
         
         if self.shoot_cooldown > 0:
             self.shoot_cooldown -= 1
@@ -29,7 +34,9 @@ class Player(pygame.sprite.Sprite):
         
         image_to_draw, image_rect = toolbox.getRotatedImage(self.image, self.rect, self.angle)
         
-        self.screen.blit(image_to_draw, image_rect)
+        
+        if self.alive:
+            self.screen.blit(image_to_draw, image_rect)
         
         
     def move(self, x_movement, y_movement):
@@ -40,6 +47,13 @@ class Player(pygame.sprite.Sprite):
         if self.shoot_cooldown <= 0:
             self.shoot_cooldown = self.shoot_cooldown_max
             projectile.water_balloon(self.screen, self.x, self.y, self.angle)
+            
+    def getHit(self, damage):
+        self.health -= damage
+        if self.health <= 0:
+            self.health = 0
+            self.alive = False
+            
         
         
         

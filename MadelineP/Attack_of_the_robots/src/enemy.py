@@ -18,7 +18,8 @@ class Enemy(pygame.sprite.Sprite):
         self.speed = 0.9
         self.health = 20
         self.hurt_timer = 0
-    
+        self.damage = 1
+
     def update(self, projectiles):
         
         self.angle = toolbox.angleBetweenPoints(self.x, self.y, self.player.x, self.player.y)
