@@ -24,6 +24,7 @@ class Player(pygame.sprite.Sprite):
         
         for enemy in enemies:
             if self.rect.colliderect(enemy.rect):
+                enemy.getHit(0)
                 self.getHit(enemy.damage)
         
         if self.shoot_cooldown > 0:
