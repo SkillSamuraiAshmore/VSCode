@@ -22,11 +22,11 @@ playerGroup = pygame.sprite.Group()
 
 projectiles_group = pygame.sprite.Group()
 
-enemyiesGroup = pygame.sprite.Group()
+enemiesGroup = pygame.sprite.Group()
 
 Player.containers = playerGroup
 water_balloon.containers = projectiles_group
-Enemy.containers = enemyiesGroup
+Enemy.containers = enemiesGroup
 
 enemy_spawn_timer_max = 80
 enemy_spawn_timer = 0
@@ -86,7 +86,7 @@ while running:
      
     screen.blit(background_image, (0, 0))
     
-    main_player.update()
+    main_player.update(enemiesGroup)
     
    
     
@@ -94,7 +94,7 @@ while running:
         projectile.update()
 
 
-    for enemy in enemyiesGroup:
+    for enemy in enemiesGroup:
         enemy.update(projectiles_group)
     # Tell pygame to update the screen
     pygame.display.flip()

@@ -18,7 +18,8 @@ class Enemy(pygame.sprite.Sprite):
         self.speed = 0.9
         self.health = 20
         self.hurt_timer = 0
-    
+        self.damage = 1
+
     def update(self, projectiles):
         
         self.angle = toolbox.angleBetweenPoints(self.x, self.y, self.player.x, self.player.y)
@@ -48,11 +49,13 @@ class Enemy(pygame.sprite.Sprite):
         self.screen.blit(image_to_draw, image_rect)
         
     def getHit(self, damage):
-        self.hurt_timer = 5
+        if damage: 
+            self.hurt_timer = 5
         self.x -= self.x_move * 7
         self.y -= self.y_move * 7
         self.health -= damage
         if self.health <= 0 :
             self.health = 99999
             self.kill()
+        
             
