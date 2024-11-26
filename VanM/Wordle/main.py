@@ -1,5 +1,7 @@
 from wordle import Wordle
 from colorama import Fore
+from letter_state import LetterState
+from typing import List
 
 def main():
     print("Hello Wordle")
@@ -47,7 +49,7 @@ def display_results(wordle):
         for letter in result:
             if letter.is_in_position:
                 color = Fore.GREEN
-            elif letter. is_in_word:
+            elif letter.is_in_word:
                 color = Fore.YELLOW
             else:
                 color = Fore.WHITE
