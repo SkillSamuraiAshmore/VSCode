@@ -35,7 +35,7 @@ pattern = [primroescolour1, primroescolour2, primroescolour2, primroescolour1,
 
 for x in range(-6, 8, 1,):
     for y in range (-6, 8, 1):
-       drawprimrose(gridsize*x, gridsize*y, primroesesize, 6, pattern[(x+y-1)%8])
+       drawprimrose(gridsize*x, gridsize*y, primroesesize,  pattern[(x+y-1)%8])
 
 
 turtle.done()
