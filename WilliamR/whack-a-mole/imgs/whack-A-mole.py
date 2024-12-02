@@ -2,9 +2,9 @@ from turtle import *
 from random import randint
 from time import sleep
 
-
 clicked = False
 whacked = False 
+
 max_screen_x, max_screen_y = 400, 300
 border = 50
 
@@ -19,7 +19,7 @@ def spin():
     sleep(0.25)
     circle(10)
 def print_text():
-    write("hit!the mole is very hurt.",align="center",font=("futuristic",15,"normal"))
+    write("hit! the mole is very hurt.",align="center",font=("futuristic",15,"normal"))
     
 def dig():
     dot(50)
@@ -62,7 +62,7 @@ title("whack-A-mole")
 bgcolor("forestgreen")
 
 speed('fast')
-register_shape("")
+register_shape("images.png")
 penup()
 
 onscreenclick(whack)
