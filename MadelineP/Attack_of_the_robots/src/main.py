@@ -4,6 +4,7 @@ from os.path import abspath
 from player import Player
 from projectile import water_balloon
 from enemy import Enemy
+from crate import Crate
 
 # Start the game
 pygame.init()
@@ -24,14 +25,19 @@ projectiles_group = pygame.sprite.Group()
 
 enemiesGroup = pygame.sprite.Group()
 
+cratesGroup = pygame.sprite.Group()
+
+
 Player.containers = playerGroup
 water_balloon.containers = projectiles_group
 Enemy.containers = enemiesGroup
-
+Crate.containers = cratesGroup
 enemy_spawn_timer_max = 80
 enemy_spawn_timer = 0
 
 main_player = Player(screen, game_width/2, game_height/2)
+
+Crate(screen, 100, 100)
 
 
 
@@ -85,9 +91,6 @@ while running:
         
      
     screen.blit(background_image, (0, 0))
-    
-    main_player.update(enemiesGroup)
-    
    
     
     for projectile in projectiles_group:
@@ -96,6 +99,12 @@ while running:
 
     for enemy in enemiesGroup:
         enemy.update(projectiles_group)
+        
+    for crate in cratesGroup:
+        crate.update()
+        
+    main_player.update(enemiesGroup)
+    
     # Tell pygame to update the screen
     pygame.display.flip()
     clock.tick(40)
