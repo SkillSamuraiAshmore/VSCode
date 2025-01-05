@@ -19,16 +19,34 @@ class Enemy(pygame.sprite.Sprite):
         self.health = 20
         self.hurt_timer = 0
         self.damage = 1
+        self.obstacale_anger = 0
+        self.obstacale_anger_max = 100
 
-    def update(self, projectiles):
+    def update(self, projectiles, crates):
         
         self.angle = toolbox.angleBetweenPoints(self.x, self.y, self.player.x, self.player.y)
         
         angle_rads = math.radians(self.angle)
         self.x_move = math.cos(angle_rads) * self.speed
         self.y_move = -math.sin(angle_rads) * self.speed
-        self.x += self.x_move
-        self.y += self.y_move
+        test_rect = self.rect
+        new_x = self.x + self.x_move
+        new_y = self.y + self.y_move
+        
+        test_rect.center = (new_x, self.y)
+        for crate in crates:
+            if test_rect.colliderect(crate.rect):
+                new_x = self.x
+                self.getAngry(crate)
+       
+        test_rect.center = (self.x, new_y)
+        for crate in crates:
+            if test_rect.colliderect(crate.rect):
+                new_y = self.y      
+                self.getAngry(crate)
+        
+        self.x = new_x
+        self.y = new_y
         self.rect.center = (self.x, self.y)
         
         for projectile in projectiles:
@@ -57,5 +75,10 @@ class Enemy(pygame.sprite.Sprite):
         if self.health <= 0 :
             self.health = 99999
             self.kill()
-        
+    def getAngry(self, crate):
+        self.obstacale_anger += 1
+        if self.obstacale_anger >= self.obstacale_anger_max:
+            crate.getHit(self.damage)
+        self.obstacale_anger = 0
+    
             

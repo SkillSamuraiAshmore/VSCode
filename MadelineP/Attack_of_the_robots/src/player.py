@@ -71,10 +71,19 @@ class Player(pygame.sprite.Sprite):
         
         
         
-    def move(self, x_movement, y_movement):
+    def move(self, x_movement, y_movement, crates):
         if self.alive:
-            self.x += self.speed * x_movement
-            self.y += self.speed * y_movement
+            test_rect = self.rect
+            test_rect.x += self.speed * x_movement
+            test_rect.y += self.speed * y_movement
+            collision = False
+            for crate in crates:
+                if test_rect.colliderect(crate.rect):
+                    collision = True
+            if not collision:
+                self.x += self.speed * x_movement
+                self.y += self.speed * y_movement
+            
         
     def shoot(self):
         if self.shoot_cooldown <= 0 and self.alive:

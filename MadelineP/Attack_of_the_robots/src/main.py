@@ -37,8 +37,8 @@ enemy_spawn_timer = 0
 
 main_player = Player(screen, game_width/2, game_height/2)
 
-Crate(screen, 100, 100)
-
+for i in range(0, 10):
+    Crate(screen, random.randint(0, game_width), random.randint(0, game_height))
 
 
 # ***************** Loop Land Below *****************
@@ -53,16 +53,16 @@ while running:
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_d]:
-        main_player.move(1, 0)
+        main_player.move(1, 0, cratesGroup)
     
     if keys[pygame.K_a]:
-        main_player.move(-1, 0)
+        main_player.move(-1, 0, cratesGroup)
         
     if keys[pygame.K_w]:
-        main_player.move(0, -1)
+        main_player.move(0, -1, cratesGroup)
         
     if keys[pygame.K_s]:
-        main_player.move(0, 1)
+        main_player.move(0, 1, cratesGroup)
         
     if pygame.mouse.get_pressed()[0]:
         main_player.shoot()
@@ -98,10 +98,10 @@ while running:
 
 
     for enemy in enemiesGroup:
-        enemy.update(projectiles_group)
+        enemy.update(projectiles_group, cratesGroup)
         
     for crate in cratesGroup:
-        crate.update()
+        crate.update(projectiles_group)
         
     main_player.update(enemiesGroup)
     
