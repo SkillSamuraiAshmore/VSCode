@@ -5,6 +5,7 @@ from player import Player
 from projectile import water_balloon
 from enemy import Enemy
 from crate import Crate
+from explosion import Explosion
 
 # Start the game
 pygame.init()
@@ -27,18 +28,23 @@ enemiesGroup = pygame.sprite.Group()
 
 cratesGroup = pygame.sprite.Group()
 
+explosionsGroup = pygame.sprite.Group()
 
 Player.containers = playerGroup
 water_balloon.containers = projectiles_group
 Enemy.containers = enemiesGroup
 Crate.containers = cratesGroup
+Explosion.containers = explosionsGroup
 enemy_spawn_timer_max = 80
 enemy_spawn_timer = 0
 
 main_player = Player(screen, game_width/2, game_height/2)
 
+explosion_image = pygame.image.load("assets/LargeExplosion2.png")
+Explosion(screen, 500, 500, explosion_image, 7, 999, False)
+
 for i in range(0, 10):
-    Crate(screen, random.randint(0, game_width), random.randint(0, game_height))
+    Crate(screen, random.randint(0, game_width), random.randint(0, game_height), main_player)
 
 
 # ***************** Loop Land Below *****************
@@ -66,6 +72,9 @@ while running:
         
     if pygame.mouse.get_pressed()[0]:
         main_player.shoot()
+        
+    if keys[pygame.K_SPACE]:
+        main_player.placeCrate()
         
     enemy_spawn_timer -= 1
     if enemy_spawn_timer <= 0:
@@ -102,6 +111,9 @@ while running:
         
     for crate in cratesGroup:
         crate.update(projectiles_group)
+        
+    for explosion in explosionsGroup:
+        explosion.update()
         
     main_player.update(enemiesGroup)
     
