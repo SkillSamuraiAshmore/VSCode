@@ -1,5 +1,6 @@
 import random
 import pygame
+import pygame.display
 # creating the data structure for pieces
 # setting up global vars
 # functions
@@ -213,15 +214,45 @@ def draw_grid(surface, grid):
             pass
              
 def clear_rows(grid, locked):
-    pass
-
+    
+    inc = 0
+    for i in range(len(grid)-1, -1, -1):
+        row = grid [i]
+        if (0,0,0) not in row:
+            inc += 1
+            ind = i
+            for j in range(len(row)):
+                try:
+                    del locked[(j,i)]
+                except:
+                    continue
+                    
+    if inc > 0:
+        for key in sorted(list(locked), key = lambda x: x[1])[::-1]:
+            x, y = key
+            if y < ind:
+                newKey = x, y + inc
+                            
+                    
+                    
+        
+            
 def draw_next_shape(shape, surface):
     font = pygame.font.SysFont('comicsans', 30)
     label = font.render('Next Shape', 1, (255,255,255))
     
-    sx = top_left_x + play_width
-    sy = top_left_y + play_height / 2
-    #continue on with video
+    sx = top_left_x + play_width + 50
+    sy = top_left_y + play_height / 2 - 100
+    format = shape.shape[shape.rotation % len(shape.shape)]
+    
+    for i, line in  enumerate(format):
+        row = list(line)
+        for j, column in enumerate(row):
+            if column == '0':
+                pygame.draw.rect(surface, shape.color, (sx + j*block_size, sy + i*block_size, block_size, block_size))
+   
+    surface.blit(label, (sx + 10, sy - 30))
+   
 
 def draw_window(surface, grid):
     surface.fill((0,0,0))
@@ -236,11 +267,11 @@ def draw_window(surface, grid):
         for j in range(len(grid[i])):
             pygame.draw.rect(surface, grid[i][j], (top_left_x + j*block_size, top_left_x + j*block_size, top_left_y +i * block_size, block_size), 0)
 
-    pygame.draw.rect(surface, (255,0,0), (top_left_x, top_left_y, play_width, play_height, 4))
+    pygame.draw.rect(surface, (255,0,0), (top_left_x, top_left_y, play_width, play_height, 5))
 
     
     draw_grid(surface, grid)
-    pygame.display.update()
+    #pygame.display.update()      
 
 def main(win):
     
@@ -304,9 +335,10 @@ def main(win):
                 next_piece = get_shape()
                 change_piece = False
                 
-                            
-                            
-        draw_window(win, grid)          
+        draw_window(win, grid)                     
+        draw_next_shape(next_piece, surface) 
+        pygame.display.update()           
+               
                     
         if check_lost(locked_positions):
             run = False
