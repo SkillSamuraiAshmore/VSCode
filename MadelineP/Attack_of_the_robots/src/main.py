@@ -39,9 +39,8 @@ enemy_spawn_timer_max = 80
 enemy_spawn_timer = 0
 
 main_player = Player(screen, game_width/2, game_height/2)
-test_explosion_list = []
-test_explosion_list.append.pygame.image.load("assets/LargeExplosion2.png")
-Explosion(screen, 500, 500, explosion_image, 7, 999, False)
+
+
 
 for i in range(0, 10):
     Crate(screen, random.randint(0, game_width), random.randint(0, game_height), main_player)
