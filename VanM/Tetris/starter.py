@@ -232,6 +232,7 @@ def clear_rows(grid, locked):
             x, y = key
             if y < ind:
                 newKey = x, y + inc
+                #keep typing
                             
                     
                     
