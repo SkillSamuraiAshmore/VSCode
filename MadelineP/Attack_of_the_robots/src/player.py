@@ -1,6 +1,7 @@
 import pygame
 import toolbox
 import projectile
+from crate import Crate
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, screen, x, y):
@@ -26,6 +27,9 @@ class Player(pygame.sprite.Sprite):
         self.health_bar_red = pygame.Rect(0, 0, self.health_bar_width, self.health_bar_height)
         self.alive = True
         self.hurt_timer = 0
+        self.crate_ammo = 10
+        self.crate_cooldown = 0
+        self.crate_cooldown_max = 10
     
     def update (self, enemies):
         self.rect.center = (self.x, self.y)
@@ -38,6 +42,9 @@ class Player(pygame.sprite.Sprite):
         if self.shoot_cooldown > 0:
             self.shoot_cooldown -= 1
             
+            
+        if self.crate_cooldown > 0:
+            self.crate_cooldown -= 1
         if self.alive:
             mouse_x, mouse_y = pygame.mouse.get_pos()
             self.angle = toolbox.angleBetweenPoints(self.x, self.y, mouse_x, mouse_y)
@@ -78,8 +85,11 @@ class Player(pygame.sprite.Sprite):
             test_rect.y += self.speed * y_movement
             collision = False
             for crate in crates:
-                if test_rect.colliderect(crate.rect):
-                    collision = True
+                
+                if not crate.just_placed:
+                    if test_rect.colliderect(crate.rect):
+                        collision = True
+            
             if not collision:
                 self.x += self.speed * x_movement
                 self.y += self.speed * y_movement
@@ -99,6 +109,11 @@ class Player(pygame.sprite.Sprite):
                 self.alive = False
             
         
+    def placeCrate(self):
+        if self.alive and self.crate_ammo > 0 and self.crate_cooldown <= 0:
+            Crate(self.screen, self.x, self.y, self)
+            self.crate_ammo -= 1
+            self.crate_cooldown = self.crate_cooldown_max
         
         
         

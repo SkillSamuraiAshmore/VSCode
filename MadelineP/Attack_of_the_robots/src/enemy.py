@@ -1,6 +1,7 @@
 import pygame
 import toolbox
 import math
+from explosion import Explosion
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, screen, x, y, player):
@@ -11,6 +12,10 @@ class Enemy(pygame.sprite.Sprite):
         self.player = player
         self.image = pygame.image.load("assets/Enemy_03.png")
         self.image_hurt = pygame.image.load("assets/Enemy_03 - Copy.png")
+        self.explosion_image = []
+        self.explosion_image.append(pygame.image.load("assets/MediumExplosion1.png"))
+        self.explosion_image.append(pygame.image.load("assets/MediumExplosion2.png"))
+        self.explosion_image.append(pygame.image.load("assets/MediumExplosion3.png"))
         # self.image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets\Enemy_03.png")
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
@@ -74,7 +79,9 @@ class Enemy(pygame.sprite.Sprite):
         self.health -= damage
         if self.health <= 0 :
             self.health = 99999
+            Explosion(self.screen, self.x, self.y, self.explosion_image, 5, 0, False)
             self.kill()
+    
     def getAngry(self, crate):
         self.obstacale_anger += 1
         if self.obstacale_anger >= self.obstacale_anger_max:

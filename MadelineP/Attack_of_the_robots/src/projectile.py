@@ -1,6 +1,7 @@
 import pygame
 import toolbox
 import math
+from explosion import Explosion
 class water_balloon(pygame.sprite.Sprite):
     def __init__(self, screen, x, y, angle):
         pygame.sprite.Sprite.__init__(self, self.containers)
@@ -9,6 +10,10 @@ class water_balloon(pygame.sprite.Sprite):
         self.y = y
         self.angle = angle
         self.image = pygame.image.load("assets\BalloonSmall.png")
+        self.explosion_images = []
+        self.explosion_images.append(pygame.image.load("assets/SplashSmall1.png"))
+        self.explosion_images.append(pygame.image.load("assets/SplashSmall2.png"))
+        self.explosion_images.append(pygame.image.load("assets/SplashSmall3.png"))
         #self.image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets\BalloonSmall.png")
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
@@ -42,6 +47,7 @@ class water_balloon(pygame.sprite.Sprite):
         self.screen.blit(self.image, self.rect)
         
     def expload(self):
+        Explosion(self.screen, self.x, self.y, self.explosion_images, 4, 0, False)
         self.kill()
         
         
