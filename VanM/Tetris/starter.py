@@ -22,7 +22,7 @@ pygame.font.init()
 s_width = 800
 s_height = 700
 play_width = 300  # meaning 300 // 10 = 30 width per block
-play_height = 600  # meaning 600 // 20 = 20 height per block
+play_height = 600  # meaning 600 // 20 = 30 height per block
 block_size = 30
 
 top_left_x = (s_width - play_width) // 2
@@ -32,9 +32,9 @@ top_left_y = s_height - play_height
 # SHAPE FORMATS
 
 S = [['.....',
-      '......',
-      '..00..',
-      '.00...',
+      '.....',
+      '..00.',
+      '.00..',
       '.....'],
      ['.....',
       '..0..',
@@ -143,8 +143,8 @@ class Piece(object):
        self.x = x 
        self.y = y
        self.shape = shape 
-       self.color = shape_colors[shape.index(shape)]
-       self.rotaion = 0
+       self.color = shape_colors[shapes.index(shape)]
+       self.rotation = 0
 
 def create_grid(locked_pos={}):
     grid = [[(0,0,0) for _ in range(10)] for _ in range(20)]
@@ -208,9 +208,9 @@ def draw_grid(surface, grid):
     sy = top_left_y
     
     for i in range(len(grid)):
-        pygame.draw.line(surface, (128, 128, 128), (sx, sy + i*block_size), (sx + play_width), (sx + play_width, sy + i*block_size))
+        pygame.draw.line(surface, (128, 128, 128), (sx, sy + i*block_size), (sx + play_width, sy + i*block_size))
         for j in range(len(grid[i])):
-            pygame.draw.line(surface, (128, 128, 128), (sx + j*block_size, sy), (sx + j*block_size), (sx + play_width, sy + play_height))
+            pygame.draw.line(surface, (128, 128, 128), (sx + j*block_size, sy), (sx + j*block_size, sy + play_height))
             pass
              
 def clear_rows(grid, locked):
@@ -226,13 +226,13 @@ def clear_rows(grid, locked):
                     del locked[(j,i)]
                 except:
                     continue
-                    
+                  
     if inc > 0:
         for key in sorted(list(locked), key = lambda x: x[1])[::-1]:
             x, y = key
             if y < ind:
-                newKey = x, y + inc
-                #keep typing
+                newKey = (x, y + inc)
+                locked[newKey] = locked.pop(key)
                             
                     
                     
@@ -259,7 +259,7 @@ def draw_window(surface, grid):
     surface.fill((0,0,0))
     
     pygame.font.init()
-    font = pygame.font.Sys.Font('comicsans, 60')
+    font = pygame.font.SysFont('comicsans', 60)
     label = font.render('Tetris💀', 1 ,(255,255,255))
     
     surface.blit(label, (top_left_x + play_width/2 - (label.get_width()/2), 30))
@@ -268,7 +268,7 @@ def draw_window(surface, grid):
         for j in range(len(grid[i])):
             pygame.draw.rect(surface, grid[i][j], (top_left_x + j*block_size, top_left_x + j*block_size, top_left_y +i * block_size, block_size), 0)
 
-    pygame.draw.rect(surface, (255,0,0), (top_left_x, top_left_y, play_width, play_height, 5))
+    pygame.draw.rect(surface, (255,0,0), (top_left_x, top_left_y, play_width, play_height), 5)
 
     
     draw_grid(surface, grid)
@@ -335,15 +335,17 @@ def main(win):
                 current_piece = next_piece
                 next_piece = get_shape()
                 change_piece = False
-                
-        draw_window(win, grid)                     
-        draw_next_shape(next_piece, surface) 
+                clear_rows(grid, locked_positions)
+        
+        draw_window(win, grid)    
+        draw_next_shape(next_piece, win)                 
+        # draw_next_shape(next_piece, surface) 
         pygame.display.update()           
                
                     
         if check_lost(locked_positions):
             run = False
-        pygame.display.pygame.quit()   
+        pygame.display.quit()   
             
 
 
@@ -354,4 +356,4 @@ def main_menu (win):
 
 win = pygame.display.set_mode((s_width, s_height))
 pygame.display.set_caption('Tetris')
-main_menu()  # start game
+main_menu(win)  # start game
