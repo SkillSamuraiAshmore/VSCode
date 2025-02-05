@@ -42,4 +42,21 @@ class Crate(pygame.sprite.Sprite):
             self.health = 99999
             self.kill()
             
-#class Explosive_Crate(): 
+class Explosive_Crate(Crate): 
+    def __init__(self, screen, x, y, player):
+        Crate.__init__(self, screen, x, y, player)
+        self.image = pygame.image.load("assets/ExplosiveBarrel.png")
+        # self.image_hurt = pygame.image.load("assets/powerupExplosiveBarrel(2).png")
+        self.explosion_images = []
+        self.explosion_images.append(pygame.image.load("assets/LargeExplosion1.png"))
+        self.explosion_images.append(pygame.image.load("assets/LargeExplosion2.png"))
+        self.explosion_images.append(pygame.image.load("assets/LargeExplosion3.png"))
+    def getHit(self, damage):
+        self.health -= damage
+        self.hurt_timer = 5
+        if self.health <= 0:
+            Explosion(self.screen, self.x, self.y, self.explosion_images, 5, 4, True)
+            self.health = 99999
+            self.kill()
+        # self.image = pygame.image.load("assets/Crate.png")
+        # self.image_hurt = pygame.image.load("assets/Crate - Hurt.png")

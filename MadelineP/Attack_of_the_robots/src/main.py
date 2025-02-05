@@ -5,6 +5,7 @@ from player import Player
 from projectile import water_balloon
 from enemy import Enemy
 from crate import Crate
+from crate import Explosive_Crate
 from explosion import Explosion
 
 # Start the game
@@ -43,7 +44,7 @@ main_player = Player(screen, game_width/2, game_height/2)
 
 
 for i in range(0, 10):
-    Crate(screen, random.randint(0, game_width), random.randint(0, game_height), main_player)
+    Explosive_Crate(screen, random.randint(0, game_width), random.randint(0, game_height), main_player)
 
 
 # ***************** Loop Land Below *****************
