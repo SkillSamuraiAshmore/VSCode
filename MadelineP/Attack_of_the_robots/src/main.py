@@ -45,6 +45,7 @@ main_player = Player(screen, game_width/2, game_height/2)
 
 for i in range(0, 10):
     Explosive_Crate(screen, random.randint(0, game_width), random.randint(0, game_height), main_player)
+    Crate(screen, random.randint(0, game_width), random.randint(0, game_height), main_player)
 
 
 # ***************** Loop Land Below *****************
@@ -75,6 +76,9 @@ while running:
         
     if keys[pygame.K_SPACE]:
         main_player.placeCrate()
+        
+    if pygame.mouse.get_pressed()[2]:
+        main_player.placeExplosiveCrate()
         
     enemy_spawn_timer -= 1
     if enemy_spawn_timer <= 0:
@@ -107,15 +111,15 @@ while running:
 
 
     for enemy in enemiesGroup:
-        enemy.update(projectiles_group, cratesGroup)
+        enemy.update(projectiles_group, cratesGroup, explosionsGroup)
         
     for crate in cratesGroup:
-        crate.update(projectiles_group)
+        crate.update(projectiles_group, explosionsGroup)
         
     for explosion in explosionsGroup:
         explosion.update()
         
-    main_player.update(enemiesGroup)
+    main_player.update(enemiesGroup, explosionsGroup)
     
     # Tell pygame to update the screen
     pygame.display.flip()

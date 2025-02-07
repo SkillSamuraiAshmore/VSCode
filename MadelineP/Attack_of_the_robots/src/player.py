@@ -2,7 +2,7 @@ import pygame
 import toolbox
 import projectile
 from crate import Crate
-
+from crate import Explosive_Crate
 class Player(pygame.sprite.Sprite):
     def __init__(self, screen, x, y):
         pygame.sprite.Sprite.__init__(self, self.containers)
@@ -28,11 +28,17 @@ class Player(pygame.sprite.Sprite):
         self.alive = True
         self.hurt_timer = 0
         self.crate_ammo = 10
+        self.explosive_crate_ammo = 10
         self.crate_cooldown = 0
         self.crate_cooldown_max = 10
     
-    def update (self, enemies):
+    def update (self, enemies, explosions):
         self.rect.center = (self.x, self.y)
+        
+        for explosion in explosions:
+            if explosion.damage and explosion.damage_player:
+                if self.rect.colliderect(explosion.rect):
+                    self.getHit(explosion.damage)
         
         for enemy in enemies:
             if self.rect.colliderect(enemy.rect):
@@ -114,6 +120,9 @@ class Player(pygame.sprite.Sprite):
             Crate(self.screen, self.x, self.y, self)
             self.crate_ammo -= 1
             self.crate_cooldown = self.crate_cooldown_max
-        
-        
-        
+            
+    def placeExplosiveCrate(self):
+        if self.alive and self.explosive_crate_ammo > 0 and self.crate_cooldown <= 0:
+            Explosive_Crate(self.screen, self.x, self.y, self)
+            self.explosive_crate_ammo -= 1
+            self.crate_cooldown = self.crate_cooldown_max

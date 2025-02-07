@@ -27,7 +27,7 @@ class Enemy(pygame.sprite.Sprite):
         self.obstacale_anger = 0
         self.obstacale_anger_max = 100
 
-    def update(self, projectiles, crates):
+    def update(self, projectiles, crates, explosions):
         
         self.angle = toolbox.angleBetweenPoints(self.x, self.y, self.player.x, self.player.y)
         
@@ -53,6 +53,11 @@ class Enemy(pygame.sprite.Sprite):
         self.x = new_x
         self.y = new_y
         self.rect.center = (self.x, self.y)
+        
+        for explosion in explosions:
+            if explosion.damage:
+                if self.rect.colliderect(explosion.rect):
+                    self.getHit(explosion.damage)
         
         for projectile in projectiles:
             if self.rect.colliderect(projectile.rect):
