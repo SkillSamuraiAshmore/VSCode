@@ -7,6 +7,7 @@ from enemy import Enemy
 from crate import Crate
 from crate import Explosive_Crate
 from explosion import Explosion
+from powerup import PowerUp
 
 # Start the game
 pygame.init()
@@ -31,16 +32,18 @@ cratesGroup = pygame.sprite.Group()
 
 explosionsGroup = pygame.sprite.Group()
 
+powerupsGroup = pygame.sprite.Group()
+
 Player.containers = playerGroup
 water_balloon.containers = projectiles_group
 Enemy.containers = enemiesGroup
 Crate.containers = cratesGroup
 Explosion.containers = explosionsGroup
+PowerUp.containers = powerupsGroup
 enemy_spawn_timer_max = 80
 enemy_spawn_timer = 0
 
 main_player = Player(screen, game_width/2, game_height/2)
-
 
 
 for i in range(0, 10):
@@ -106,6 +109,12 @@ while running:
     screen.blit(background_image, (0, 0))
    
     
+    for powerup in powerupsGroup:
+        powerup.update(main_player)
+    
+    for explosion in explosionsGroup:
+        explosion.update()
+    
     for projectile in projectiles_group:
         projectile.update()
 
@@ -115,10 +124,7 @@ while running:
         
     for crate in cratesGroup:
         crate.update(projectiles_group, explosionsGroup)
-        
-    for explosion in explosionsGroup:
-        explosion.update()
-        
+    
     main_player.update(enemiesGroup, explosionsGroup)
     
     # Tell pygame to update the screen

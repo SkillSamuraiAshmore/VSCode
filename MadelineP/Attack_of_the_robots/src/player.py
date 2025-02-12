@@ -126,3 +126,11 @@ class Player(pygame.sprite.Sprite):
             Explosive_Crate(self.screen, self.x, self.y, self)
             self.explosive_crate_ammo -= 1
             self.crate_cooldown = self.crate_cooldown_max
+            
+            
+    def powerUp(self, power_type):
+        if power_type == 'crateammo':
+            self.crate_ammo += 10
+        elif power_type == 'explosivammo':
+            self.explosive_crate_ammo += 10
+            
