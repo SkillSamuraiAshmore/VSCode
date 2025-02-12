@@ -2,7 +2,8 @@ import pygame
 import toolbox
 import math
 from explosion import Explosion
-
+import random
+from powerup import PowerUp
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, screen, x, y, player):
         pygame.sprite.Sprite.__init__(self, self.containers)
@@ -26,8 +27,8 @@ class Enemy(pygame.sprite.Sprite):
         self.damage = 1
         self.obstacale_anger = 0
         self.obstacale_anger_max = 100
-
-    def update(self, projectiles, crates):
+        self.powerup_drop_chance = 50
+    def update(self, projectiles, crates, explosions):
         
         self.angle = toolbox.angleBetweenPoints(self.x, self.y, self.player.x, self.player.y)
         
@@ -53,6 +54,11 @@ class Enemy(pygame.sprite.Sprite):
         self.x = new_x
         self.y = new_y
         self.rect.center = (self.x, self.y)
+        
+        for explosion in explosions:
+            if explosion.damage:
+                if self.rect.colliderect(explosion.rect):
+                    self.getHit(explosion.damage)
         
         for projectile in projectiles:
             if self.rect.colliderect(projectile.rect):
@@ -80,6 +86,9 @@ class Enemy(pygame.sprite.Sprite):
         if self.health <= 0 :
             self.health = 99999
             Explosion(self.screen, self.x, self.y, self.explosion_image, 5, 0, False)
+            
+            if random.randint(0, 100) < self.powerup_drop_chance:
+                PowerUp(self.screen, self.x, self.y)
             self.kill()
     
     def getAngry(self, crate):

@@ -17,9 +17,17 @@ class Crate(pygame.sprite.Sprite):
         self.hurt_timer = 0 
         self.just_placed = True
 
-    def update(self, projectiles):
+    def update(self, projectiles, explosions):
         if not self.rect.colliderect(self.player.rect):
             self.just_placed = False
+            
+            
+        for explosion in explosions:
+            if explosion.damage:
+                if self.rect.colliderect(explosion.rect):
+                    self.getHit(explosion.damage)
+                
+            
         
         for projectile in projectiles:
             if self.rect.colliderect(projectile.rect):
@@ -46,11 +54,13 @@ class Explosive_Crate(Crate):
     def __init__(self, screen, x, y, player):
         Crate.__init__(self, screen, x, y, player)
         self.image = pygame.image.load("assets/ExplosiveBarrel.png")
+        self.image_hurt = pygame.image.load("assets/ExplosiveBarrel - Copy.png")
         # self.image_hurt = pygame.image.load("assets/powerupExplosiveBarrel(2).png")
         self.explosion_images = []
         self.explosion_images.append(pygame.image.load("assets/LargeExplosion1.png"))
         self.explosion_images.append(pygame.image.load("assets/LargeExplosion2.png"))
         self.explosion_images.append(pygame.image.load("assets/LargeExplosion3.png"))
+        self.health = 20
     def getHit(self, damage):
         self.health -= damage
         self.hurt_timer = 5

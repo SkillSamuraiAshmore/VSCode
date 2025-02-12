@@ -7,6 +7,7 @@ from enemy import Enemy
 from crate import Crate
 from crate import Explosive_Crate
 from explosion import Explosion
+from powerup import PowerUp
 
 # Start the game
 pygame.init()
@@ -31,20 +32,23 @@ cratesGroup = pygame.sprite.Group()
 
 explosionsGroup = pygame.sprite.Group()
 
+powerupsGroup = pygame.sprite.Group()
+
 Player.containers = playerGroup
 water_balloon.containers = projectiles_group
 Enemy.containers = enemiesGroup
 Crate.containers = cratesGroup
 Explosion.containers = explosionsGroup
+PowerUp.containers = powerupsGroup
 enemy_spawn_timer_max = 80
 enemy_spawn_timer = 0
 
 main_player = Player(screen, game_width/2, game_height/2)
 
 
-
 for i in range(0, 10):
     Explosive_Crate(screen, random.randint(0, game_width), random.randint(0, game_height), main_player)
+    Crate(screen, random.randint(0, game_width), random.randint(0, game_height), main_player)
 
 
 # ***************** Loop Land Below *****************
@@ -76,6 +80,9 @@ while running:
     if keys[pygame.K_SPACE]:
         main_player.placeCrate()
         
+    if pygame.mouse.get_pressed()[2]:
+        main_player.placeExplosiveCrate()
+        
     enemy_spawn_timer -= 1
     if enemy_spawn_timer <= 0:
         new_enemy = Enemy(screen, 0, 0, main_player)
@@ -102,20 +109,23 @@ while running:
     screen.blit(background_image, (0, 0))
    
     
+    for powerup in powerupsGroup:
+        powerup.update(main_player)
+    
+    for explosion in explosionsGroup:
+        explosion.update()
+    
     for projectile in projectiles_group:
         projectile.update()
 
 
     for enemy in enemiesGroup:
-        enemy.update(projectiles_group, cratesGroup)
+        enemy.update(projectiles_group, cratesGroup, explosionsGroup)
         
     for crate in cratesGroup:
-        crate.update(projectiles_group)
-        
-    for explosion in explosionsGroup:
-        explosion.update()
-        
-    main_player.update(enemiesGroup)
+        crate.update(projectiles_group, explosionsGroup)
+    
+    main_player.update(enemiesGroup, explosionsGroup)
     
     # Tell pygame to update the screen
     pygame.display.flip()
