@@ -9,12 +9,15 @@ class water_balloon(pygame.sprite.Sprite):
         self.x= x
         self.y = y
         self.angle = angle
-        self.image = pygame.image.load("assets\BalloonSmall.png")
+        self.image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets\BalloonSmall.png")
+        # self.image = pygame.image.load("assets\BalloonSmall.png")
         self.explosion_images = []
-        self.explosion_images.append(pygame.image.load("assets/SplashSmall1.png"))
-        self.explosion_images.append(pygame.image.load("assets/SplashSmall2.png"))
-        self.explosion_images.append(pygame.image.load("assets/SplashSmall3.png"))
-        #self.image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets\BalloonSmall.png")
+        self.explosion_images.append(pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/SplashSmall1.png"))
+        self.explosion_images.append(pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/SplashSmall2.png"))
+        self.explosion_images.append(pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/SplashSmall3.png"))
+        # self.explosion_images.append(pygame.image.load("assets/SplashSmall1.png"))
+        # self.explosion_images.append(pygame.image.load("assets/SplashSmall2.png"))
+        # self.explosion_images.append(pygame.image.load("assets/SplashSmall3.png"))
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
         self.image, self.rect = toolbox.getRotatedImage(self.image, self.rect, self.angle)
