@@ -11,13 +11,17 @@ class Enemy(pygame.sprite.Sprite):
         self.x = x
         self.y = y
         self.player = player
-        self.image = pygame.image.load("assets/Enemy_03.png")
-        self.image_hurt = pygame.image.load("assets/Enemy_03 - Copy.png")
+        self.image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets\Enemy_03.png")
+        self.image_hurt = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/Enemy_03 - Copy.png")
+        # self.image = pygame.image.load("assets/Enemy_03.png")
+        # self.image_hurt = pygame.image.load("assets/Enemy_03 - Copy.png")
         self.explosion_image = []
-        self.explosion_image.append(pygame.image.load("assets/MediumExplosion1.png"))
-        self.explosion_image.append(pygame.image.load("assets/MediumExplosion2.png"))
-        self.explosion_image.append(pygame.image.load("assets/MediumExplosion3.png"))
-        # self.image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets\Enemy_03.png")
+        self.explosion_image.append(pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/MediumExplosion1.png"))
+        self.explosion_image.append(pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/MediumExplosion2.png"))
+        self.explosion_image.append(pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/MediumExplosion3.png"))
+        # self.explosion_image.append(pygame.image.load("assets/MediumExplosion1.png"))
+        # self.explosion_image.append(pygame.image.load("assets/MediumExplosion2.png"))
+        # self.explosion_image.append(pygame.image.load("assets/MediumExplosion3.png"))
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
         self.angle = 0
