@@ -54,4 +54,10 @@ class water_balloon(pygame.sprite.Sprite):
         self.kill()
         
         
-        
+class SplitWaterBalloon(water_balloon):
+    def __init__(self, screen, x, y, angle):
+        water_balloon.__init__(self, screen, x, y, angle)
+        self.image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/BalloonSmall.png")
+        self.damage = 7
+        self.rect = self.image.get_rect()
+        self.image, self.rect = toolbox.getRotatedImage(self.image, self.rect, self.angle)

@@ -110,10 +110,13 @@ class Player(pygame.sprite.Sprite):
             if self.shot_type == 'normal':
                 projectile.water_balloon(self.screen, self.x, self.y, self.angle)
             elif self.shot_type == 'splitshot':
-                projectile.water_balloon(self.screen, self.x, self.y, self.angle-15)
-                projectile.water_balloon(self.screen, self.x, self.y, self.angle)
-                projectile.water_balloon(self.screen, self.x, self.y, self.angle+15)
+                projectile.SplitWaterBalloon(self.screen, self.x, self.y, self.angle-15)
+                projectile.SplitWaterBalloon(self.screen, self.x, self.y, self.angle)
+                projectile.SplitWaterBalloon(self.screen, self.x, self.y, self.angle+15)
+                self.special_ammo -= 1
             self.shoot_cooldown = self.shoot_cooldown_max
+            if self.special_ammo <= 0:
+                self.powerUp('normal')
 
             
     def getHit(self, damage):
@@ -145,7 +148,10 @@ class Player(pygame.sprite.Sprite):
             self.explosive_crate_ammo += 10
         elif power_type == "splitshot":
             self.shot_type = 'splitshot'
-            self.special_ammo += 40
+            self.special_ammo = 40
             self.shoot_cooldown_max = 20
+        elif power_type == 'normal':
+            self.shot_type = 'normal'
+            self.shoot_cooldown_max = 10
             
             
