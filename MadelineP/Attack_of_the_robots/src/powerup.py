@@ -8,7 +8,7 @@ class PowerUp(pygame.sprite.Sprite):
         self.screen = screen
         self.x = x
         self.y = y
-        self.pick_power = random.randint(0, 2)
+        self.pick_power = random.randint(0, 4)
         if self.pick_power == 0:
             self.image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/powerupCrate.png")
             self.background_image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/powerupBackgroundBlue.png")
@@ -30,6 +30,16 @@ class PowerUp(pygame.sprite.Sprite):
             # self.image = pygame.image.load("assets/powerupSplit.png")
             # self.background_image = pygame.image.load("assets/powerupBackgroundRed.png")
             self.power_type = 'splitshot'
+        
+        elif self.pick_power == 3:
+            self.image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/powerupDrop.png")
+            self.background_image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/powerupBackgroundRed.png")
+            self.power_type = 'stream'
+        
+        elif self.pick_power == 4:
+            self.image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/SplashSmall1.png")
+            self.background_image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/powerupBackgroundRed.png")
+            self.power_type = 'burst' 
         
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
