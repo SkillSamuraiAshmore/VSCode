@@ -8,6 +8,7 @@ from crate import Crate
 from crate import Explosive_Crate
 from explosion import Explosion
 from powerup import PowerUp
+from Hud import HUD
 
 # Start the game
 pygame.init()
@@ -44,6 +45,8 @@ enemy_spawn_timer_max = 80
 enemy_spawn_timer = 0
 
 main_player = Player(screen, game_width/2, game_height/2)
+
+hud = HUD(screen, main_player)
 
 
 for i in range(0, 10):
@@ -126,6 +129,8 @@ while running:
         crate.update(projectiles_group, explosionsGroup)
     
     main_player.update(enemiesGroup, explosionsGroup)
+    
+    hud.update()
     
     # Tell pygame to update the screen
     pygame.display.flip()

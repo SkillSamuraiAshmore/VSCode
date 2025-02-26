@@ -35,6 +35,7 @@ class Player(pygame.sprite.Sprite):
         self.crate_cooldown_max = 10
         self.shot_type = 'normal'
         self.special_ammo = 0
+        self.score = 0
     
     def update (self, enemies, explosions):
         self.rect.center = (self.x, self.y)
@@ -151,12 +152,15 @@ class Player(pygame.sprite.Sprite):
     def powerUp(self, power_type):
         if power_type == 'crateammo':
             self.crate_ammo += 10
+            self.getScore(10)
         elif power_type == 'explosiveammo':
             self.explosive_crate_ammo += 10
+            self.getScore(10)
         elif power_type == "splitshot":
             self.shot_type = 'splitshot'
             self.special_ammo = 40
             self.shoot_cooldown_max = 20
+            self.getScore(20)
         elif power_type == 'normal':
             self.shot_type = 'normal'
             self.shoot_cooldown_max = 10
@@ -164,9 +168,14 @@ class Player(pygame.sprite.Sprite):
             self.shot_type = 'stream'
             self.special_ammo = 300
             self.shoot_cooldown_max = 3
-            
+            self.getScore(20)
         elif power_type == 'burst':
             self.shot_type = 'burst'
             self.special_ammo = 35
             self.shoot_cooldown_max = 30
+            self.getScore(20)
+    
+    def getScore(self, score):
+        if self.alive:
+            self.score += score
             
