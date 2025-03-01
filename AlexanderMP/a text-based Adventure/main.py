@@ -20,15 +20,6 @@ def damage(damage, hp):
     hp -= damage
     game_over(hp)        
 
-
-typewriter("greetings and salutations, adventurer!")
-
-def start_game():
-    typewriter("begin the game? [yes or no]")
-    play = input()
-    if play  == "yes":
-        typewriter("let's begin")
-        
 def way():
     typewriter("you are in a cave. there are two ways you can go, left or right. which way? [left or right]:")
     decision = input()
@@ -36,9 +27,23 @@ def way():
     if decision =="left":
         typewriter ("the left path leads you to a small cavern with a spring ijn the center and a key on top of the spring")
         typewriter ("the spring must lead to the small rotted door to the right of the springl.")
-        cavern()
+    elif decision =="right":
+        typewriter("you walk down the right path, bat run into some spikes.")
+        damage(random.randint(1, 3), hp)    
           
-        
+def start_game():
+    global hp
+    typewriter("begin the game? [yes or no]")
+    play = input()
+    if play  == "yes":
+        typewriter("let's begin")
+        game_over(hp)
+        way()
+    
+    
+typewriter("greetings and salutations, adventurer!")
+    
+
 start_game()
     
 

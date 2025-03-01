@@ -89,10 +89,12 @@ class Enemy(pygame.sprite.Sprite):
         self.health -= damage
         if self.health <= 0 :
             self.health = 99999
+            self.player.getScore(50)
             Explosion(self.screen, self.x, self.y, self.explosion_image, 5, 0, False)
             
             if random.randint(0, 100) < self.powerup_drop_chance:
                 PowerUp(self.screen, self.x, self.y)
+            
             self.kill()
     
     def getAngry(self, crate):
