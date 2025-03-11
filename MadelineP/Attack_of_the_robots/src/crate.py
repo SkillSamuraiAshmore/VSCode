@@ -7,10 +7,13 @@ class Crate(pygame.sprite.Sprite):
         self.x = x
         self.y = y
         self.player = player
-        self.image = pygame.image.load("assets/Crate.png")
-        self.image_hurt = pygame.image.load("assets/Crate - Hurt.png")
+        self.image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/Crate.png")
+        self.image_hurt = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/Crate - Hurt.png")
+        # self.image = pygame.image.load("assets/Crate.png")
+        # self.image_hurt = pygame.image.load("assets/Crate - Hurt.png")
         self.explosion_images = []
-        self.explosion_images.append(pygame.image.load("assets/CrateRubble.png"))
+        self.explosion_images.append(pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/CrateRubble.png"))
+        # self.explosion_images.append(pygame.image.load("assets/CrateRubble.png"))
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
         self.health = 50
@@ -53,13 +56,17 @@ class Crate(pygame.sprite.Sprite):
 class Explosive_Crate(Crate): 
     def __init__(self, screen, x, y, player):
         Crate.__init__(self, screen, x, y, player)
-        self.image = pygame.image.load("assets/ExplosiveBarrel.png")
-        self.image_hurt = pygame.image.load("assets/ExplosiveBarrel - Copy.png")
-        # self.image_hurt = pygame.image.load("assets/powerupExplosiveBarrel(2).png")
+        self.image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/ExplosiveBarrel.png")
+        self.image_hurt = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/ExplosiveBarrel - Copy.png")
+        # self.image = pygame.image.load("assets/ExplosiveBarrel.png")
+        # self.image_hurt = pygame.image.load("assets/ExplosiveBarrel - Copy.png")
         self.explosion_images = []
-        self.explosion_images.append(pygame.image.load("assets/LargeExplosion1.png"))
-        self.explosion_images.append(pygame.image.load("assets/LargeExplosion2.png"))
-        self.explosion_images.append(pygame.image.load("assets/LargeExplosion3.png"))
+        self.explosion_images.append(pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/LargeExplosion1.png"))
+        self.explosion_images.append(pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/LargeExplosion2.png"))
+        self.explosion_images.append(pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/LargeExplosion3.png"))
+        # self.explosion_images.append(pygame.image.load("assets/LargeExplosion1.png"))
+        # self.explosion_images.append(pygame.image.load("assets/LargeExplosion2.png"))
+        # self.explosion_images.append(pygame.image.load("assets/LargeExplosion3.png"))
         self.health = 20
     def getHit(self, damage):
         self.health -= damage
@@ -68,5 +75,3 @@ class Explosive_Crate(Crate):
             Explosion(self.screen, self.x, self.y, self.explosion_images, 5, 4, True)
             self.health = 99999
             self.kill()
-        # self.image = pygame.image.load("assets/Crate.png")
-        # self.image_hurt = pygame.image.load("assets/Crate - Hurt.png")
