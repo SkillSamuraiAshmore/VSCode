@@ -35,6 +35,7 @@ class Player(pygame.sprite.Sprite):
         self.crate_cooldown_max = 10
         self.shot_type = 'normal'
         self.special_ammo = 0
+        self.score = 0
     
     def update (self, enemies, explosions):
         self.rect.center = (self.x, self.y)
@@ -114,6 +115,13 @@ class Player(pygame.sprite.Sprite):
                 projectile.SplitWaterBalloon(self.screen, self.x, self.y, self.angle)
                 projectile.SplitWaterBalloon(self.screen, self.x, self.y, self.angle+15)
                 self.special_ammo -= 1
+            elif self.shot_type == 'stream':
+                projectile.waterDroplet(self.screen, self.x, self.y, self.angle)
+                self.special_ammo -= 1
+            elif self.shot_type == 'burst':
+                projectile.explosiveWaterBalloon(self.screen, self.x, self.y, self.angle)
+                self.special_ammo -= 1
+                
             self.shoot_cooldown = self.shoot_cooldown_max
             if self.special_ammo <= 0:
                 self.powerUp('normal')
@@ -144,14 +152,30 @@ class Player(pygame.sprite.Sprite):
     def powerUp(self, power_type):
         if power_type == 'crateammo':
             self.crate_ammo += 10
+            self.getScore(10)
         elif power_type == 'explosiveammo':
             self.explosive_crate_ammo += 10
+            self.getScore(10)
         elif power_type == "splitshot":
             self.shot_type = 'splitshot'
             self.special_ammo = 40
             self.shoot_cooldown_max = 20
+            self.getScore(20)
         elif power_type == 'normal':
             self.shot_type = 'normal'
             self.shoot_cooldown_max = 10
-            
+        elif power_type == 'stream':
+            self.shot_type = 'stream'
+            self.special_ammo = 300
+            self.shoot_cooldown_max = 3
+            self.getScore(20)
+        elif power_type == 'burst':
+            self.shot_type = 'burst'
+            self.special_ammo = 35
+            self.shoot_cooldown_max = 30
+            self.getScore(20)
+    
+    def getScore(self, score):
+        if self.alive:
+            self.score += score
             
