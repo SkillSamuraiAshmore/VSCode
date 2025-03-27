@@ -4,6 +4,11 @@ from os.path import abspath
 from player import Player
 from projectile import water_balloon
 from enemy import Enemy
+from crate import Crate
+from crate import Explosive_Crate
+from explosion import Explosion
+from powerup import PowerUp
+from Hud import HUD
 
 # Start the game
 pygame.init()
@@ -15,24 +20,38 @@ running = True
 
 # KEVIN: this is better solution, remember to use the "\\"
 # you can r-click "copy relative path"
-background_image = pygame.image.load("assets/BG_Urban.png")
-#background_image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets\BG_Urban.png")
+#background_image = pygame.image.load("assets/BG_Urban.png")
+background_image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets\BG_Urban.png")
 
 playerGroup = pygame.sprite.Group()
 
 projectiles_group = pygame.sprite.Group()
 
-enemyiesGroup = pygame.sprite.Group()
+enemiesGroup = pygame.sprite.Group()
+
+cratesGroup = pygame.sprite.Group()
+
+explosionsGroup = pygame.sprite.Group()
+
+powerupsGroup = pygame.sprite.Group()
 
 Player.containers = playerGroup
 water_balloon.containers = projectiles_group
-Enemy.containers = enemyiesGroup
-
+Enemy.containers = enemiesGroup
+Crate.containers = cratesGroup
+Explosion.containers = explosionsGroup
+PowerUp.containers = powerupsGroup
 enemy_spawn_timer_max = 80
 enemy_spawn_timer = 0
 
 main_player = Player(screen, game_width/2, game_height/2)
 
+hud = HUD(screen, main_player)
+
+
+for i in range(0, 10):
+    Explosive_Crate(screen, random.randint(0, game_width), random.randint(0, game_height), main_player)
+    Crate(screen, random.randint(0, game_width), random.randint(0, game_height), main_player)
 
 
 # ***************** Loop Land Below *****************
@@ -47,19 +66,25 @@ while running:
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_d]:
-        main_player.move(1, 0)
+        main_player.move(1, 0, cratesGroup)
     
     if keys[pygame.K_a]:
-        main_player.move(-1, 0)
+        main_player.move(-1, 0, cratesGroup)
         
     if keys[pygame.K_w]:
-        main_player.move(0, -1)
+        main_player.move(0, -1, cratesGroup)
         
     if keys[pygame.K_s]:
-        main_player.move(0, 1)
+        main_player.move(0, 1, cratesGroup)
         
     if pygame.mouse.get_pressed()[0]:
         main_player.shoot()
+        
+    if keys[pygame.K_SPACE]:
+        main_player.placeCrate()
+        
+    if pygame.mouse.get_pressed()[2]:
+        main_player.placeExplosiveCrate()
         
     enemy_spawn_timer -= 1
     if enemy_spawn_timer <= 0:
@@ -85,17 +110,28 @@ while running:
         
      
     screen.blit(background_image, (0, 0))
-    
-    main_player.update()
-    
    
+    
+    for powerup in powerupsGroup:
+        powerup.update(main_player)
+    
+    for explosion in explosionsGroup:
+        explosion.update()
     
     for projectile in projectiles_group:
         projectile.update()
 
 
-    for enemy in enemyiesGroup:
-        enemy.update(projectiles_group)
+    for enemy in enemiesGroup:
+        enemy.update(projectiles_group, cratesGroup, explosionsGroup)
+        
+    for crate in cratesGroup:
+        crate.update(projectiles_group, explosionsGroup)
+    
+    main_player.update(enemiesGroup, explosionsGroup)
+    
+    hud.update()
+    
     # Tell pygame to update the screen
     pygame.display.flip()
     clock.tick(40)
