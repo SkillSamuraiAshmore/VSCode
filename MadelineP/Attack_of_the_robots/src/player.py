@@ -1,17 +1,20 @@
 import pygame
 import toolbox
 import projectile
-
+from crate import Crate
+from crate import Explosive_Crate
 class Player(pygame.sprite.Sprite):
     def __init__(self, screen, x, y):
         pygame.sprite.Sprite.__init__(self, self.containers)
         self.screen = screen
         self.x = x
         self.y = y
-        self.image = pygame.image.load("assets/Player_04.png")
-        self.image_hurt = pygame.image.load("assets/Player_04 - hurt.png")
-        self.image_defeated = pygame.image.load("assets/Enemy_01.png")
-        # self.image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets\Player_04.png")
+        self.image = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/Player_04.png")
+        self.image_hurt = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/Player_04 - hurt.png")
+        self.image_defeated = pygame.image.load("MadelineP\Attack_of_the_robots\src\\assets/Enemy_01.png")
+        # self.image = pygame.image.load("assets/Player_04.png")
+        # self.image_hurt = pygame.image.load("assets/Player_04 - hurt.png")
+        # self.image_defeated = pygame.image.load("assets/Enemy_01.png")
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
         self.speed = 8
@@ -26,9 +29,21 @@ class Player(pygame.sprite.Sprite):
         self.health_bar_red = pygame.Rect(0, 0, self.health_bar_width, self.health_bar_height)
         self.alive = True
         self.hurt_timer = 0
+        self.crate_ammo = 10
+        self.explosive_crate_ammo = 10
+        self.crate_cooldown = 0
+        self.crate_cooldown_max = 10
+        self.shot_type = 'normal'
+        self.special_ammo = 0
+        self.score = 0
     
-    def update (self, enemies):
+    def update (self, enemies, explosions):
         self.rect.center = (self.x, self.y)
+        
+        for explosion in explosions:
+            if explosion.damage and explosion.damage_player:
+                if self.rect.colliderect(explosion.rect):
+                    self.getHit(explosion.damage)
         
         for enemy in enemies:
             if self.rect.colliderect(enemy.rect):
@@ -38,6 +53,9 @@ class Player(pygame.sprite.Sprite):
         if self.shoot_cooldown > 0:
             self.shoot_cooldown -= 1
             
+            
+        if self.crate_cooldown > 0:
+            self.crate_cooldown -= 1
         if self.alive:
             mouse_x, mouse_y = pygame.mouse.get_pos()
             self.angle = toolbox.angleBetweenPoints(self.x, self.y, mouse_x, mouse_y)
@@ -71,15 +89,43 @@ class Player(pygame.sprite.Sprite):
         
         
         
-    def move(self, x_movement, y_movement):
+    def move(self, x_movement, y_movement, crates):
         if self.alive:
-            self.x += self.speed * x_movement
-            self.y += self.speed * y_movement
+            test_rect = self.rect
+            test_rect.x += self.speed * x_movement
+            test_rect.y += self.speed * y_movement
+            collision = False
+            for crate in crates:
+                
+                if not crate.just_placed:
+                    if test_rect.colliderect(crate.rect):
+                        collision = True
+            
+            if not collision:
+                self.x += self.speed * x_movement
+                self.y += self.speed * y_movement
+            
         
     def shoot(self):
         if self.shoot_cooldown <= 0 and self.alive:
+            if self.shot_type == 'normal':
+                projectile.water_balloon(self.screen, self.x, self.y, self.angle)
+            elif self.shot_type == 'splitshot':
+                projectile.SplitWaterBalloon(self.screen, self.x, self.y, self.angle-15)
+                projectile.SplitWaterBalloon(self.screen, self.x, self.y, self.angle)
+                projectile.SplitWaterBalloon(self.screen, self.x, self.y, self.angle+15)
+                self.special_ammo -= 1
+            elif self.shot_type == 'stream':
+                projectile.waterDroplet(self.screen, self.x, self.y, self.angle)
+                self.special_ammo -= 1
+            elif self.shot_type == 'burst':
+                projectile.explosiveWaterBalloon(self.screen, self.x, self.y, self.angle)
+                self.special_ammo -= 1
+                
             self.shoot_cooldown = self.shoot_cooldown_max
-            projectile.water_balloon(self.screen, self.x, self.y, self.angle)
+            if self.special_ammo <= 0:
+                self.powerUp('normal')
+
             
     def getHit(self, damage):
         if self.alive:
@@ -90,6 +136,46 @@ class Player(pygame.sprite.Sprite):
                 self.alive = False
             
         
-        
-        
-        
+    def placeCrate(self):
+        if self.alive and self.crate_ammo > 0 and self.crate_cooldown <= 0:
+            Crate(self.screen, self.x, self.y, self)
+            self.crate_ammo -= 1
+            self.crate_cooldown = self.crate_cooldown_max
+            
+    def placeExplosiveCrate(self):
+        if self.alive and self.explosive_crate_ammo > 0 and self.crate_cooldown <= 0:
+            Explosive_Crate(self.screen, self.x, self.y, self)
+            self.explosive_crate_ammo -= 1
+            self.crate_cooldown = self.crate_cooldown_max
+            
+            
+    def powerUp(self, power_type):
+        if power_type == 'crateammo':
+            self.crate_ammo += 10
+            self.getScore(10)
+        elif power_type == 'explosiveammo':
+            self.explosive_crate_ammo += 10
+            self.getScore(10)
+        elif power_type == "splitshot":
+            self.shot_type = 'splitshot'
+            self.special_ammo = 40
+            self.shoot_cooldown_max = 20
+            self.getScore(20)
+        elif power_type == 'normal':
+            self.shot_type = 'normal'
+            self.shoot_cooldown_max = 10
+        elif power_type == 'stream':
+            self.shot_type = 'stream'
+            self.special_ammo = 300
+            self.shoot_cooldown_max = 3
+            self.getScore(20)
+        elif power_type == 'burst':
+            self.shot_type = 'burst'
+            self.special_ammo = 35
+            self.shoot_cooldown_max = 30
+            self.getScore(20)
+    
+    def getScore(self, score):
+        if self.alive:
+            self.score += score
+            
