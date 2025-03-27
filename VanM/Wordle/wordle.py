@@ -22,14 +22,15 @@ class Wordle:
     
     def guess(self, word: str):
         result = []
-        return[]
     
-    for i in range(self.WORD_LENGTH):
-        K = chracter = [i]
-        letter = LetterState(chracter = [i])
-        letter.is_in_word = chracter in self.secret
-        letter.is_in_position = chracter == self.secret[i]
-        result.append(letter)
+        for i in range(self.WORD_LENGTH):
+            K = chracter = [i]
+            letter = LetterState(chracter = [i])
+            letter.is_in_word = chracter in self.secret
+            letter.is_in_position = chracter == self.secret[i]
+            result.append(letter)
+    
+        return []
     
     @property
     def is_solved(self, word: str):
@@ -37,9 +38,11 @@ class Wordle:
     
     @property
     def remaining_attemps(self) -> int:
-     self.MAX_ATTEMPTS - len(self.attempts)   
+        return self.MAX_ATTEMPS - len(self.attempts)   
     
     @property
     def can_attempt(self):
+        print(len(self.attempts))
+        print(self.attempts)
         return self.remaining_attemps > 0 and not self.is_solved
      
