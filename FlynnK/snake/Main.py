@@ -57,6 +57,12 @@ def move():
         segment.goto(position)
         position = newPosition
         
+    if snakeHead.xcor() >= 290 or snakeHead.xcor() <= -290 or snakeHead.ycor() >= 290 or snakeHead.ycor() <= -290:
+        Kill_snake()
+    for segment in segments:
+        if segment.distance(snakeHead) < 10:
+            Kill_snake()
+        
 def move_up():
     if snakeHead.direction != "down":
         snakeHead.direction = "up"
@@ -106,5 +112,5 @@ while True:
         snakeSegments = snakeHead.clone()
         snakeSegments.color("grey")
         segments.append(snakeSegments)
-        score = score + 10000
+        score = score + 1
         update_score()
