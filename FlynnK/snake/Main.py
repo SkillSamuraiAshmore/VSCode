@@ -12,9 +12,19 @@ snakeHead. shape("square")
 snakeHead.penup()
 snakeHead.speed(0)
 snakeHead.direction = "stop"
-delay = 0.2
-
+delay = 0
 segments = []
+score = 0
+
+scoreLable = turtle.Turtle()
+scoreLable.penup()
+scoreLable.hideturtle()
+scoreLable.goto(-280, 260)
+scoreLable.write("Score: " + str(score), font = ("Arial", 24, "normal"))
+
+def update_score():
+    scoreLable.clear()
+    scoreLable.write("Score: " + str(score), font = ("Arial", 24, "normal"))
 
 snakeFood = turtle.Turtle()
 snakeFood.color("red")
@@ -23,6 +33,13 @@ snakeFood.shapesize(1, 1)
 snakeFood.speed(0)
 snakeFood.penup()
 snakeFood.goto(0,100)
+
+#BetterFood = turtle.Turtle()
+#BetterFood.shape("square")
+#BetterFood.shapesize(0.5, 0.5)
+#BetterFood.speed(0)
+#BetterFood.penup()
+#BetterFood.goto(0,100)
 
 def move():
     position = snakeHead.position()
@@ -52,6 +69,25 @@ def move_left():
 def move_right():
     if snakeHead.direction != "left":
         snakeHead.direction = "right"
+        
+def Kill_snake():
+    global segments, delay, score
+    for segment in segments:
+        segment.color("red")
+        time.sleep(delay)
+        snakeScreen.update()
+    time.sleep(1)
+    for segment in reversed(segments):
+        segment.hideturtle()
+        time.sleep(delay)
+        snakeScreen.update()
+    segments = []
+    snakeHead.goto(0,0)
+    snakeHead.direction = "stop"
+    delay = 0.1
+    score = 0
+    update_score()
+        
 
 snakeScreen.onkeypress(move_up , 'w')
 snakeScreen.onkeypress(move_down , 's')
@@ -70,4 +106,5 @@ while True:
         snakeSegments = snakeHead.clone()
         snakeSegments.color("grey")
         segments.append(snakeSegments)
-
+        score = score + 10000
+        update_score()
