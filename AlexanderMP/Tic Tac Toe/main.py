@@ -24,31 +24,49 @@ while(running):
         count += 1
     else:
         print("That place is taken. Choose another spot!!!")
-        continue    
-if board ['7'] == board['8'] == board['9'] != ' ':
-        printBoard(board)
-        print("Game Over!\n")
-        print("Player " + player + " won.")
-    
-if board ['4'] == board['5'] == board['6'] != ' ':
-        printBoard(board)
-        print("Game Over!\n")
-        print("Player " + player + " won.")
-    
-if board ['1'] == board['2'] == board['3'] != ' ':
-        printBoard(board)
-        print("Game Over!\n")
-        print("Player " + player + " won.")
-        
-elif board ['1'] == board['4'] == board['7'] != ' ':
-        printBoard(board)
-        print("Game Over!\n")
-        print("Player " + player + " won.")
-        
-elif board ['2'] == board['5'] == board['8'] != ' ':
-        printBoard(board)
-        print("Game Over!\n")
-        print("Player " + player + " won.")
+        continue 
+
+    # across the top row
+    if board ['7'] == board['8'] == board['9'] != ' ':
+            praintBoard(board)
+            print("Game Over!\n")
+            print("Player " + player + " won.")
+    # middle row
+    elif board ['4'] == board['5'] == board['6'] != ' ':
+            praintBoard(board)
+            print("Game Over!\n")
+            print("Player " + player + " won.")
+    # bottom row 
+    elif board ['1'] == board['2'] == board['3'] != ' ':
+            praintBoard(board)
+            print("Game Over!\n")
+            print("Player " + player + " won.")
+
+    elif board ['1'] == board['4'] == board['7'] != ' ':
+            praintBoard(board)
+            print("Game Over!\n")
+            print("Player " + player + " won.")      
+            
+    elif board ['2'] == board['5'] == board['8'] != ' ':
+            praintBoard(board)
+            print("Game Over!\n")
+            print("Player " + player + " won.")         
+
+    elif board ['3'] == board['6'] == board['9'] != ' ':
+            praintBoard(board)
+            print("Game Over!\n")
+            print("Player " + player + " won.")    
+
+    elif board ['7'] == board['5'] == board['3'] != ' ':
+            praintBoard(board)
+            print("Game Over!\n")
+            print("Player " + player + " won.")   
+                    
+    elif board ['9'] == board['5'] == board['1'] != ' ':
+            praintBoard(board)
+            print("Game Over!\n")
+            print("Player " + player + " won.")                     
+
 
 
 
