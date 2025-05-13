@@ -5,7 +5,7 @@ def playGame(target):
     while count < target:
         print("It's your turn " + players[currentPlayer])
         value = input("Pick 1, 2, 3, 4 or 5 \n")
-        while value not in ["0", "1", "2", "3", "4","5", "100"]:
+        while value not in ["-1", "0", "1", "2", "3", "4","5", "100"]:
             value = input("Enter only 1, 2, 3, 4 or 5 \n")
         count += int(value)
         
