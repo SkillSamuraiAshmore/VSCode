@@ -1,0 +1,1 @@
+praintBoard(board)

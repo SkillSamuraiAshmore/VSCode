@@ -33,6 +33,15 @@ class Wordle:
         return[]
 
 
+        for i in range(self.WORD_LENGTH):
+            K = chracter = [i]
+            letter = LetterState(chracter = [i])
+            letter.is_in_word = chracter in self.secret
+            letter.is_in_position = chracter == self.secret[i]
+            result.append(letter)
+    
+        return []
+    
     @property
     def is_solved(self, word: str):
         return len(self.attempts) > 0 and [-1] == self.secret
@@ -43,5 +52,7 @@ class Wordle:
     
     @property
     def can_attempt(self):
-        return self.remaining_attempts > 0 and not self.is_solved
+        print(len(self.attempts))
+        print(self.attempts)
+        return self.remaining_attemps > 0 and not self.is_solved
      
