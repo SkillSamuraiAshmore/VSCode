@@ -41,17 +41,17 @@ while(running):
             praintBoard(board)
             print("Game Over!\n")
             print("Player " + player + " won.")
-
+# left coiumn
     elif board ['1'] == board['4'] == board['7'] != ' ':
             praintBoard(board)
             print("Game Over!\n")
             print("Player " + player + " won.")      
-            
+# middle column            
     elif board ['2'] == board['5'] == board['8'] != ' ':
             praintBoard(board)
             print("Game Over!\n")
             print("Player " + player + " won.")         
-
+# left to right
     elif board ['3'] == board['6'] == board['9'] != ' ':
             praintBoard(board)
             print("Game Over!\n")
@@ -67,9 +67,16 @@ while(running):
             print("Game Over!\n")
             print("Player " + player + " won.")                     
 
-
-
-
+        
+        
+# tie 
+if count >= 9:
+        print("Game Over!\n")
+        print("it'a tie")
+        
+#TODO: fix
+if player='x':
+        player = 'o'
 
 
 
