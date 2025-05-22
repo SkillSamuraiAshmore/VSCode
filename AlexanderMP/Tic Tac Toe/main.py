@@ -74,10 +74,10 @@ if count >= 9:
         print("Game Over!\n")
         print("it'a tie")
         
-#TODO: fix
-if player='x':
-        player = 'o'
 
+if player =='x':
+        player = 'o'
+#TODO: fix
 
 
 
