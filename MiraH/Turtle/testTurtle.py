@@ -13,6 +13,17 @@ def inflate_balloon ():
   diameter = diameter + 10
   draw_balloon()
   
+  if diameter >= pop_diameter:
+    clear()  
+    diameter = 40
+    write("POP!")
 draw_balloon
-inflate_balloon()
+inflate_balloon
+onkey(inflate_balloon, "Up")
+listen()
+
+
+
+
+
 done()
