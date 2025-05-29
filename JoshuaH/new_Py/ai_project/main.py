@@ -3,7 +3,8 @@ from openai import OpenAI
 # pass the api key 
 # never upload this to github
 client = OpenAI(
-    api_key = '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'
+    #TODO: i think it's saying error 429 because we are sharing this key online, later the tutorial hides this key so it should be fine later at the end of the tutorial
+    api_key = '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'
 )
 
 # define prompt 
