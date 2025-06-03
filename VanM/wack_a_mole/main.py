@@ -17,7 +17,7 @@ def spin():
     circle(10)
 
 def print_text():
-    write("bonk!", align="center", font=("Arial", 15, "normal"))()
+    write("bonk!", align="center", font=("Arial", 15, "normal"))
     
 def dig():
     dot(50)
