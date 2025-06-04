@@ -5,7 +5,7 @@ import wikipedia
 # pass the api key 
 # never upload this to github
 client = OpenAI(
-    api_key = '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'
+    
 )
 
 # get user input
