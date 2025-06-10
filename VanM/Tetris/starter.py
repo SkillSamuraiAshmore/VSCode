@@ -261,8 +261,16 @@ def draw_next_shape(shape, surface):
                 pygame.draw.rect(surface, shape.color, (sx + j*block_size, sy + i*block_size, block_size, block_size))
    
     surface.blit(label, (sx + 10, sy - 30))
-   
-
+    
+def update_score(score):
+    with open('scores.txt', 'r') as f:
+        lines = f.readlines()
+        score = lines[0].strip()
+        
+    with open('scores.txt', 'w') as f:
+        if score >
+            
+        
 def draw_window(surface, grid):
     surface.fill((0,0,0))
     

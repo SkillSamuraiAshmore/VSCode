@@ -55,7 +55,7 @@ def move():
         segment.goto(position)
         position = newPosition
 
-    if snakeHead.xcor() >= 290 or snakeHead.xcor() <= -290 or snakeHead.ycor() >= 290 or snakeHead.ycor() <= -290:
+    
         kill_snake()
     for segment in segments:
         if segment.distance(snakeHead) < 10:
