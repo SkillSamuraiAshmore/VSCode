@@ -7,3 +7,4 @@ def translate(phrase):
             translation=translation+ letter
     return translation
 print(translate(input("Enter a phrase or word:")))
+#hello
