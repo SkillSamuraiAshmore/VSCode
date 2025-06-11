@@ -1,11 +1,6 @@
-if (sadsadsad) then 
-    sadsadsaed
-end
-
-if (jashdkhsa) {
-    sadsadsadsad
-}
-
-if (sadasd):
-    dsadsad
+class Player:
     
+    def __init__(self, skin, name, health, shield):  
+        self.name = "Van"
+        self.health = 100
+        self.shield = 100
