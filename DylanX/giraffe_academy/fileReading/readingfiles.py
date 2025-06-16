@@ -1,2 +1,4 @@
-files=open("grades.txt", "r")
-files.close()
+grades=open("grades.txt", "r")
+for student in grades:
+    print(student)
+grades.close()
