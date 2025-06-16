@@ -1,0 +1,2 @@
+people_i_hate=["Jenson","Jenson","Jenson","Jenson","Jenson","Jenson","Jenson","Jenson","Jenson","Jenson","Jenson","Jenson","Jenson","Jenson","Jenson","Jenson","Jenson","Jenson","Jenson","Jenson","Jenson"]
+print(people_i_hate[2:9])
