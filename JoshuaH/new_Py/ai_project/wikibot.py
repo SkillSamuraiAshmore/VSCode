@@ -1,15 +1,17 @@
 import openai
 from openai import OpenAI
 import wikipedia 
+import os
 
 # pass the api key 
 # never upload this to github
 client = OpenAI(
-    
+    api_key = os.environ.get('OPENAI_API_KEY')
 )
-
+print(os.environ.get("OPENAI_API_KEY"))
 # get user input
 title = input('title of the page: ')
+
 
 # get the wikipedia content
 page = wikipedia.page(title=title, auto_suggest=False)
