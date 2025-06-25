@@ -19,12 +19,6 @@ paddle_a.color("white")
 #main game loop
 while True:
     wn.update()
-    
-    
 
-    
-    
-    
-    
     
 turtle.done
