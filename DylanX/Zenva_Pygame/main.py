@@ -1,4 +1,3 @@
-#SET UP PYGAME
 
 import pygame,sys
 
@@ -10,20 +9,15 @@ screen = pygame.display.set_mode()
 pygame.display.set_caption("My special game ")
 red=pygame.Color(255,0,0,1)
 grey=pygame.Color(100,100,100,1)
-#GAME LOOP
+white=pygame.Color(255,255,255,1)
 
 while True:
-    #CHECKING FOR EVENTS
-    for event in  pygame.event.get():
-        #CHECK FOR QUIT
+    for event in  pygame.event.get():T
         if event.type == pygame.QUIT:
-            #QUIT
             pygame.quit()
             sys.exit()
-    screen.fill(cyan)
+    screen.fill(white)
     pygame.display.flip()
-    #pygame.display.update()
-    #SET FPS
     clock.tick(60)
     
 
