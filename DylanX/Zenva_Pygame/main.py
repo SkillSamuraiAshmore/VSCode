@@ -1,5 +1,5 @@
 
-import pygame,sys
+import pygame,sys,math
 
 pygame.init()
 
@@ -26,7 +26,7 @@ while True:
             sys.exit()
     screen.fill(white)
     
-    pygame.draw.arc(screen,grey,pygame.Rect(50,50,100,100),0,3.1415926535897932384626)
+    pygame.draw.arc(screen,grey,pygame.Rect(50,50,100,100),0,math.pi,5)
     
     #pygame.draw.ellipse(screen,grey,pygame.Rect(50,50,100,200))
     #pygame.draw.rect(screen,grey,pygame.Rect(50,50,100,200),1)
