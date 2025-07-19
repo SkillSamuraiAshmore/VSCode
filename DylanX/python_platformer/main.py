@@ -15,7 +15,9 @@ def flip(sprites):
     return[pygame.transform.flip(sprite,True,False)for sprite in sprites]
 
 def load_sprite_sheets(dir1,dir2,width,height,direction=False):
-    path = join("assets",dir1,dir2)
+    path = join("Dylanx","python_platformer","assets",dir1,dir2)
+    #needed to add in more infomation to directory -Jarrod
+    
     images = [f for f in listdir(path) if isfile(join(path,f))]
     
     all_sprites={}
@@ -31,30 +33,32 @@ def load_sprite_sheets(dir1,dir2,width,height,direction=False):
             sprites.append(pygame.transform.scale2x(surface))
             
         if direction:
-            all_sprites[image.replace(".png","") + "_right"]=sprites
+            all_sprites[image.replace(".png","") + "_right"]= sprites
             all_sprites[image.replace(".png","") + "_left" ] = flip(sprites)
         else:
             all_sprites[image.replace(".png","")] = sprites
+            
     return all_sprites
 
 
 def get_block(size):
-    path=join("assets","Terrain","Terrain.png")
+    path=join("Dylanx","python_platformer","assets","Terrain","Terrain.png")
     image=pygame.image.load(path).convert_alpha()
-    surface = pygame.Surface((size,size),pygame.SCRALPHA,32)
+    surface = pygame.Surface((size,size),pygame.SRCALPHA,32)
     rect=pygame.Rect(96,0,size,size)
     surface.blit(image,(0,0),rect)
     return pygame.transform.scale2x(surface)
 
 
 
-#DylanX\python_platformer\assets\MainCharacters\VirtualGuy
+
 class Player(pygame.sprite.Sprite):
     
     COLOUR = (255,0,0)
     GRAVITY = 1
     SPRITES= load_sprite_sheets("MainCharacters","VirtualGuy",32,32,True)
     ANIMATION_DELAY=5
+    
     def __init__(self,x,y,width,height):
         super().__init__()
         self.rect = pygame.Rect(x,y,width,height)
@@ -83,8 +87,10 @@ class Player(pygame.sprite.Sprite):
                 self.animation_count= 0 
             
     def loop(self,fps):
-        self.y_vel += min(1,(self.fall_count/fps) * self.GRAVITY)
+        #commented out gravity for testing -Jarrod
+        #self.y_vel += min(1,(self.fall_count/fps) * self.GRAVITY)
         self.move(self.x_vel ,self.y_vel)
+        
         self.fall_count += 1
         self.update_sprite()
         
@@ -92,6 +98,7 @@ class Player(pygame.sprite.Sprite):
         sprite_sheet="idle"
         if self.x_vel!=0:
             sprite_sheet="run"
+            
         sprite_sheet_name = sprite_sheet + "_" + self.direction
         sprites = self.SPRITES[sprite_sheet_name]
         sprite_index = (self.animation_count // self.ANIMATION_DELAY) % len(sprites)
@@ -114,18 +121,19 @@ class Object(pygame.sprite.Sprite):
         self.width=width
         self.height=height
         self.name=name
+        
     def draw(self,win):
-        win.blit(self.image),(self.rect.y,self.rect.y)
+        win.blit(self.image,(self.rect.x,self.rect.y))
 
 class Block(Object):
     def __init__(self,x,y,size):
-        super().__init__(self,x,y,size)
+        super().__init__(x,y,size,size)
         block = get_block(size)
         self.image.blit(block,(0,0))
         self.mask=pygame.mask.from_surface(self.image)
 
 def get_background(name):
-    image=pygame.image.load(join("assets","Background",name))
+    image=pygame.image.load(join("Dylanx","python_platformer","assets","Background",name))
     _,_, width,height = image.get_rect()
     tiles=[]
     
@@ -133,16 +141,18 @@ def get_background(name):
         for j in range (HEIGHT // height + 1):
             pos=(i*width,j*height)
             tiles.append(pos)
+            
     return tiles,image
 
 def draw(window,background,bg_image,player,objects):
     for tile in background:
         window.blit(bg_image,tile)
-        player.draw(window)
-    pygame.display.update()
-    
+        
     for obj in objects:
         obj.draw(window)
+        
+    player.draw(window)
+    pygame.display.update()
 
 def handle_move(player):
     keys = pygame.key.get_pressed()
@@ -162,12 +172,14 @@ def main(window):
     
     player = Player(100,100,50,50)
     blocks = [Block(0,HEIGHT-block_size,block_size)]
+    
     while run:
         clock.tick(FPS)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run=False
                 break
+            
         player.loop(FPS)
         handle_move(player)
         draw(window,background,bg_image,player,blocks)
