@@ -8,9 +8,9 @@ clock = pygame.time.Clock()
 screen = pygame.display.set_mode((800, 500))
 pygame.display.set_caption("My Game")
 
-blue = "lavender"
+background_color = "lavender"
 
-rect = pygame.Rect(0, 0, 200, 100)
+rect = pygame.Rect(50, 10, 200, 100)
 
 
 while True:
@@ -20,7 +20,9 @@ while True:
       
       sys.exit()
   
-    screen.fill(blue)    
+    screen.fill(background_color)    
+    pygame.draw.rect(screen, "lavenderblush", rect)
+     
     pygame.display.flip()
     
     
