@@ -9,30 +9,30 @@ pygame.display.set_caption("My Special Game")
 
 background_color = "white"
 
-apple = pygame.image.load("apple.png")
-rect = apple.get_rect()
-
-rect = rect.move(10, 10)
-
-screen_rect = screen.get_rect()
-
-
-def check_for_collision():
-    return rect.x <= 0 or rect.x + rect.width >= screen_rect.width or rect.y <= 0 or rect.y + rect.height >= screen_rect.height
-
+circle_x=50
+circle_y=50
 
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-    
-    if not check_for_collision(): 
-        rect = rect.move(0, 1) 
-    
-    screen.fill(background_color)
+        
+        keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+                circle_x -= 1
+    if keys[pygame.K_RIGHT]:
+        circle_x += 1
+    if keys[pygame.K_UP]:
+        circle_y -= 1
+    if keys[pygame.K_DOWN]:
+        circle_y += 1
 
-    screen.blit(apple, rect)
+
+    screen.fill(background_color)
+    
+
+    pygame.draw.circle(screen,"red",(circle_x,circle_y),20)
     
     pygame.display.flip()
     
