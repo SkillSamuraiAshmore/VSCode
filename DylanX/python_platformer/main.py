@@ -1,6 +1,8 @@
 import os,random,math,pygame
 from os import listdir
 from os.path import isfile,join
+import pathlib
+
 pygame.init()
 
 pygame.display.set_caption("Platformer") 
@@ -15,7 +17,8 @@ def flip(sprites):
     return[pygame.transform.flip(sprite,True,False)for sprite in sprites]
 
 def load_sprite_sheets(dir1,dir2,width,height,direction=False):
-    path = join("Dylanx","python_platformer","assets",dir1,dir2)
+    # need to add full file // thingy
+    path = join("C:\Repo\VSCode\DylanX","python_platformer","assets",dir1,dir2)
     #needed to add in more infomation to directory -Jarrod
     
     images = [f for f in listdir(path) if isfile(join(path,f))]
@@ -42,7 +45,7 @@ def load_sprite_sheets(dir1,dir2,width,height,direction=False):
 
 
 def get_block(size):
-    path=join("Dylanx","python_platformer","assets","Terrain","Terrain.png")
+    path=join("C:\Repo\VSCode\Dylanx","python_platformer","assets","Terrain","Terrain.png")
     image=pygame.image.load(path).convert_alpha()
     surface = pygame.Surface((size,size),pygame.SRCALPHA,32)
     rect=pygame.Rect(96,0,size,size)
@@ -133,7 +136,7 @@ class Block(Object):
         self.mask=pygame.mask.from_surface(self.image)
 
 def get_background(name):
-    image=pygame.image.load(join("Dylanx","python_platformer","assets","Background",name))
+    image=pygame.image.load(join("C:\Repo\VSCode\DylanX","python_platformer","assets","Background",name))
     _,_, width,height = image.get_rect()
     tiles=[]
     
@@ -143,6 +146,10 @@ def get_background(name):
             tiles.append(pos)
             
     return tiles,image
+
+def handle_vertical_Collision(players,objects,dy):
+    collided_objects = []
+    # for obj in objects: 
 
 def draw(window,background,bg_image,player,objects):
     for tile in background:
@@ -166,10 +173,12 @@ def handle_move(player):
 def main(window):
     clock = pygame.time.Clock()
     background, bg_image = get_background("Blue.png")
-    run=True
-    
     block_size=96
     
+    floor = [Block(i*block_size, HEIGHT - block_size, block_size) for i in range (-WIDTH // block_size, WIDTH * 2 // block_size)]
+    
+    run=True
+
     player = Player(100,100,50,50)
     blocks = [Block(0,HEIGHT-block_size,block_size)]
     
@@ -182,7 +191,7 @@ def main(window):
             
         player.loop(FPS)
         handle_move(player)
-        draw(window,background,bg_image,player,blocks)
+        draw(window,background,bg_image,player,floor)
             
             
     pygame.quit()
