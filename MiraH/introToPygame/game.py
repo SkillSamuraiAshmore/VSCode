@@ -22,7 +22,8 @@ while True:
   
     screen.fill(background_color)    
     pygame.draw.rect(screen, "lavenderblush", rect, 5, 20)
-     
+    pygame.draw.circle(screen, "aliceblue", (100, 100))
+
     pygame.display.flip()
     
     
