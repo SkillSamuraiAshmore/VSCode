@@ -18,7 +18,7 @@ def flip(sprites):
 
 def load_sprite_sheets(dir1,dir2,width,height,direction=False):
     # need to add full file // thingy
-    path = join("C:\Repo\VSCode\DylanX","python_platformer","assets",dir1,dir2)
+    path = join("DylanX","python_platformer","assets",dir1,dir2)
     #needed to add in more infomation to directory -Jarrod
     
     images = [f for f in listdir(path) if isfile(join(path,f))]
@@ -45,7 +45,7 @@ def load_sprite_sheets(dir1,dir2,width,height,direction=False):
 
 
 def get_block(size):
-    path=join("C:\Repo\VSCode\Dylanx","python_platformer","assets","Terrain","Terrain.png")
+    path=join("DylanX","python_platformer","assets","Terrain","Terrain.png")
     image=pygame.image.load(path).convert_alpha()
     surface = pygame.Surface((size,size),pygame.SRCALPHA,32)
     rect=pygame.Rect(96,0,size,size)
@@ -71,7 +71,15 @@ class Player(pygame.sprite.Sprite):
         self.direction = "left"
         self.animation_count = 0
         self.fall_count = 0
-    
+        self.jump_count = 0
+        
+    def jump(self):
+        self.y_vel = -self.GRAVITY * 8
+        self.animation_count = 0
+        self.jump_count += 1
+        if self.jump_count == 1:
+            self.fall_count=0
+            
     def move(self,dx,dy):
         self.rect.x += dx
         self.rect.y += dy
@@ -90,7 +98,6 @@ class Player(pygame.sprite.Sprite):
                 self.animation_count= 0 
             
     def loop(self,fps):
-        #commented out gravity for testing -Jarrod
         self.y_vel += min(1,(self.fall_count/fps) * self.GRAVITY)
         self.move(self.x_vel ,self.y_vel)
         
@@ -109,8 +116,15 @@ class Player(pygame.sprite.Sprite):
         
     def update_sprite(self):
         sprite_sheet="idle"
-        if self.x_vel!=0:
-            sprite_sheet="run"
+        if self.y_vel < 0:
+            if self.jump_count == 1:
+                sprite_sheet="jump"
+            elif self.jump_count ==2 :
+                sprite_sheet="double_jump"
+        elif self.y_vel > self.GRAVITY * 2 :
+                sprite_sheet= "fall"
+        elif self.x_vel!=0:
+                sprite_sheet="run"
             
         sprite_sheet_name = sprite_sheet + "_" + self.direction
         sprites = self.SPRITES[sprite_sheet_name]
@@ -146,7 +160,7 @@ class Block(Object):
         self.mask=pygame.mask.from_surface(self.image)
 
 def get_background(name):
-    image=pygame.image.load(join("C:\Repo\VSCode\DylanX","python_platformer","assets","Background",name))
+    image=pygame.image.load(join("DylanX","python_platformer","assets","Background",name))
     _,_, width,height = image.get_rect()
     tiles=[]
     
@@ -164,9 +178,10 @@ def handle_vertical_collision(player,objects,dy):
             if dy>0:
                 player.rect.bottom=obj.rect.top
                 player.landed()
-        elif dy<0:
-            player.rect.top = obj.rect.bottom
-            player.hit_head()
+            elif dy<0:
+                player.rect.top = obj.rect.bottom
+                player.hit_head()
+        
         collided_objects.append(obj)
     
     return collided_objects
@@ -210,6 +225,10 @@ def main(window):
             if event.type == pygame.QUIT:
                 run=False
                 break
+            
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE and player.jump_count < 2:
+                    player.jump()
             
         player.loop(FPS)
         handle_move(player,floor)
