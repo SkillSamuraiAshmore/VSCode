@@ -5,7 +5,7 @@ pop_diameter = 300
 
 def draw_balloon():
   a = 5
-  color("purple")
+  color("lavender")
   dot(diameter)
   
 def inflate_balloon (): 
