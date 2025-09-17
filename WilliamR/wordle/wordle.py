@@ -1,4 +1,4 @@
-
+from letter_state import LetterState
 
 
 class Wordle:
@@ -11,7 +11,7 @@ class Wordle:
         self.secret: str = secret.upper
         self.attempts = []
         pass
-    
+
     
    
     
