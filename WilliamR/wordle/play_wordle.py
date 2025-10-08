@@ -54,13 +54,14 @@ def draw_border_around(lines: list[str], size: int = 9, pad: int = 1):
     content_length = size + pad * 2
     top_border = "┌"  +  "─"  * content_length + "┐"
     bottom_border = "└"  +  "─"  * content_length + "┘"
+    space = " " * pad
     print(top_border)
     
     for line in lines:
-        print(line)
+        print("│", +  space + line + space + "│")
+
         
-        
-    print("│" +	bottom_border)  
+    print(	bottom_border)  
     
          
     if __name__ == "__main__":
