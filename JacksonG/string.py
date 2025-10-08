@@ -1,5 +1,6 @@
 import math
 
+
 phrase = "GIRAFFE ACADEMY"
 print(phrase + " IS COOL")
 print(phrase.upper())     
