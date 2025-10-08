@@ -37,8 +37,8 @@ let player = {
         this.health += 10;
 
         console.log(this.health);
-    };
-}
+    }
+};
 
 player.eatApple();
 console.log(player);
