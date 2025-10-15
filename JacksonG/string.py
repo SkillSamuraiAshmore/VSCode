@@ -12,3 +12,11 @@ print(phrase.index("G"))
 print(phrase.replace("GIRAFFE", "elephant"))
 print(50 - -2.0987 + 0.897 * 908 / 9)
 print(math.pi)
+
+print          
+            
+            
+            
+            
+            
+            
