@@ -1,6 +1,6 @@
 def main():
     input_file_path = "WilliamR/data/word_source.txt"
-    output_file_path = "wordle_words.txt"
+    output_file_path = "WilliamR/data/wordle_words.txt"
     five_letter_words = []
     
     
@@ -14,7 +14,9 @@ def main():
     with open(output_file_path, "w") as f:
         for word in five_letter_words:
             f.write(word + "\n")  
-    print(f"Found{len(five_letter_words)} five letter words")
+            
+            
+    print(f"Found{len(five_letter_words)} five letter words.")
     pass
 
 if __name__ == "__main__":
