@@ -6,7 +6,7 @@ import random
 
 def main():
     
-    word_set = load_word_set("WilliamR/data/wordle_words.txt")
+    word_set = load_word_set("C:\\repos\VSCode\WilliamR\wordle\data\wordle_words.txt")
     secret = random.choice(list(word_set))
     wordle = Wordle("secret")
     
@@ -69,7 +69,7 @@ def convert_result_to_color(result: list[LetterState]):
         elif letter.is_in_word:
             color = Fore.YELLOW
         else:
-            coulor = Fore.WHITE
+            color = Fore.WHITE
         colored_letter = color + letter.character + Fore.RESET
         result_with_color.append(colored_letter)
     return "".join(result_with_color)
@@ -89,5 +89,5 @@ def draw_border_around(lines: list[str], size: int = 9, pad: int = 1):
     print(	bottom_border)  
     
          
-    if __name__ == "__main__":
-       main()
+if __name__ == "__main__":
+    main()
