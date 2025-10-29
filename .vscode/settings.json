@@ -7,5 +7,6 @@
     },
     "code-runner.executorMap": {
         "python": "python",
-    }
+    },
+    "python.analysis.autoImportCompletions": true
 }
