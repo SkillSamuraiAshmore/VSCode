@@ -2,7 +2,7 @@ from openai import OpenAI
 
 # pass the API key
 client = OpenAI(
-    api_key = 'sk-proj-g-Spmz5U1Igo6R2IK7yARQu5hxVFnz6PLJceQkgrWb-sg624wAcscs4fPOhBJ4EzWveZmBAOa0T3BlbkFJQSoqAvaJdpyeVILIKqM'
+    # api_key = 'sk-proj-g-Spmz5U1Igo6R2IK7yARQu5hxVFnz6PLJceQkgrWb-sg624wAcscs4fPOhBJ4EzWveZmBAOa0T3BlbkFJQSoqAvaJdpyeVILIKqM'
 )
 # define prompt
 message = {role: 'user', 'content':, 'why is my website now?'}
