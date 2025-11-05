@@ -24,10 +24,32 @@ game_over_images = pygame.image.load("assets/background.png")
 #game
 
 scroll_speed =  1
+bird_start_position = (100, 250)
 
-
+class bird(pygame.sprite.Sprite):
+    def __init__(self):
+      self.image = bird_images[0]
+      self.rect = self.image.get_rect()
+      self.rect.center = bird_start_position
+      self.image_index = 0
+    def update(self):
+        #animate
+        self.image_index += 1  
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
 class Ground(pygame.sprite.Sprite):
     def __init__(self, x,y):
+        pygame.sprite.Sprite.__init__(self)
         self.image = ground_image           
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = x, y
@@ -53,13 +75,18 @@ def quit_game():
 
 
 def main():
-    #Instantiate initial ground
+    #Instantiate Bird
+    bird = pygame.sprite.GroupSingle()
+    bird.add(bird())
+    
+   #Instantiate initial ground
     x_pos_ground, y_pos_ground = 0, 520
     ground = pygame.sprite.Group()
-    ground.add(ground(x_pos_ground, y_pos_ground))
+    ground.add(Ground(x_pos_ground, y_pos_ground))
     run = True
     while run:
         #quit
+        #TODO:fix
         quit_game
         
         #reset
@@ -72,8 +99,16 @@ def main():
         #drawbackground
         window.blit(background_images, (0, 0))
         
+        #spawn Ground
+        if len(ground) <= 2:
+            ground.add(Ground(win_width, y_pos_ground)) 
+    
         #draw - pipes, ground and bird
-        
+        ground.draw(window)
+        bird.draw(window)
+        # update
+        ground.update()
+        bird.update
         
         clock.tick(60)
         pygame.display.update()
