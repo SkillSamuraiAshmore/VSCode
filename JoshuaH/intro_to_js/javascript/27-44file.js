@@ -61,3 +61,52 @@ while (i < 10) {
     population *= 1.05;
     i++
 }
+
+
+for(let i = 0; i < 10; i++){
+    p
+    opulation *=1.05;
+}
+
+console.log(population);
+
+
+let database = ['turtle', 'cat', 'dog', 'bird'];
+console.log(database);
+console.log(databas.length);
+
+let animal = datbase[1];
+console.log(animal);
+
+datdabase[0] = 'dinosaur';
+console.log(database);
+
+let last = database [database.length - 1];
+console.log (last);
+
+database.push('lizard');
+console.log(database)
+
+database.pop();
+console.log(database);
+
+
+let scores = [10, 20, 10];
+
+let p = 0;
+while(p < scores.length) {
+    score [p]++;
+    i++
+}
+
+console.log(scores);
+
+for(p = 0; p < scores.length; i++) {
+    scores[i]++;
+}
+
+console.log
+
+scores.forEach(function(entry, index){
+    console.log(entry, index);
+});
