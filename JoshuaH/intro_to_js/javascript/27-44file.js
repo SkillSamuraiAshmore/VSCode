@@ -90,12 +90,11 @@ console.log(database)
 database.pop();
 console.log(database);
 
-
 let scores = [10, 20, 10];
 
 let p = 0;
 while(p < scores.length) {
-    score [p]++;
+    score[p]++;
     i++
 }
 
@@ -109,4 +108,32 @@ console.log
 
 scores.forEach(function(entry, index){
     console.log(entry, index);
+    scores[p]++
 });
+console.log(scores);
+
+scores.forEach(function(entry, index){
+    scores[p]++
+});
+console.log(scores);
+
+let catalog = [{
+    title: 'Js for beginners',
+    author: 'josh',
+    copies: 1
+}]
+
+catalog.forEach(function(entry, index){
+    if(entry.author == 'zenva'){
+        entry.copies++;
+    }
+})
+
+console.log(catalog);
+
+let a = [[1, 2, 3], [4, 5, 6., 7]]
+console.log(a[0][1]);
+
+a[1][2] = 100;
+
+consle.log(a[1][2]);
