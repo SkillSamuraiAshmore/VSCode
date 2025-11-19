@@ -1,5 +1,6 @@
 import pygame
 from sys import exit
+import random
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -8,6 +9,7 @@ clock = pygame.time.Clock()
 win_height = 720
 win_width = 551
 window = pygame.display.set_mode((win_width, win_height))
+
 bird_images = [pygame.image.load("assets/bird_down.png"),
                pygame.image.load("assets/bird_mid.png"),                
                pygame.image.load("assets/bird_up.png")]
@@ -53,11 +55,29 @@ class Bird(pygame.sprite.Sprite):
         if self.vel == 0:
             self.flap = False        
         
+        #rotate
+        self.image = pygame.transform.rotate(self.image, self.vel * -7)
+        
+        
         # User input
         if user_input[pygame.K_SPACE] and not self.flap and self.rect.y > 0:
             self.flap = True
             self.vel = -7  
     
+    
+class Pipe(pygame.sprite.Sprite):
+    def __init__(self, x, y,image):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = image
+        self.rect = self.image.get_rect()
+        self.rect.x, self.rect.y = x, y
+      
+      
+    def update(self):
+        self.rect.x -= scroll_speed
+        if self.rect.x <= -win_width:
+            self.kill()
+      
       
 class Ground(pygame.sprite.Sprite):
     def __init__(self, x,y):
@@ -91,6 +111,11 @@ def main():
     bird = pygame.sprite.GroupSingle()
     bird.add(Bird())
     
+    #SETUP PIPES
+    pipe_timer = 0
+    # FORGOT PARENTHESIS
+    pipes = pygame.sprite.Group()
+    
    #Instantiate initial ground
     x_pos_ground, y_pos_ground = 0, 520
     ground = pygame.sprite.Group()
@@ -117,12 +142,26 @@ def main():
             ground.add(Ground(win_width, y_pos_ground)) 
     
         #draw - pipes, ground and bird
+        pipes.draw(window)
         ground.draw(window)
         bird.draw(window)
         # update
+        pipes.update()
         ground.update()
-        bird.update()
+        bird.update(user_input)
+        
+        #spawn pipe
+        
+        if pipe_timer <= 0:
+            x_top, x_bottom = 550, 550
+            y_top = random.randint(-600, -480)
+            y_bottom = y_top + random.randint(90, 130) + bottom_pipe_image.get_height()
+            pipes.add(Pipe(x_top, y_top, top_pipe_image))
+            pipes.add(Pipe(x_bottom, y_bottom, bottom_pipe_image))
+            pipe_timer = random.randint(180, 250)
+        pipe_timer -= 1
+        
         
         clock.tick(60)
-        pygame.display.update()
+        pygame.display.update() 
 main()
