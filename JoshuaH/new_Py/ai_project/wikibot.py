@@ -5,6 +5,7 @@ import os
 
 # pass the api key 
 # never upload this to github
+#TODO: make new api key
 client = OpenAI(
     api_key = os.environ.get('OPENAI_API_KEY')
 )
@@ -17,17 +18,13 @@ title = input('title of the page: ')
 page = wikipedia.page(title=title, auto_suggest=False)
 
 # define prompt
-prompt = 'Write a summary of the following article: ' + page.content
-
 prompt = 'Write a summary of the following article: ' + page.content[:10000]
 
 # define prompt 
-prompt = 'create a 5 bullet point summary of:'
 messages = []
 messages.append({'role': 'user', 'content': prompt})
 
 try:
-    
     # make an api 
     response = client.chat.completions.create(messages=messages, model="gpt-4.1")
 

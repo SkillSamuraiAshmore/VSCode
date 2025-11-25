@@ -1,28 +1,41 @@
-#SET UP PYGAME
-
-import pygame,sys
+import pygame, sys, math
 
 pygame.init()
 
 clock = pygame.time.Clock()
 
-screen = pygame.display.set_mode()
-pygame.display.set_caption("My special game ")
-red=pygame.Color(255,0,0,1)
-#GAME LOOP
+screen = pygame.display.set_mode((800, 500))
+pygame.display.set_caption("My Special Game")
+
+background_color = "white"
+
+circle_x=50
+circle_y=50
 
 while True:
-    #CHECKING FOR EVENTS
-    for event in  pygame.event.get():
-        #CHECK FOR QUIT
+    for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            #QUIT
             pygame.quit()
             sys.exit()
-    screen.fill(red)
+        
+        keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+                circle_x -= 1
+    if keys[pygame.K_RIGHT]:
+        circle_x += 1
+    if keys[pygame.K_UP]:
+        circle_y -= 1
+    if keys[pygame.K_DOWN]:
+        circle_y += 1
+
+
+    screen.fill(background_color)
+    
+
+    pygame.draw.circle(screen,"red",(circle_x,circle_y),20)
+    
     pygame.display.flip()
-    #pygame.display.update()
-    #SET FPS
+    
     clock.tick(60)
     
 
