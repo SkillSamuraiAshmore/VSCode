@@ -64,8 +64,7 @@ while (i < 10) {
 
 
 for(let i = 0; i < 10; i++){
-    p
-    opulation *=1.05;
+    population *=1.05;
 }
 
 console.log(population);
@@ -75,7 +74,7 @@ let database = ['turtle', 'cat', 'dog', 'bird'];
 console.log(database);
 console.log(databas.length);
 
-let animal = datbase[1];
+let animal = database[1];
 console.log(animal);
 
 datdabase[0] = 'dinosaur';
@@ -136,4 +135,11 @@ console.log(a[0][1]);
 
 a[1][2] = 100;
 
-consle.log(a[1][2]);
+console.log(a[1][2]);
+
+let terrains = [
+    ['desert', 'desert', 'grass', 'grass']
+    ['desert', 'desert', 'grass', 'grass'],
+    ['desert', 'desert', 'grass', 'grass'],
+    ['desert', 'desert', 'grass', 'grass']
+];
