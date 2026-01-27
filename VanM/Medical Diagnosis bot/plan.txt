@@ -1,0 +1,12 @@
+
+
+
+
+
+# Try calling the 2 functions below according to the appearance_prompt input!
+#def print("Assessing skin")
+#REMEBER PUT THE CODE AT THE BOTTOM ONE FINSHED(EACH PART)
+
+def assess_eyes():
+   print("Assessing eyes")
+REMEBER PUT THE CODE AT THE BOTTOM ONE FINSHED(EACH PART)

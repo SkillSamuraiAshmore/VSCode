@@ -1,0 +1,5 @@
+colour=input("Choose a colour:")
+adjective=input("Choose an adjective(isn't a colour):")
+animal=input("Choose an animal in plural:")
+number=input("Choose a number bigger than 1:")
+print("I heard you have "+ number  +" "+  adjective  +" " + colour  + " "+ animal)

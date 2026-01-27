@@ -1,7 +1,12 @@
 {
     "python.REPL.enableREPLSmartSend": false,
-
+    "code-runner.respectShebang": false, 
     "workbench.colorCustomizations": {
         "tree.indentGuidesStroke": "#35e20a"
+        
     },
+    "code-runner.executorMap": {
+        "python": "python",
+    },
+    "python.analysis.autoImportCompletions": true
 }
