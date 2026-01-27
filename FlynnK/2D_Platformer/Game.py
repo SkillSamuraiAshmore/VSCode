@@ -4,9 +4,13 @@ import math
 import pygame
 from os import listdir, replace
 from os.path import isfile, join
+from pathlib import Path
 pygame.init()
 
 pygame.display.set_caption("Platformer with no name")
+
+# gets the base directory of the file
+BASE_DIR = Path(__file__).resolve().parent
 
 WIDTH, HEIGHT = 1000, 800
 FPS = 60
@@ -18,7 +22,8 @@ def flip(sprites):
     return [pygame.transform. flip(sprite, True, False) for sprite in sprites]
 
 def load_sprite_sheets(dir1, dir2, width, height, direction=False):
-    path = join("assets", dir1, dir2)
+    # need BASE_DIR to make it work with relative paths
+    path = join(BASE_DIR, "assets", dir1, dir2)
     images = [f for f in listdir(path) if isfile(join(path, f))]
     
     all_sprites = {}
