@@ -19,7 +19,7 @@ ground_image =     pygame.image.load("assets/ground.png")
 bottom_pipe_image = pygame.image.load("assets/pipe_bottom.png")
 top_pipe_image = pygame.image.load("assets/pipe_top.png")
 start_image =   pygame.image.load("assets/start.png")                
-game_over_images = pygame.image.load("assets/background.png")                
+               
 
                
 #game
@@ -28,7 +28,7 @@ scroll_speed =  1
 bird_start_position = (100, 250)
 score = 0
 font = pygame.font.SysFont('segoe' , 26)
-
+game_stopped = True
 
 class Bird(pygame.sprite.Sprite):
     def __init__(self):
@@ -182,6 +182,15 @@ def main():
        #colision detection 
         collision_pipes = pygame.sprite.spritecollide(bird.sprites()[0], pipes, False)
         collision_ground = pygame.sprite.spritecollide(bird.sprites()[0], ground, False)
+        if collision_pipes or collision_ground:
+            bird.sprite.alive = False
+        if collision_ground:
+            window.blit(game_over_images , (win_width // 2 - game_over_images.get_width() // 2, win_height // 2 - game_over_images.get_height()))
+        
+        if user_input[pygame.K_r]:
+            score = 0
+            break
+        
         
         #TODO: FIX
         # if collision_pipes or collision_ground = false:
@@ -204,4 +213,27 @@ def main():
         
         clock.tick(60)
         pygame.display.update() 
-main()
+  #menu      
+def menu():
+    
+    global game_stopped   
+    
+    while game_stopped:
+        quit_game()
+        
+        #draw menu
+        window.fill((0, 0, 0))
+        window.blit(background_images, (0, 0))
+        window.blit(ground_image, Ground(0, 520))
+        window.blit(bird_images[0], (100, 250))
+        window.blit(start_image, (win_width // 2 - start_image.get_width() // 2,
+                                  win_height // 2 - start_image.get_height() // 2))
+        
+        user_input = pygame.key.get_pressed()
+        # TODO: fix input
+        if user_input[pygame.K_space]:
+            main()
+            
+        pygame.display.update()     
+
+menu()
