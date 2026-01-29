@@ -13,7 +13,7 @@ pygame.display.set_caption("Platformer with no name")
 BASE_DIR = Path(__file__).resolve().parent
 
 WIDTH, HEIGHT = 1000, 800
-FPS = 60
+FPS = 100
 PLAYER_VEL = 5
 
 window = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -44,10 +44,13 @@ def load_sprite_sheets(dir1, dir2, width, height, direction=False):
         else:
             all_sprites[image.replace(".png", "")] = sprites
             
+    return all_sprites
+            
 class Player(pygame.sprite.Sprite):
     COLOR = (255, 0, 0)
     GRAVITY = 1
     SPRITES = load_sprite_sheets("MainCharacters", "VirtualGuy", 32, 32, True)
+    ANIMATION_DELAY = 5
     
     def __init__(self, x, y, width, height):
         self.rect = pygame.Rect(x, y, width, height)
@@ -76,16 +79,31 @@ class Player(pygame.sprite.Sprite):
             
     def loop(self, fps):
         # self.y_vel += min(1, (self.fall_count / fps) * self.GRAVITY)
+        # print("loop")
         self.move(self.x_vel, self.y_vel)
         
         self.fall_count += 1
+        self.update_sprite()
+        
+    def update_sprite(self):
+        # print("update_sprite")
+        sprite_sheet = "idle"
+        if self.x_vel != 0:
+            sprite_sheet = "run"
+            
+        sprite_sheet_name = sprite_sheet + "_" + self.direction
+        sprites = self.SPRITES[sprite_sheet_name]
+        sprite_index = (self.animation_count // self.ANIMATION_DELAY) % len(sprites)
+        self.sprite = sprites[sprite_index]
+        self.animation_count += 1
         
     def draw(self, win):
-        self.sprite = self.SPRITES["idle_" + self.direction][0]
+        #was overwriting sprite every draw call
+        # self.sprite = self.SPRITES["idle_" + self.direction][0]
         win.blit(self.sprite, (self.rect.x, self.rect.y))
 
 def get_background(name):
-    image = pygame.image.load(join("assets", "Background", name))
+    image = pygame.image.load(join(BASE_DIR, "assets", "Background", name))
     _, _, width, height = image.get_rect()
     tiles = []
     
