@@ -1,0 +1,1 @@
+        # self.sprite = self.SPRITES["idle_" + self.direction][0]
