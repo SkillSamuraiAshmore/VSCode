@@ -10,7 +10,7 @@ pygame.init()
 #Things to do:
 # - add more blocks and objects
 # - add more levels
-# - add health and death system
+# - add health and death system <--
 # - maybe even sound and music
 
 pygame.display.set_caption("Platformer with no name")
