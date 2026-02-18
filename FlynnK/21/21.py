@@ -27,7 +27,7 @@ def main():
           "Each player takes turns adding 1, 2, 3, 4 or 5 to the total \n" + 
           "You lose if you're the player to reach or exceed the target value")
     while gameOverFlage == False:
-        gameTarget = input("What would yuo like to play to? \n")
+        gameTarget = input("What would you like to play to? \n")
         playGame(int(gameTarget))
         gameOverFlage = checkEndgame()
     
