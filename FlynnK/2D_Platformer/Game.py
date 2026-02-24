@@ -330,7 +330,9 @@ def main(window):
         player.loop(FPS)
         fire.loop()
         handle_move(player, objects)
-        draw(window, background, bg_image, player, objects, offset_x, health_bar)
+        # JESSE'S COMMENT 2026/02/24: This draw call has 7 arguments but it is expecting 6. Check your code, health_bar is the arguemnt not expected.
+        # Removing the arguement makes the game draw the sprites.
+        draw(window, background, bg_image, player, objects, offset_x)
         
         if ((player.rect.right - offset_x >= WIDTH - scroll_area_width) and player.x_vel > 0) or (
             (player.rect.left - offset_x <= scroll_area_width) and player.x_vel < 0):
