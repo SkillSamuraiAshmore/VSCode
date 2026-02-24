@@ -60,7 +60,6 @@ def get_block(size):
     surface.blit(image, (0, 0), rect)
     return pygame.transform.scale2x(surface)
     
-            
 class Player(pygame.sprite.Sprite):
     COLOR = (255, 0, 0)
     GRAVITY = 1
@@ -79,7 +78,6 @@ class Player(pygame.sprite.Sprite):
         self.jump_count = 0
         self.hit = False
         self.hit_count = 0
-        self.health = 5
         
     def jump(self):
         self.y_vel = -self.GRAVITY * 8
@@ -163,6 +161,22 @@ class Player(pygame.sprite.Sprite):
         # self.sprite = self.SPRITES["idle_" + self.direction][0]
         win.blit(self.sprite, (self.rect.x - offset_x, self.rect.y))
         
+class HealthBar():
+    def __init__(self, x, y, w, h, max_hp):
+        self.x = x
+        self.y = y
+        self.w= w
+        self.hp = max_hp
+        self.max_hp = max_hp
+        
+        def drawHealthBar(self, surface):
+            ratio = self.hp / self.max_hp
+            pygame.draw.rect(surface, "red", (self.x, self.y, self.w, self.h))
+            pygame.draw.rect(surface, "green", (self.x, self.y, self.w * ratio, self.h))
+
+health_bar = HealthBar(250, 200, 300, 40, 100)
+            
+    
 class Object(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height, name=None):
         super().__init__()
@@ -316,7 +330,7 @@ def main(window):
         player.loop(FPS)
         fire.loop()
         handle_move(player, objects)
-        draw(window, background, bg_image, player, objects, offset_x)
+        draw(window, background, bg_image, player, objects, offset_x, health_bar)
         
         if ((player.rect.right - offset_x >= WIDTH - scroll_area_width) and player.x_vel > 0) or (
             (player.rect.left - offset_x <= scroll_area_width) and player.x_vel < 0):
