@@ -17,11 +17,19 @@
 //console.log(c);
 
 let balance = 100;
-let stock = 50;
+let stock = 8;
 let price = 5;
 let quantity = 8;
 
-if(stock >= 1) {
-  stock - 1;
-  
+function sellitem(quantity) {
+  if(quantity <= stock) {
+    stock = stock - quantity;
+    balance = balance + (price * quantity);
+    console.log("Purchase successful!");
+    console.log("Remaining stock: " + stock);
+    console.log("New balance: " + balance);
+  }
+  else {
+    console.log("Purchase failed: Not enough stock.");
+  }
 }
