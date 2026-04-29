@@ -80,11 +80,11 @@ t5.goto(-250, -100)
 time.sleep(2)
 
 for i in range (140):
-    t1.forward(randint(1,6))
+    t1.forward(randint(1,5))
     t2.forward(randint(1,6))
-    t3.forward(randint(1,6))
+    t3.forward(randint(2,6))
     t4.forward(randint(1,6))
-    t5.forward(randint(1,6))
+    t5.forward(randint(-1,8))
 
 
 

@@ -10,7 +10,7 @@ snakeScreen.tracer
 snakeHead = turtle.Turtle()
 snakeHead. shape("square")
 snakeHead.penup()
-snakeHead.speed(0)
+snakeHead.speed(100)
 snakeHead.direction = "stop"
 delay = 0
 segments = []
