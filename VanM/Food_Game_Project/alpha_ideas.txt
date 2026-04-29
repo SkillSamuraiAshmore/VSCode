@@ -1,0 +1,27 @@
+ PixelMe: AI Pixel Art Camera - we can use this to pixelate photos instead of crafting them with app to pixelate stuff
+ Look for:
+ Desk
+ Cash
+Assets for  PixelMe: AI Pixel Art Camera
+ Open Palm Hand
+ Desk
+ Grabbing Hand
+ Cutting Board: Press 'space' to start a timer to "slice" an ingredient.
+Stove: Drag ingredient to stove; apply color change or animation to indicate "cooking"
+ Assets to code for game
+ Saving
+loading
+We need to code:
+Grabbing stuff 
+Moving sprites
+Questions for myself:
+Do we make it first or third person?
+Is it a story game?
+Are we going to add upgrades?
+Will the people have a fury meter for how long the food takes?
+Is this game going to just be a repative game?
+What if the game starts to slowly get harder and it has a dark plotwist
+My ideas for this version/Alpha
+i think this game should be a story game once we get enogh stuff coded we could maybe make a story game.
+since im such a good story writer we could have one that has actual in-depth story that is good.
+
