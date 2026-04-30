@@ -1,6 +1,7 @@
 def name():
     name = input("What is your name?\n")
     print("Welcome " + name + "\n")
+    
 #This is the name for the objective of second parts in my comments
 welcome_prompt = " - To list all patients, press 1\n - To run a new diagnosis, press 2\n - to quit, press q\n"
 def appearance():
@@ -13,18 +14,6 @@ def appearance():
         print("Please pinch your skin")
         print("Assessing skin")
     
-
-
-
-
-
-
-
-
-
-
-
-
 def list_patients():
     name()
     print("Listing patients and diagnosis")
