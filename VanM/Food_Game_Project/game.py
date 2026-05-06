@@ -3,7 +3,7 @@ import sys
 
 pygame.init()
 window = pygame.display.set_mode((800, 600))
-pygame.display.set_caption("Food Game")
+pygame.display.set_caption("FRIED")
 runwin = True
 while runwin:
    for event in pygame.event.get():
