@@ -1,7 +1,8 @@
 TODO LIST:
 WINDOWPOPUP = DONE
 make sprites appear on window = nope
-Order System: Create a visual "ticket" showing which recipe to make. = nope
+Order System: Create a visual "ticket" showing which recipe to make. Maybe do this? = nope
 Animations for everyone = nope
 make people interact with cooker = nope
 make a fury meter for how long it takes = nope
+how do i know the coordinates of where to put stuff
