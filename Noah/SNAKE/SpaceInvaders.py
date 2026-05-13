@@ -34,12 +34,13 @@ bullet.shape("triangle")
 bullet.speed(0)
 bullet.penup()
 bullet.setheading(90)
-bullet.setposition(0, -250)
+#bullet.setposition(0, -250)
 bullet.shapesize(0.5, 0.5)
 bullet.hideturtle()
 
 bulletspeed = 25
 bulletstate = "ready"
+
 def move_left():
   x = player.xcor()
   x = max(x - playerspeed, -280)
@@ -56,7 +57,7 @@ def fire_bullet():
   if bulletstate == "ready":
     bulletstate = "fire"
     x = player.xcor()
-    y = player.ycor   () + 10
+    y = player.ycor() + 10
     bullet.setposition(x, y)
     bullet.showturtle()
 
@@ -67,12 +68,24 @@ turtle.onkey(fire_bullet, "space")
 
 while True:
   if bulletstate == "fire":
-   y = bullet.ycor()
-   y = y + bulletspeed
-   bullet.sety(y)
+    y = bullet.ycor()
+    y = y + bulletspeed
+    bullet.sety(y)
   
   if bullet.ycor() > 275:
     bullet.hideturtle()
     bulletstate = "ready"
+    
+  for invader in invaderList:  
+    x = invader.xcor()
+    x = x + invaderspeed
+    invader.setx(x)
+    
+    if invader.xcor() > 280 or invader.xcor() < -280:
+      invaderspeed = invaderspeed * -1
+      
+      for invader in invaderList:
+        y = invader.ycor()
+        
 
 input("Press button to close")
