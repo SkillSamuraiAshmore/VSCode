@@ -1,35 +1,45 @@
 import pygame
 import sys
 
+def forHire_Text():
+    forHire_image = pygame.image.load("VanM\Food_Game_Project\\backdrops\For_Hire.jpg")
+    font = pygame.font.SysFont('Pixelify Sans', 30)
+    text_surface = font.render('Hello, i see you finished your coffe and look its not my personal business but ypu seem like a typical person we need around here please come fore hire', True, (255, 255, 255))
+    Hire_rect = text_surface.get_rect(midtop=(320, 10))
+    window.blit(forHire_image, cursor_pos)
 pygame.init()
 
-SCREEN_HEIGHT = 800
-SCREEN_WIDTH = 600
-window = pygame.display.set_mode((800, 600))
+pygame.mouse.set_visible(False) 
+
+SCREEN_HEIGHT = 1000
+SCREEN_WIDTH = 1200
+window = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("FRIED")
 runwin = True
 
 def cursor():
     # Get the rectangle of the image
-    image = pygame.image.load("assets\images\Open_Palm_Hand.png")
-    image_rect = image.get_rect()
-
-    image_rect.topleft = (100, 150) # Example position
+    cursor_image = pygame.image.load("assets\images\Open_Palm_Hand.png")
+    # cursor_rect = cursor_image.get_rect()
+    mouse_X, mouse_Y = pygame.mouse.get_pos()
+    cursor_pos = (mouse_X, mouse_Y) 
     
-    #need to use blit to get image on screen
+    window.blit(cursor_image, cursor_pos)
 
 # Main game loop!
 while runwin:
-   for event in pygame.event.get():
-       
-        cursor()
+    for event in pygame.event.get():
         if event.type == pygame.QUIT:
             runwin = False
-            pygame.display.update()
-            
-            window.fill((0, 0, 0))
-            pygame.quit()   
-            
+    
+    window.fill((0, 0, 0))
+    cursor()
+    
+    pygame.display.update()
+        
+        
+        
+pygame.quit()         
 
 
 
